@@ -1,6 +1,7 @@
 package com.example.sam.bucketlist;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by sam on 9/19/17.
@@ -11,7 +12,7 @@ public class BucketListFields {
     private int id,userId;
     private String bucketListName;
     private Date dateCreated, dateModified;
-    private Items items;
+    private List<ItemFields> items;
 
     public void setId(int idEntry){
         this.id =idEntry;
@@ -46,10 +47,11 @@ public class BucketListFields {
         return dateModified;
     }
 
-    public void setItems(Items itemEntry){
+    public void setItems(List<ItemFields> itemEntry){
+
         this.items = itemEntry;
     }
-    public Items getItems(){
+    public List<ItemFields> getItems(){
         return items;
     }
 

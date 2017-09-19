@@ -19,7 +19,7 @@ public class BucketList {
     BucketListFields bucketListFields = new BucketListFields();
     Date date = new Date();
 
-    public void BucketList(int id,String bucketListName,Date dateCreated, Date dateModified, int userId, Items items){
+    public BucketList(int id,String bucketListName,Date dateCreated, Date dateModified, int userId, List<ItemFields> items){
 
         bucketListFields.setId(id);
         bucketListFields.setBucketListName(bucketListName);
@@ -30,12 +30,12 @@ public class BucketList {
 
     }
 
-    public Collection<List<BucketListFields>> createBucketList(){
+    public List<BucketListFields> createBucketList(){
 
         bucketList.add(bucketListFields);
         allBucketLists.add(bucketList);
 
-            return allBucketLists;
+            return bucketList;
         }
 
 }
