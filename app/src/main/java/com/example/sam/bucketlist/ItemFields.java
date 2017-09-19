@@ -6,7 +6,7 @@ import java.util.Date;
  * The class sets and gets Item fields
  */
 
-public class itemFields {
+public class ItemFields {
     private int itemID,bucketId;
     private String itemName;
     private Date dateCreated;

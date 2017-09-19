@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by sam on 9/19/17.
  */
 
-public class bucketListFields {
+public class BucketListFields {
 
     private int id,userId;
     private String bucketListName;
