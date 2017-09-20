@@ -52,6 +52,19 @@ public class BucketList {
         return false;
 
     }
+    public boolean deleteBucketList(String bucketListName){
+
+        Iterator<List<BucketListFields>> iterator = allBucketLists.iterator();
+
+        while (iterator.hasNext()){
+            List<BucketListFields> listElement = iterator.next();
+            if (listElement.get(0).getBucketListName().equals(bucketListName)){
+                iterator.remove();
+            }
+            return true;
+        }
+        return false;
+    }
 
 
 }
