@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -37,5 +38,20 @@ public class BucketList {
 
             return bucketList;
         }
+    public boolean renameBucketList(String bucketListName,String newName){
+
+        Iterator<List<BucketListFields>> iterator = allBucketLists.iterator();
+
+        while (iterator.hasNext()){
+            List<BucketListFields> listElement = iterator.next();
+            if (listElement.get(0).getBucketListName().equals(bucketListName)){
+                listElement.get(0).setBucketListName(newName);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 
 }

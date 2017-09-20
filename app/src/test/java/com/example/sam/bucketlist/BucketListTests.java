@@ -54,4 +54,10 @@ public class BucketListTests {
         assertEquals(value.get(0).getBucketListName(),"HAWAII");
 
     }
+    @Test
+    public void test_that_a_bucket_list_can_be_renamed(){
+
+        assertEquals(bucketList.renameBucketList("HAWAII","ZANZIBAR"),true);
+
+    }
 }
