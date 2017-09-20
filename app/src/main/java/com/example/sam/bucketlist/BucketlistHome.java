@@ -38,7 +38,7 @@ import java.util.List;
  * Created by Sam on 19/03/2017.
  */
 
-public class Bucketlists extends AppCompatActivity{
+public class BucketlistHome extends AppCompatActivity{
     Button loadtoken;
     TextView blists;
     public static String token;
