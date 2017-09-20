@@ -66,9 +66,6 @@ public class BucketlistHome extends AppCompatActivity{
                     String responseStr = EntityUtils.toString(response.getEntity());
                     // Writing response to log
                     Log.d("HTTP Get Response :", responseStr);
-
-//                    JSONObject resp = new JSONObject(responseStr);
-//                    Log.d("HTTP JSON :", String.valueOf(resp));
                     blists =(TextView)findViewById(R.id.dataview);
                     blists.setText(responseStr);
 

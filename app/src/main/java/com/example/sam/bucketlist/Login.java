@@ -83,7 +83,6 @@ public class Login extends AppCompatActivity {
                     try{
                         HttpResponse response = httpClient.execute(httpPost);
                         String responseStr = EntityUtils.toString(response.getEntity());
-                        // Writing response to log
                         Log.d("HTTP Post Response :", responseStr);
 
                         JSONObject resp = new JSONObject(responseStr);
@@ -93,7 +92,7 @@ public class Login extends AppCompatActivity {
                         String token = resp.getString("token");
                         intent.putExtra("Token",token);
                         startActivity(intent);
-//                        Log.d("Token : ",token);
+
                     } catch (ClientProtocolException e){
 
                     } catch (IOException e){
@@ -104,9 +103,7 @@ public class Login extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-
                 }
-
             }
         });
         forgot_pass =(Button) findViewById(R.id.forgot_password);
