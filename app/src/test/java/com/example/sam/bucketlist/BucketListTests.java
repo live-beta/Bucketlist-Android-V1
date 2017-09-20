@@ -37,8 +37,10 @@ public class BucketListTests {
         bucketList =new BucketList(1,"HAWAII",date, date, 1, newItem );
 
     }
+
     @AfterClass
     public static void tearDown(){
+
         bucketList = null;
         newItem =null;
         item =null;

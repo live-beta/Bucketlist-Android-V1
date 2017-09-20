@@ -1,7 +1,6 @@
 package com.example.sam.bucketlist;
 
 import android.os.StrictMode;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.net.URL;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -22,7 +20,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -30,8 +27,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.util.Log;
 
 /**
@@ -94,7 +89,7 @@ public class Login extends AppCompatActivity {
                         JSONObject resp = new JSONObject(responseStr);
                         Log.d("HTTP JSON :", String.valueOf(resp));
 
-                        Intent intent = new Intent(context,Bucketlists.class);
+                        Intent intent = new Intent(context,BucketlistHome.class);
                         String token = resp.getString("token");
                         intent.putExtra("Token",token);
                         startActivity(intent);
