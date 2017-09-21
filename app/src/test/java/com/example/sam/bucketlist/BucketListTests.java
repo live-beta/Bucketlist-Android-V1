@@ -60,4 +60,8 @@ public class BucketListTests {
         assertEquals(bucketList.renameBucketList("HAWAII","ZANZIBAR"),true);
 
     }
+    @Test
+    public void test_that_a_bucket_list_can_be_deleted(){
+        assertEquals(bucketList.deleteBucketList("ZANZIBAR"),true);
+    }
 }

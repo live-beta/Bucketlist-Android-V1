@@ -67,7 +67,7 @@ public class BucketlistHome extends AppCompatActivity{
                     // Writing response to log
                     Log.d("HTTP Get Response :", responseStr);
                     blists =(TextView)findViewById(R.id.dataview);
-                    blists.setText(responseStr);
+                    blists.setText(responseStr.toString());
 
 
 
