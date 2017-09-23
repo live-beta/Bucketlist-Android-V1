@@ -7,8 +7,15 @@ import java.util.List;
  */
 
 public class BucketListAPICalls {
+    public boolean login(String username, String password){
+
+
+        return false;
+    }
 
     public boolean createBucketList(List<BucketListFields> newBucketList){
+
+
         return false;
     }
     public boolean editBucketList(String newName){
