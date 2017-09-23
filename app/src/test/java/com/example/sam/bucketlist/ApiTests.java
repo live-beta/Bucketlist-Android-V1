@@ -58,12 +58,12 @@ public class ApiTests {
 
     @Test
     public void test_that_bucketlist_can_be_edited(){
-        assertEquals(apicalls.editBucketList("CHAD"),true);
+        assertEquals(apicalls.editBucketList(1,"CHAD"),true);
     }
 
     @Test
     public void test_that_bucketlist_can_be_deleted(){
-        assertEquals(apicalls.deleteBucketList("CHAD"),true);
+        assertEquals(apicalls.deleteBucketList(1),true);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ApiTests {
 
     @Test
     public void test_that_an_item_can_be_edited(){
-        assertEquals(apicalls.editItem("SWIMMING"),true);
+        assertEquals(apicalls.editItem(1,"SWIMMING"),true);
     }
 
 
