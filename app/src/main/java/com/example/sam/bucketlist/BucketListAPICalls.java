@@ -33,6 +33,7 @@ import java.util.List;
 public class BucketListAPICalls {
 
     private String  token;
+    private JSONObject jsonResponseObject;
     private  List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
 
     public void setToken(String token){
@@ -41,6 +42,7 @@ public class BucketListAPICalls {
     public String getToken(){
         return token;
     }
+
 
     public boolean login(String username, String password){
 
@@ -83,6 +85,38 @@ public class BucketListAPICalls {
 
         return false;
     }
+
+    public JSONObject getBucketLists() {
+
+        token = getToken();
+        if (token.equals("")) {
+            Log.d("Auth ", "Not Authorized, Login in again");
+        } else {
+
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet("http://10.0.2.2:5000/api/v1/bucketlist");
+
+            try {
+                HttpResponse response = httpClient.execute(httpGet);
+                String responseStr = EntityUtils.toString(response.getEntity());
+                jsonResponseObject= new JSONObject(responseStr);
+
+                if (!token.isEmpty()) {
+                }
+
+            } catch (ClientProtocolException e) {
+
+            } catch (IOException e) {
+                // Log exception
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return jsonResponseObject;
+    }
+
 
     public boolean createBucketList(List<BucketListFields> newBucketList){
         token = getToken();
