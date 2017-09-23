@@ -10,6 +10,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -154,7 +155,32 @@ public class BucketListAPICalls {
 
      return false;
     }
-    public boolean deleteBucketList(String bucketListName){
+    public boolean deleteBucketList(int id){
+        if (token.equals("")){
+            Log.d("Auth : ", "Not Authorized");
+            return false;
+        }else {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpDelete httpDelete = new HttpDelete("http://10.0.2.2:5000/api/v1/bucketlists/"+id);
+
+            try {
+
+                httpDelete.addHeader("Content-Type","application/x-www-form-urlencoded");
+                httpDelete.addHeader("Authorization","Bearer "+token);
+                HttpResponse response = httpclient.execute(httpDelete);
+                int responseCode = response.getStatusLine().getStatusCode();
+
+                if (responseCode == 200){
+                    return true;
+                }
+
+            } catch (ClientProtocolException e) {
+
+            } catch (IOException e) {
+
+            }
+
+        }
         return false;
     }
     public boolean createItem(List<ItemFields> newItems){
