@@ -34,9 +34,10 @@ import android.util.Log;
  */
 
 public class Login extends AppCompatActivity {
-    EditText uname,upass;
+    EditText userName,password;
     Button login,forgot_pass;
     final Context context = this;
+    private BucketListAPICalls bucketListAPICalls = new BucketListAPICalls();
 
     @Override
     protected  void  onCreate(Bundle savedInstanceState){
@@ -47,67 +48,28 @@ public class Login extends AppCompatActivity {
                     new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        uname = (EditText)findViewById(R.id.uname);
-        upass =(EditText)findViewById(R.id.upass);
+        userName = (EditText)findViewById(R.id.uname);
+        password =(EditText)findViewById(R.id.upass);
         login = (Button) findViewById(R.id.login);
-        /* If someone clicks on login*/
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                /*get the user information */
-                String user_name = uname.getText().toString();
-                String user_password = upass.getText().toString();
+            public void onClick(View view) {
+                boolean status = bucketListAPICalls.login(userName.getText().toString(),password.getText().toString());
 
-                /* Check if the user has supplied all the required information */
-                if (user_name == "" || user_password == "") {
-                    Toast.makeText(getApplicationContext(),"Enter all the required fields",Toast.LENGTH_SHORT).show();
-                }else {
-                    /*Make a login post request*/
+                if (status = true){
 
-                    HttpClient httpClient = new DefaultHttpClient();
-                    HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/auth/login");
+                    Intent intent = new Intent(context, BucketlistHome.class);
+                    startActivity(intent);
 
-
-                    /* Creadentials payload*/
-                    List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-                    nameValuePair.add(new BasicNameValuePair("username",user_name));
-                    nameValuePair.add(new BasicNameValuePair("password",user_password));
-                    /*Encoding POST data*/
-                    try {
-                        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-                    }catch (UnsupportedEncodingException e){
-                        //log exception
-                        e.printStackTrace();
-                    }
-                    /* Make post request*/
-                    try{
-                        HttpResponse response = httpClient.execute(httpPost);
-                        String responseStr = EntityUtils.toString(response.getEntity());
-                        Log.d("HTTP Post Response :", responseStr);
-
-                        JSONObject resp = new JSONObject(responseStr);
-                        Log.d("HTTP JSON :", String.valueOf(resp));
-
-                        Intent intent = new Intent(context,BucketlistHome.class);
-                        String token = resp.getString("token");
-                        intent.putExtra("Token",token);
-                        startActivity(intent);
-
-                    } catch (ClientProtocolException e){
-
-                    } catch (IOException e){
-                        // Log exception
-                        e.printStackTrace();
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
+                }else{
+                    Toast.makeText(getApplicationContext(),"Wrong Username or Password", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
         forgot_pass =(Button) findViewById(R.id.forgot_password);
-        /*If someone forgets their password*/
+
         forgot_pass.setOnClickListener(new View.OnClickListener() {
 
             @Override
