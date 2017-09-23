@@ -49,34 +49,6 @@ public class BucketlistHome extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bucketlist_activity_layout);
 
-        token= getIntent().getStringExtra("Token");
-        loadtoken = (Button) findViewById(R.id.tokener);
-        loadtoken.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"This is"+ token,Toast.LENGTH_LONG).show();
-
-                HttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet("http://10.0.2.2:5000/api/v1/bucketlists");
-                httpGet.addHeader("Content-Type","application/x-www-form-urlencoded");
-                httpGet.addHeader("Authorization","Bearer "+token);
-
-                try{
-                    HttpResponse response = httpClient.execute(httpGet);
-                    String responseStr = EntityUtils.toString(response.getEntity());
-                    // Writing response to log
-                    Log.d("HTTP Get Response :", responseStr);
-                    blists =(TextView)findViewById(R.id.dataview);
-                    blists.setText(responseStr.toString());
-
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            });
     }
 }
 
