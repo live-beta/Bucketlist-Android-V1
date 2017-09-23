@@ -61,6 +61,20 @@ public class ApiTests {
         assertEquals(apicalls.editBucketList("CHAD"),true);
     }
 
+    @Test
+    public void test_that_bucketlist_can_be_deleted(){
+        assertEquals(apicalls.deleteBucketList("CHAD"),true);
+    }
+
+    @Test
+    public void test_that_an_item_can_be_created(){
+        assertEquals(apicalls.createItem(newItem),true);
+    }
+
+    @Test
+    public void test_that_an_item_can_be_edited(){
+        assertEquals(apicalls.editItem("SWIMMING"),true);
+    }
 
 
 }

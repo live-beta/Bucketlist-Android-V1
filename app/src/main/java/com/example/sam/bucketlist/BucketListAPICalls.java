@@ -85,7 +85,7 @@ public class BucketListAPICalls {
     public boolean deleteBucketList(String bucketListName){
         return false;
     }
-    public boolean crateItem(List<ItemFields> newItems){
+    public boolean createItem(List<ItemFields> newItems){
         return false;
     }
     public boolean editItem(String newItemName){
