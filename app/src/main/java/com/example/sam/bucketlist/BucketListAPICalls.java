@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -183,10 +184,73 @@ public class BucketListAPICalls {
         }
         return false;
     }
-    public boolean createItem(List<ItemFields> newItems){
-        return false;
+    public boolean createItem(List<ItemFields> newItems) {
+        token = getToken();
+        String name = newItems.get(0).getItemName();
+
+        if (token.equals("")) {
+            Log.d("Auth ", "Not Authorized, Login in again");
+            return false;
+        } else {
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/items");
+
+            try {
+
+                httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                httpPost.addHeader("Authorization", "Bearer " + token);
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("name", name));
+                nameValuePairs.add(new BasicNameValuePair("status", "false"));
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                HttpResponse response = httpclient.execute(httpPost);
+                int responseCode = response.getStatusLine().getStatusCode();
+
+                if (responseCode == 200) {
+                    return true;
+                }
+
+            } catch (ClientProtocolException e) {
+
+            } catch (IOException e) {
+
+            }
+            return false;
+        }
     }
-    public boolean editItem(String newItemName){
+    public boolean editItem(int id,String newItemName){
+        if (token.equals("")){
+            Log.d("Auth : ", "Not Authorized");
+            return false;
+        }else {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httpPut = new HttpPut("http://10.0.2.2:5000/api/v1/items/"+id);
+
+            try {
+
+                httpPut.addHeader("Content-Type","application/x-www-form-urlencoded");
+                httpPut.addHeader("Authorization","Bearer "+token);
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("name", newItemName));
+                httpPut.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                HttpResponse response = httpclient.execute(httpPut);
+                int responseCode = response.getStatusLine().getStatusCode();
+
+                if (responseCode == 200){
+                    return true;
+                }
+
+            } catch (ClientProtocolException e) {
+
+            } catch (IOException e) {
+
+            }
+
+        }
+
         return false;
     }
 
