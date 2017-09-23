@@ -56,6 +56,11 @@ public class ApiTests {
         assertEquals(apicalls.createBucketList(newBucketList),true);
     }
 
+    @Test
+    public void test_that_bucketlist_can_be_edited(){
+        assertEquals(apicalls.editBucketList("CHAD"),true);
+    }
+
 
 
 }
