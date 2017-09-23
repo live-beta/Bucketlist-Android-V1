@@ -49,6 +49,7 @@ public class BucketlistHome extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bucketlist_activity_layout);
 
+
     }
 }
 
