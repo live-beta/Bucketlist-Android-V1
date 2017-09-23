@@ -12,6 +12,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -119,12 +120,35 @@ public class BucketListAPICalls {
 
         return false;
     }
-    public boolean editBucketList(String newName){
+    public boolean editBucketList(int id, String newName){
 
         if (token.equals("")){
             Log.d("Auth : ", "Not Authorized");
             return false;
         }else {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPut httpPut = new HttpPut("http://10.0.2.2:5000/api/v1/bucketlists/"+id);
+
+            try {
+
+                httpPut.addHeader("Content-Type","application/x-www-form-urlencoded");
+                httpPut.addHeader("Authorization","Bearer "+token);
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("name", newName));
+                httpPut.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                HttpResponse response = httpclient.execute(httpPut);
+                int responseCode = response.getStatusLine().getStatusCode();
+
+                if (responseCode == 200){
+                    return true;
+                }
+
+            } catch (ClientProtocolException e) {
+
+            } catch (IOException e) {
+
+            }
 
         }
 
