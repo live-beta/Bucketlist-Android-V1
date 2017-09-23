@@ -42,23 +42,8 @@ public class BucketList {
 
         bucketList.add(bucketListFields);
         allBucketLists.add(bucketList);
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/bucketlists");
-        httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
-        httpPost.addHeader("Authorization","Bearer "+token);
-        httpPost.addHeader("Name",bucketList.get(0).getBucketListName());
 
-        try {
-            HttpResponse response = httpClient.execute(httpPost);
-            Log.d("Response",response.toString());
-
-        }catch (Exception e){
-            Log.d("No data passed",e.getLocalizedMessage());
-            return null;
-
-        }
-
-            return bucketList;
+        return bucketList;
         }
     public boolean renameBucketList(String bucketListName,String newName){
 
@@ -67,8 +52,9 @@ public class BucketList {
         while (iterator.hasNext()){
             List<BucketListFields> listElement = iterator.next();
             if (listElement.get(0).getBucketListName().equals(bucketListName)){
-                listElement.get(0).setBucketListName(newName);
+                listElement.get(0).setBucketListName(newName) ;
                 return true;
+
             }
         }
         return false;
