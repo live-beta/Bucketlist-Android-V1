@@ -1,6 +1,6 @@
 package com.example.sam.bucketlist;
 
-import com.example.sam.*;
+import com.example.sam.bucketlist.api.BucketListAPICalls;
 
 /**
  * Created by sam on 9/23/17.

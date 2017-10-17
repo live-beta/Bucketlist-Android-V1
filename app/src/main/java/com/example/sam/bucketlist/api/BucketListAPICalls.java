@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist;
+package com.example.sam.bucketlist.api;
 
 import android.content.ContentProvider;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.sam.bucketlist.BucketListFields;
+import com.example.sam.bucketlist.ItemFields;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -143,6 +146,7 @@ public class BucketListAPICalls {
 
 
     public boolean createBucketList(List<BucketListFields> newBucketList){
+
         token = getToken();
         String name = newBucketList.get(0).getBucketListName();
         List<ItemFields> items= newBucketList.get(0).getItems();
@@ -154,11 +158,10 @@ public class BucketListAPICalls {
 
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/bucketlists");
+            httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
+            httpPost.addHeader("Authorization","Bearer "+token);
 
             try {
-
-                httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
-                httpPost.addHeader("Authorization","Bearer "+token);
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("name", name));
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -168,16 +171,20 @@ public class BucketListAPICalls {
 
                 if (responseCode == 200){
                     return true;
+                }else{
+                    return false;
                 }
 
+
             } catch (ClientProtocolException e) {
+                return false;
 
             } catch (IOException e) {
+                Log.d("Exception",e.getLocalizedMessage());
 
             }
 
         }
-
         return false;
     }
     public boolean editBucketList(int id, String newName){
