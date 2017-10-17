@@ -11,10 +11,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/tokener" />
 
-    <TextView
+    <ListView
+        android:id="@+id/bucketlister"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dataview"
-        android:textAlignment="center" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

@@ -55,9 +55,12 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 boolean status = bucketListAPICalls.login(userName.getText().toString(),password.getText().toString());
 
-                if (status = true){
+                Log.d("Boolean ", String.valueOf(status));
+
+                if (status == true){
 
                     Intent intent = new Intent(context, BucketlistHome.class);
                     startActivity(intent);
