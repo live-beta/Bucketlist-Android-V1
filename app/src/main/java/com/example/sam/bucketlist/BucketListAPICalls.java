@@ -2,6 +2,8 @@ package com.example.sam.bucketlist;
 
 import android.content.ContentProvider;
 import android.content.Intent;
+import android.os.StrictMode;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,77 +35,98 @@ import java.util.List;
 
 public class BucketListAPICalls {
 
-    private String  token;
-    private JSONObject jsonResponseObject;
-    private  List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+    public static String  token;
 
     public void setToken(String token){
         this.token = token;
     }
     public String getToken(){
-        return token;
+        return this.token;
     }
 
 
-    public boolean login(String username, String password){
+    /*]
+    * Method receives the user's details for authentication
+     */
 
-        nameValuePair.add(new BasicNameValuePair("username",username));
-        nameValuePair.add(new BasicNameValuePair("password",password));
+    public boolean login(String userName, String password){
 
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/auth/login");
-
-        try {
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-        }catch (UnsupportedEncodingException e){
-            e.printStackTrace();
-            return false;
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy =
+                    new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
         }
 
-        try{
-            HttpResponse response = httpClient.execute(httpPost);
-            String responseStr = EntityUtils.toString(response.getEntity());
-            Log.d("HTTP Post Response :", responseStr);
+        if (userName.equals("") || password.equals("")){
+            Log.d("Value", " User name or password cannot be empty");
+            return false;
+        } else {
 
-            JSONObject resp = new JSONObject(responseStr);
-            Log.d("HTTP JSON :", String.valueOf(resp));
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/auth/login");
+            List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+            nameValuePair.add(new BasicNameValuePair("username",userName));
+            nameValuePair.add(new BasicNameValuePair("password",password));
 
-            token = resp.getString("token");
+            try{
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+            }catch(UnsupportedEncodingException e){
 
-            if (!token.isEmpty()){
+                e.printStackTrace();
+            }
+            try {
+                HttpResponse response = httpClient.execute(httpPost);
+                String responseString = EntityUtils.toString(response.getEntity());
+
+                if (responseString.contains("Could not log you in, Check credentials")){
+                    return false;
+                }
+
+                JSONObject jsonResponse = new JSONObject(responseString);
+                String token = jsonResponse.getString("token");
+
+                setToken(token);
+
                 return true;
+
+
+            }catch (ClientProtocolException e){
+                Log.d("Error", e.getMessage());
+            }catch (IOException e){
+
+                e.printStackTrace();
+
+            }catch (JSONException e){
+                e.printStackTrace();
             }
 
-        } catch (ClientProtocolException e){
-
-        } catch (IOException e){
-            // Log exception
-            e.printStackTrace();
         }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         return false;
     }
 
-    public JSONObject getBucketLists() {
+    public JSONArray getBucketLists() {
+
+        JSONArray jsonArray = new JSONArray();
 
         token = getToken();
+
+        Log.d("BucketList Token", token.toString());
+
         if (token.equals("")) {
             Log.d("Auth ", "Not Authorized, Login in again");
         } else {
 
             HttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet("http://10.0.2.2:5000/api/v1/bucketlist");
+            HttpGet httpGet = new HttpGet("http://10.0.2.2:5000/api/v1/bucketlists");
+            httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
+            httpGet.addHeader("Authorization","Bearer " + token);
 
             try {
                 HttpResponse response = httpClient.execute(httpGet);
                 String responseStr = EntityUtils.toString(response.getEntity());
-                jsonResponseObject= new JSONObject(responseStr);
 
-                if (!token.isEmpty()) {
-                }
+                jsonArray = new JSONArray(responseStr);
+
 
             } catch (ClientProtocolException e) {
 
@@ -114,7 +138,7 @@ public class BucketListAPICalls {
             }
 
         }
-        return jsonResponseObject;
+        return jsonArray;
     }
 
 
