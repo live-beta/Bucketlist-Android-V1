@@ -33,21 +33,55 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Sam on 19/03/2017.
  */
 
 public class BucketlistHome extends AppCompatActivity{
-    Button loadtoken;
-    TextView blists;
+    private Button loadToken;
+    private TextView blists;
+    BucketListAPICalls apiCalls = new BucketListAPICalls();
     public static String token;
     final Context context = this;
+    private JSONObject bucketlistData;
+    private  ListView bucketLister;
+    private ArrayAdapter<String> adapter;
+    private ArrayList <String>bucketListName =new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bucketlist_activity_layout);
+
+        loadToken = (Button)findViewById(R.id.tokener);
+        bucketLister =(ListView)findViewById(R.id.bucketlister);
+
+        loadToken.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                JSONArray myArrayObject = apiCalls.getBucketLists();
+
+                for (int index = 0; index < myArrayObject.length() ; index++) {
+
+                    try {
+                        bucketlistData = new JSONObject( myArrayObject.getString(index));
+                        bucketListName.add(bucketlistData.getString("name"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                adapter = new ArrayAdapter<String>(getApplication(),
+                        android.R.layout.simple_list_item_1, bucketListName);
+
+                bucketLister.setAdapter(adapter);
+
+            }
+        });
+
 
 
     }
