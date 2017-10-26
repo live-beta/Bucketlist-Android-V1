@@ -26,15 +26,11 @@ import java.util.List;
 
 public class BucketlistHome extends AppCompatActivity{
     private Button loadToken, addBucketList;
-    private TextView blists;
     BucketListAPICalls apiCalls = new BucketListAPICalls();
-    public static String token;
-    final Context context = this;
     private JSONObject bucketlistData;
     private  ListView bucketLister;
     private ArrayAdapter<String> adapter;
     private ArrayList <String>bucketListName =new ArrayList<String>();
-    List<BucketListFields> newBucketList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -75,8 +71,6 @@ public class BucketlistHome extends AppCompatActivity{
 
             @Override
             public void onClick(View view) {
-
-                //boolean bucketlistAdded =apiCalls.createBucketList();
 
             }
         });
