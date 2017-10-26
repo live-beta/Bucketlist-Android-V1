@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist;
+package com.example.sam.bucketlist.Views;
 
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,8 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-import com.example.sam.bucketlist.api.BucketListAPICalls;
+import com.example.sam.bucketlist.API.BucketListAPICalls;
+import com.example.sam.bucketlist.R;
 
 /**
  * Created by Sam on 19/03/2017.

@@ -1,4 +1,6 @@
-package com.example.sam.bucketlist;
+package com.example.sam.bucketlist.Views;
+
+import com.example.sam.bucketlist.Fields.ItemFields;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,14 +1,10 @@
-package com.example.sam.bucketlist.api;
+package com.example.sam.bucketlist.API;
 
-import android.content.ContentProvider;
-import android.content.Intent;
 import android.os.StrictMode;
-import android.provider.Settings;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.sam.bucketlist.BucketListFields;
-import com.example.sam.bucketlist.ItemFields;
+import com.example.sam.bucketlist.Fields.BucketListFields;
+import com.example.sam.bucketlist.Fields.ItemFields;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -29,11 +25,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
- * Class contains Application Programming Interface calls for bucketlist functions.
+ * Class Implements BucketList API calls
  */
 
 public class BucketListAPICalls {
@@ -47,10 +42,6 @@ public class BucketListAPICalls {
         return this.token;
     }
 
-
-    /*]
-    * Method receives the user's details for authentication
-     */
 
     public boolean login(String userName, String password){
 

@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist;
+package com.example.sam.bucketlist.Views;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.sam.bucketlist.api.BucketListAPICalls;
+import com.example.sam.bucketlist.API.BucketListAPICalls;
+import com.example.sam.bucketlist.Fields.BucketListFields;
+import com.example.sam.bucketlist.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,12 +1,7 @@
-package com.example.sam.bucketlist;
+package com.example.sam.bucketlist.BucketListMethods;
 
-import android.util.Log;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import com.example.sam.bucketlist.Fields.BucketListFields;
+import com.example.sam.bucketlist.Fields.ItemFields;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Class containing all BucketList Operations
+ * Class BucketList Application Operations
+ *
  */
 
 public class BucketList {

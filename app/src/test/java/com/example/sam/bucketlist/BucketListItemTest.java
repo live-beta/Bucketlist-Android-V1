@@ -3,8 +3,10 @@ package com.example.sam.bucketlist;
 /**
  * Created by sam on 9/20/17.
  */
+import com.example.sam.bucketlist.Fields.ItemFields;
+import com.example.sam.bucketlist.Views.BucketListItems;
+
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

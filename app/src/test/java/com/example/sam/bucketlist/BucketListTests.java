@@ -1,19 +1,16 @@
 package com.example.sam.bucketlist;
 
-import android.util.Log;
-
-import com.example.sam.bucketlist.BucketList;
+import com.example.sam.bucketlist.BucketListMethods.BucketList;
+import com.example.sam.bucketlist.Fields.BucketListFields;
+import com.example.sam.bucketlist.Fields.ItemFields;
+import com.example.sam.bucketlist.Views.BucketListItems;
 
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.text.DateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.zip.DataFormatException;
 
 import static org.junit.Assert.*;
 /**

@@ -1,6 +1,8 @@
 package com.example.sam.bucketlist;
 
-import com.example.sam.bucketlist.api.BucketListAPICalls;
+import com.example.sam.bucketlist.API.BucketListAPICalls;
+import com.example.sam.bucketlist.Fields.BucketListFields;
+import com.example.sam.bucketlist.Fields.ItemFields;
 
 /**
  * Created by sam on 9/23/17.
