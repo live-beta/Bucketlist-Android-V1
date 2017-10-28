@@ -1,7 +1,11 @@
 package com.example.sam.bucketlist.BucketListMethods;
 
+import android.widget.Toast;
+
+import com.example.sam.bucketlist.API.BucketListAPICalls;
 import com.example.sam.bucketlist.Fields.BucketListFields;
 import com.example.sam.bucketlist.Fields.ItemFields;
+import com.example.sam.bucketlist.Fields.UserFields;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,7 +25,8 @@ public class BucketList {
     public static String token;
 
     BucketListFields bucketListFields = new BucketListFields();
-    Date date = new Date();
+    UserFields userFields = new UserFields();
+    BucketListAPICalls apiCalls = new BucketListAPICalls();
 
     public BucketList(int id,String bucketListName,Date dateCreated, Date dateModified, int userId, List<ItemFields> items){
 
@@ -33,6 +38,19 @@ public class BucketList {
         bucketListFields.setItems(items);
 
     }
+
+    public BucketList(String userName,String password){
+
+        this.userFields.setUserName(userName);
+        this.userFields.setPassword(password);
+    }
+
+    public boolean login(){
+
+        boolean status = apiCalls.login(userFields.getUserName(),userFields.getPassword());
+        return status;
+    }
+
 
     public List<BucketListFields> createBucketList(){
 

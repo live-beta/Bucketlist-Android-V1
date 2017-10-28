@@ -13,6 +13,7 @@ import android.widget.Toast;
 import android.util.Log;
 
 import com.example.sam.bucketlist.API.BucketListAPICalls;
+import com.example.sam.bucketlist.BucketListMethods.BucketList;
 import com.example.sam.bucketlist.R;
 
 /**
@@ -37,22 +38,23 @@ public class Login extends AppCompatActivity {
         userName = (EditText)findViewById(R.id.uname);
         password =(EditText)findViewById(R.id.upass);
         login = (Button) findViewById(R.id.login);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                BucketList bucketList = new BucketList(userName.getText().toString(),
+                        password.getText().toString());
 
-                boolean status = bucketListAPICalls.login(userName.getText().toString(),password.getText().toString());
 
-                Log.d("Boolean ", String.valueOf(status));
+                boolean status = bucketList.login();
 
-                if (status == true){
+                if (status){
 
                     Intent intent = new Intent(context, BucketlistHome.class);
                     startActivity(intent);
 
                 }else{
-                    Toast.makeText(getApplicationContext(),"Wrong Username or Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Wrong Username or Password",
+                            Toast.LENGTH_SHORT).show();
                 }
 
             }

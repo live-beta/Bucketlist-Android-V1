@@ -136,12 +136,9 @@ public class BucketListAPICalls {
     }
 
 
-    public boolean createBucketList(List<BucketListFields> newBucketList){
+    public boolean createBucketList(String name){
 
         token = getToken();
-        String name = newBucketList.get(0).getBucketListName();
-        List<ItemFields> items= newBucketList.get(0).getItems();
-
         if (token.equals("")){
             Log.d("Auth ", "Not Authorized, Login in again");
             return false;
@@ -198,7 +195,13 @@ public class BucketListAPICalls {
                 HttpResponse response = httpclient.execute(httpPut);
                 int responseCode = response.getStatusLine().getStatusCode();
 
+                /*
+                * TODO
+                * Debug API HTTP Responses */
+
                 if (responseCode == 200){
+                    return true;
+                }else if (responseCode == 201){
                     return true;
                 }
 
