@@ -21,24 +21,29 @@ import com.example.sam.bucketlist.R;
  */
 
 public class Login extends AppCompatActivity {
+
     EditText userName,password;
     Button login,forgot_pass;
     final Context context = this;
-    private BucketListAPICalls bucketListAPICalls = new BucketListAPICalls();
 
     @Override
     protected  void  onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy =
                     new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
         userName = (EditText)findViewById(R.id.uname);
         password =(EditText)findViewById(R.id.upass);
         login = (Button) findViewById(R.id.login);
+
         login.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 BucketList bucketList = new BucketList(userName.getText().toString(),
@@ -59,6 +64,7 @@ public class Login extends AppCompatActivity {
 
             }
         });
+
         forgot_pass =(Button) findViewById(R.id.forgot_password);
 
         forgot_pass.setOnClickListener(new View.OnClickListener() {
