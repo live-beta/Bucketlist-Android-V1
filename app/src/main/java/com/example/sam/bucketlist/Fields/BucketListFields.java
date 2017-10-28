@@ -29,6 +29,9 @@ public class BucketListFields {
     public void setBucketListName(String bucketListNameEntry){
         this.bucketListName = bucketListNameEntry;
     }
+    public String getBucketListName(){
+        return bucketListName;
+    }
     public void setDateCreated(Date dateCreatedEntry){
         this.dateCreated = dateCreatedEntry;
 
@@ -52,9 +55,7 @@ public class BucketListFields {
         return items;
     }
 
-    public String getBucketListName(){
-        return bucketListName;
-    }
+
 
 
 }

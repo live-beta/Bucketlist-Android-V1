@@ -7,6 +7,10 @@ import com.example.sam.bucketlist.Fields.BucketListFields;
 import com.example.sam.bucketlist.Fields.ItemFields;
 import com.example.sam.bucketlist.Fields.UserFields;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -39,6 +43,10 @@ public class BucketList {
 
     }
 
+    public BucketList(){
+
+    }
+
     public BucketList(String userName,String password){
 
         this.userFields.setUserName(userName);
@@ -49,6 +57,27 @@ public class BucketList {
 
         boolean status = apiCalls.login(userFields.getUserName(),userFields.getPassword());
         return status;
+    }
+
+    public ArrayList getBucketLists(){
+
+        JSONArray myBucketListsArrayObject = apiCalls.getBucketLists();
+        JSONObject bucketlistData;
+        ArrayList <String>bucketListName =new ArrayList<String>();
+
+        for (int index = 0; index < myBucketListsArrayObject.length() ; index++) {
+
+            try {
+                bucketlistData = new JSONObject( myBucketListsArrayObject.getString(index));
+                bucketListFields.setBucketListName(bucketlistData.getString("name"));
+                bucketListName.add(bucketListFields.getBucketListName());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return bucketListName;
     }
 
 

@@ -3,13 +3,17 @@ package com.example.sam.bucketlist.Views;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sam.bucketlist.API.BucketListAPICalls;
+import com.example.sam.bucketlist.BucketListMethods.BucketList;
 import com.example.sam.bucketlist.Fields.BucketListFields;
 import com.example.sam.bucketlist.R;
 
@@ -19,43 +23,42 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Sam on 19/03/2017.
  */
 
 public class BucketlistHome extends AppCompatActivity{
+
     private Button loadToken, addBucketList;
     BucketListAPICalls apiCalls = new BucketListAPICalls();
     private JSONObject bucketlistData;
+    private EditText newBucketList;
     private  ListView bucketLister;
     private ArrayAdapter<String> adapter;
-    private ArrayList <String>bucketListName =new ArrayList<String>();
+    public BucketListFields bucketListFields = new BucketListFields();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bucketlist_activity_layout);
 
         loadToken = (Button)findViewById(R.id.tokener);
         bucketLister =(ListView)findViewById(R.id.bucketlister);
+        newBucketList =(EditText)findViewById(R.id.newBucketListName);
+        addBucketList =(Button)findViewById(R.id.addBucketListButton);
 
         loadToken.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                JSONArray myArrayObject = apiCalls.getBucketLists();
 
-                for (int index = 0; index < myArrayObject.length() ; index++) {
+                BucketList bucketList = new BucketList();
 
-                    try {
-                        bucketlistData = new JSONObject( myArrayObject.getString(index));
-                        bucketListName.add(bucketlistData.getString("name"));
+                ArrayList <String> bucketListName = bucketList.getBucketLists();
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
                 adapter = new ArrayAdapter<String>(getApplication(),
                         android.R.layout.simple_list_item_1, bucketListName);
 
@@ -64,13 +67,30 @@ public class BucketlistHome extends AppCompatActivity{
             }
         });
 
-
-
-        addBucketList = (Button) findViewById(R.id.addBucketList);
         addBucketList.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
+
+                String newBucketListInputName = newBucketList.getText().toString();
+
+                boolean status = false;
+
+                try {
+                  status = apiCalls.createBucketList(newBucketListInputName);
+                    Toast.makeText(getApplicationContext(),"Status Value!"+ status,Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),"Error:" + e.getMessage(),Toast.LENGTH_LONG).show();
+                }
+
+
+                if (status == true){
+                    Toast.makeText(getApplicationContext(),"BucketList Created!",Toast.LENGTH_LONG).show();
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"oops, that didn't work",Toast.LENGTH_LONG).show();
+                }
 
             }
         });
