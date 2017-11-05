@@ -47,8 +47,8 @@ public class BucketlistHome extends AppCompatActivity{
 
         loadToken = (Button)findViewById(R.id.tokener);
         bucketLister =(ListView)findViewById(R.id.bucketlister);
-        newBucketList =(EditText)findViewById(R.id.newBucketListName);
-        addBucketList =(Button)findViewById(R.id.addBucketListButton);
+        newBucketList =(EditText)findViewById(R.id.bucketlistName);
+        addBucketList =(Button)findViewById(R.id.addBucketList);
 
         loadToken.setOnClickListener(new View.OnClickListener() {
 
