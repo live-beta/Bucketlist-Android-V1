@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <EditText
+        android:id="@+id/bucketlistName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Bucketlist Name"
+        />
+
+    <Button
+        android:text="Get Bucketlists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tokener" />
+
+    <Button
+        android:id="@+id/addBucketList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Bucketlist "
+        android:background="@color/colorAccent"
+        android:theme="@android:style/Theme.Material.Light" />
+
+    <ListView
+        android:id="@+id/bucketlister"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
