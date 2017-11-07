@@ -111,7 +111,7 @@ public class BucketListAPICalls {
         } else {
 
             HttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet("http://10.0.2.2:5000/api/v1/bucketlists");
+            HttpGet httpGet = new HttpGet("http://10.0.2.2:5000/api/v1/bucketlists?limit=5000");
             httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
             httpGet.addHeader("Authorization","Bearer " + token);
 
