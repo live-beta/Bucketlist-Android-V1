@@ -19,6 +19,11 @@
         android:layout_height="wrap_content"
         android:hint="Edit Bucketlist"
         android:id="@+id/editBucketlistName"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Delete Bucketlist"
+        android:id="@+id/bucketlist_delete"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -28,6 +33,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:id="@+id/bucketlistItemList"
         />
 
