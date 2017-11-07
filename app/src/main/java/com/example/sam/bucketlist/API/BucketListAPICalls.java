@@ -33,17 +33,18 @@ import java.util.List;
 
 public class BucketListAPICalls {
 
-    public static String  token;
+    public static String token;
 
-    public void setToken(String token){
+    public void setToken(String token) {
         this.token = token;
     }
-    public String getToken(){
+
+    public String getToken() {
         return this.token;
     }
 
 
-    public boolean login(String userName, String password){
+    public boolean login(String userName, String password) {
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy =
@@ -51,7 +52,7 @@ public class BucketListAPICalls {
             StrictMode.setThreadPolicy(policy);
         }
 
-        if (userName.equals("") || password.equals("")){
+        if (userName.equals("") || password.equals("")) {
             Log.d("Value", " User name or password cannot be empty");
             return false;
         } else {
@@ -59,12 +60,12 @@ public class BucketListAPICalls {
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/auth/login");
             List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-            nameValuePair.add(new BasicNameValuePair("username",userName));
-            nameValuePair.add(new BasicNameValuePair("password",password));
+            nameValuePair.add(new BasicNameValuePair("username", userName));
+            nameValuePair.add(new BasicNameValuePair("password", password));
 
-            try{
+            try {
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-            }catch(UnsupportedEncodingException e){
+            } catch (UnsupportedEncodingException e) {
 
                 e.printStackTrace();
             }
@@ -72,7 +73,7 @@ public class BucketListAPICalls {
                 HttpResponse response = httpClient.execute(httpPost);
                 String responseString = EntityUtils.toString(response.getEntity());
 
-                if (responseString.contains("Could not log you in, Check credentials")){
+                if (responseString.contains("Could not log you in, Check credentials")) {
                     return false;
                 }
 
@@ -84,13 +85,13 @@ public class BucketListAPICalls {
                 return true;
 
 
-            }catch (ClientProtocolException e){
+            } catch (ClientProtocolException e) {
                 Log.d("Error", e.getMessage());
-            }catch (IOException e){
+            } catch (IOException e) {
 
                 e.printStackTrace();
 
-            }catch (JSONException e){
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -113,12 +114,12 @@ public class BucketListAPICalls {
             HttpClient httpClient = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet("http://10.0.2.2:5000/api/v1/bucketlists?limit=5000");
             httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
-            httpGet.addHeader("Authorization","Bearer " + token);
+            httpGet.addHeader("Authorization", "Bearer " + token);
 
             try {
                 HttpResponse response = httpClient.execute(httpGet);
                 String responseStr = EntityUtils.toString(response.getEntity());
-
+                //Log.d("JSON", responseStr);
                 jsonArray = new JSONArray(responseStr);
 
 
@@ -136,18 +137,18 @@ public class BucketListAPICalls {
     }
 
 
-    public boolean createBucketList(String name){
+    public boolean createBucketList(String name) {
 
         token = getToken();
-        if (token.equals("")){
+        if (token.equals("")) {
             Log.d("Auth ", "Not Authorized, Login in again");
             return false;
         } else {
 
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/bucketlists");
-            httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
-            httpPost.addHeader("Authorization","Bearer "+token);
+            httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
+            httpPost.addHeader("Authorization", "Bearer " + token);
 
             try {
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -157,9 +158,9 @@ public class BucketListAPICalls {
                 HttpResponse response = httpclient.execute(httpPost);
                 int responseCode = response.getStatusLine().getStatusCode();
 
-                if (responseCode == 200){
+                if (responseCode == 200) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
 
@@ -168,26 +169,27 @@ public class BucketListAPICalls {
                 return false;
 
             } catch (IOException e) {
-                Log.d("Exception",e.getLocalizedMessage());
+                Log.d("Exception", e.getLocalizedMessage());
 
             }
 
         }
         return false;
     }
-    public boolean editBucketList(int id, String newName){
 
-        if (token.equals("")){
+    public boolean editBucketList(int id, String newName) {
+
+        if (token.equals("")) {
             Log.d("Auth : ", "Not Authorized");
             return false;
-        }else {
+        } else {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPut httpPut = new HttpPut("http://10.0.2.2:5000/api/v1/bucketlists/"+id);
+            HttpPut httpPut = new HttpPut("http://10.0.2.2:5000/api/v1/bucketlists/" + id);
 
             try {
 
-                httpPut.addHeader("Content-Type","application/x-www-form-urlencoded");
-                httpPut.addHeader("Authorization","Bearer "+token);
+                httpPut.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                httpPut.addHeader("Authorization", "Bearer " + token);
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("name", newName));
                 httpPut.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -199,9 +201,9 @@ public class BucketListAPICalls {
                 * TODO
                 * Debug API HTTP Responses */
 
-                if (responseCode == 200){
+                if (responseCode == 200) {
                     return true;
-                }else if (responseCode == 201){
+                } else if (responseCode == 201) {
                     return true;
                 }
 
@@ -213,24 +215,25 @@ public class BucketListAPICalls {
 
         }
 
-     return false;
+        return false;
     }
-    public boolean deleteBucketList(int id){
-        if (token.equals("")){
+
+    public boolean deleteBucketList(int id) {
+        if (token.equals("")) {
             Log.d("Auth : ", "Not Authorized");
             return false;
-        }else {
+        } else {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpDelete httpDelete = new HttpDelete("http://10.0.2.2:5000/api/v1/bucketlists/"+id);
+            HttpDelete httpDelete = new HttpDelete("http://10.0.2.2:5000/api/v1/bucketlists/" + id);
 
             try {
 
-                httpDelete.addHeader("Content-Type","application/x-www-form-urlencoded");
-                httpDelete.addHeader("Authorization","Bearer "+token);
+                httpDelete.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                httpDelete.addHeader("Authorization", "Bearer " + token);
                 HttpResponse response = httpclient.execute(httpDelete);
                 int responseCode = response.getStatusLine().getStatusCode();
 
-                if (responseCode == 200){
+                if (responseCode == 200) {
                     return true;
                 }
 
@@ -243,6 +246,7 @@ public class BucketListAPICalls {
         }
         return false;
     }
+
     public boolean createItem(List<ItemFields> newItems) {
         token = getToken();
         String name = newItems.get(0).getItemName();
@@ -279,18 +283,19 @@ public class BucketListAPICalls {
             return false;
         }
     }
-    public boolean editItem(int id,String newItemName){
-        if (token.equals("")){
+
+    public boolean editItem(int id, String newItemName) {
+        if (token.equals("")) {
             Log.d("Auth : ", "Not Authorized");
             return false;
-        }else {
+        } else {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPut httpPut = new HttpPut("http://10.0.2.2:5000/api/v1/items/"+id);
+            HttpPut httpPut = new HttpPut("http://10.0.2.2:5000/api/v1/items/" + id);
 
             try {
 
-                httpPut.addHeader("Content-Type","application/x-www-form-urlencoded");
-                httpPut.addHeader("Authorization","Bearer "+token);
+                httpPut.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                httpPut.addHeader("Authorization", "Bearer " + token);
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("name", newItemName));
                 httpPut.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -298,7 +303,7 @@ public class BucketListAPICalls {
                 HttpResponse response = httpclient.execute(httpPut);
                 int responseCode = response.getStatusLine().getStatusCode();
 
-                if (responseCode == 200){
+                if (responseCode == 200) {
                     return true;
                 }
 

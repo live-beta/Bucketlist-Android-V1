@@ -3,7 +3,7 @@ package com.example.sam.bucketlist;
 import com.example.sam.bucketlist.BucketListMethods.BucketList;
 import com.example.sam.bucketlist.Fields.BucketListFields;
 import com.example.sam.bucketlist.Fields.ItemFields;
-import com.example.sam.bucketlist.Views.BucketListItems;
+import com.example.sam.bucketlist.BucketListMethods.BucketListItems;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

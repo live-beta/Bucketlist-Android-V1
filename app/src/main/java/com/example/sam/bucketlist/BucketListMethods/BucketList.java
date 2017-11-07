@@ -14,17 +14,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 /**
  * Class BucketList Application Operations
- *
  */
 
 public class BucketList {
 
-    Collection <List<BucketListFields>> allBucketLists = new ArrayList<>();
+    Collection<List<BucketListFields>> allBucketLists = new ArrayList<>();
     List<BucketListFields> bucketList = new ArrayList<>();
     public static String token;
 
@@ -32,7 +32,7 @@ public class BucketList {
     UserFields userFields = new UserFields();
     BucketListAPICalls apiCalls = new BucketListAPICalls();
 
-    public BucketList(int id,String bucketListName,Date dateCreated, Date dateModified, int userId, List<ItemFields> items){
+    public BucketList(int id, String bucketListName, Date dateCreated, Date dateModified, int userId, List<ItemFields> items) {
 
         bucketListFields.setId(id);
         bucketListFields.setBucketListName(bucketListName);
@@ -43,59 +43,69 @@ public class BucketList {
 
     }
 
-    public BucketList(){
+    public BucketList() {
 
     }
 
-    public BucketList(String userName,String password){
+    public BucketList(String userName, String password) {
 
         this.userFields.setUserName(userName);
         this.userFields.setPassword(password);
     }
 
-    public boolean login(){
+    public boolean login() {
 
-        boolean status = apiCalls.login(userFields.getUserName(),userFields.getPassword());
+        boolean status = apiCalls.login(userFields.getUserName(), userFields.getPassword());
         return status;
     }
 
-    public ArrayList getBucketLists(){
+    public ArrayList<HashMap> getBucketLists() {
 
         JSONArray myBucketListsArrayObject = apiCalls.getBucketLists();
         JSONObject bucketlistData;
-        ArrayList <String>bucketListName =new ArrayList<String>();
 
-        for (int index = 0; index < myBucketListsArrayObject.length() ; index++) {
+
+        ArrayList<HashMap> bucketLists = new ArrayList<HashMap>();
+
+        for (int index = 0; index < myBucketListsArrayObject.length(); index++) {
 
             try {
+                HashMap<String, String> bucketListData = new HashMap<>();
+                //bucketlistData = myBucketListsArrayObject.getJSONObject(index);
                 bucketlistData = new JSONObject( myBucketListsArrayObject.getString(index));
                 bucketListFields.setBucketListName(bucketlistData.getString("name"));
-                bucketListName.add(bucketListFields.getBucketListName());
+                bucketListFields.setId(bucketlistData.getInt("id"));
+
+                bucketListData.put("name", bucketListFields.getBucketListName());
+                bucketListData.put("id", String.valueOf(bucketListFields.getId()));
+
+                bucketLists.add(bucketListData);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
-        return bucketListName;
+        return bucketLists;
     }
 
 
-    public List<BucketListFields> createBucketList(){
+    public List<BucketListFields> createBucketList() {
 
         bucketList.add(bucketListFields);
         allBucketLists.add(bucketList);
 
         return bucketList;
-        }
-    public boolean renameBucketList(String bucketListName,String newName){
+    }
+
+    public boolean renameBucketList(String bucketListName, String newName) {
 
         Iterator<List<BucketListFields>> iterator = allBucketLists.iterator();
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             List<BucketListFields> listElement = iterator.next();
-            if (listElement.get(0).getBucketListName().equals(bucketListName)){
-                listElement.get(0).setBucketListName(newName) ;
+            if (listElement.get(0).getBucketListName().equals(bucketListName)) {
+                listElement.get(0).setBucketListName(newName);
                 return true;
 
             }
@@ -103,13 +113,14 @@ public class BucketList {
         return false;
 
     }
-    public boolean deleteBucketList(String bucketListName){
+
+    public boolean deleteBucketList(String bucketListName) {
 
         Iterator<List<BucketListFields>> iterator = allBucketLists.iterator();
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             List<BucketListFields> listElement = iterator.next();
-            if (listElement.get(0).getBucketListName().equals(bucketListName)){
+            if (listElement.get(0).getBucketListName().equals(bucketListName)) {
                 iterator.remove();
             }
             return true;

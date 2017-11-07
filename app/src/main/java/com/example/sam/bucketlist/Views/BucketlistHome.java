@@ -1,14 +1,17 @@
 package com.example.sam.bucketlist.Views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,22 +25,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-/**
- * Created by Sam on 19/03/2017.
- */
 
 public class BucketlistHome extends AppCompatActivity{
 
-    private Button loadToken, addBucketList;
+    Button loadToken, addBucketList,editBucketlist;
     BucketListAPICalls apiCalls = new BucketListAPICalls();
     private JSONObject bucketlistData;
-    private EditText newBucketList;
+    private EditText newBucketList,editBucketlistEntry;
     private  ListView bucketLister;
-    private ArrayAdapter<String> adapter;
+//    private ArrayAdapter<String> adapter;
     public BucketListFields bucketListFields = new BucketListFields();
+    private Context context= this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -45,10 +47,24 @@ public class BucketlistHome extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bucketlist_activity_layout);
 
-        loadToken = (Button)findViewById(R.id.tokener);
+        loadToken = (Button)findViewById(R.id.getBucketlists);
         bucketLister =(ListView)findViewById(R.id.bucketlister);
-        newBucketList =(EditText)findViewById(R.id.bucketlistName);
+        newBucketList =(EditText)findViewById(R.id.addBucketListEntry);
         addBucketList =(Button)findViewById(R.id.addBucketList);
+        editBucketlist= (Button)findViewById(R.id.editBucketlist);
+        editBucketlistEntry =(EditText)findViewById(R.id.editBucketlistEntry);
+
+
+        editBucketlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Toast.makeText(getApplicationContext(),"This is edit logic",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         loadToken.setOnClickListener(new View.OnClickListener() {
 
@@ -57,10 +73,24 @@ public class BucketlistHome extends AppCompatActivity{
 
                 BucketList bucketList = new BucketList();
 
-                ArrayList <String> bucketListName = bucketList.getBucketLists();
+                ArrayList<HashMap> bucketListData = bucketList.getBucketLists();
 
-                adapter = new ArrayAdapter<String>(getApplication(),
-                        android.R.layout.simple_list_item_1, bucketListName);
+
+               // Log.d("Items needed", String.valueOf(bucketListName));
+
+
+
+//                adapter = new ArrayAdapter<String>(getApplication(),
+//                        android.R.layout.simple_list_item_1);
+
+                /**
+                 * TODO
+                 * Set up the data types passed to work with the arraylist
+                 */
+
+                CustomBucketListAdapter adapter = new CustomBucketListAdapter(BucketlistHome.this,
+                        bucketListData);
+
 
                 bucketLister.setAdapter(adapter);
 
@@ -94,10 +124,32 @@ public class BucketlistHome extends AppCompatActivity{
 
             }
         });
+        bucketLister.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+
+                HashMap<String,String> bucketListName =(HashMap<String, String>) parent.getItemAtPosition(position);
+
+                Toast.makeText(getApplicationContext(),"I am "+
+                        bucketListName,Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(context,ItemsDetails.class);
+
+
+                intent.putExtra("Name",bucketListName.get("name"));
+
+                startActivity(intent);
+
+
+
+            }
+        });
+    }
 
 
 
     }
-}
 
 
