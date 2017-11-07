@@ -130,15 +130,13 @@ public class BucketlistHome extends AppCompatActivity{
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
 
-                HashMap<String,String> bucketListName =(HashMap<String, String>) parent.getItemAtPosition(position);
-
-                Toast.makeText(getApplicationContext(),"I am "+
-                        bucketListName,Toast.LENGTH_SHORT).show();
+                HashMap<String,String> bucketListInfo =(HashMap<String, String>) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(context,ItemsDetails.class);
 
 
-                intent.putExtra("Name",bucketListName.get("name"));
+                intent.putExtra("Name",bucketListInfo.get("name"));
+                intent.putExtra("Id",bucketListInfo.get("id"));
 
                 startActivity(intent);
 
