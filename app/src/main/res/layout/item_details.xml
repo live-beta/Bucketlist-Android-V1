@@ -19,16 +19,36 @@
         android:layout_height="wrap_content"
         android:hint="Edit Bucketlist"
         android:id="@+id/editBucketlistName"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New Bucketlist Name"
+        android:id="@+id/newBucketlistName"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Delete Bucketlist"
         android:id="@+id/bucketlist_delete"/>
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Add Item"
+        android:id="@+id/addItem"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/newBucketlistName"/>
+        android:hint="New Item Name"
+        android:id="@+id/addItemName"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Edit Item"
+        android:id="@+id/editItem"/>
+
 
     <ListView
         android:layout_width="match_parent"
