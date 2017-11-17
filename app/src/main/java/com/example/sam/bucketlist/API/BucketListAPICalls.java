@@ -2,10 +2,6 @@ package com.example.sam.bucketlist.API;
 
 import android.os.StrictMode;
 import android.util.Log;
-
-import com.example.sam.bucketlist.Fields.BucketListFields;
-import com.example.sam.bucketlist.Fields.ItemFields;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -249,7 +245,6 @@ public class BucketListAPICalls {
 
     public boolean createItem(int id, String newItem) {
         token = getToken();
-       // String name = newItems.get(0).getItemName();
 
         if (token.equals("")) {
             Log.d("Auth ", "Not Authorized, Login in again");
@@ -318,6 +313,43 @@ public class BucketListAPICalls {
         }
 
         return false;
+    }
+
+
+    public Object getBucketList(int bucketListId)  {
+
+        Object object = new Object();
+
+        token = getToken();
+
+        if (token.equals("")) {
+            Log.d("Authentication", "Token Needed");
+
+        } else{
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet("http://10.0.2.2:5000/api/v1/bucketlists/" + bucketListId);
+            try {
+
+                httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                httpGet.addHeader("Authorization", "Bearer " + token);
+
+                HttpResponse response = httpclient.execute(httpGet);
+                String responseStr = EntityUtils.toString(response.getEntity());
+
+                Log.d("Response string", responseStr);
+
+                object = responseStr;
+
+
+            }catch (ClientProtocolException e){
+
+            }catch (IOException e){
+
+            }
+        }
+
+        return object;
+
     }
 
 }

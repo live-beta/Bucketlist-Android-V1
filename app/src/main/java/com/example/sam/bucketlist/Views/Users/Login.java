@@ -1,7 +1,7 @@
-package com.example.sam.bucketlist.Views;
+package com.example.sam.bucketlist.Views.Users;
 
+import android.app.Activity;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
@@ -10,17 +10,15 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
 
-import android.util.Log;
-
-import com.example.sam.bucketlist.API.BucketListAPICalls;
 import com.example.sam.bucketlist.BucketListMethods.BucketList;
 import com.example.sam.bucketlist.R;
+import com.example.sam.bucketlist.Views.BucketListItems.BucketlistHome;
 
 /**
  * Created by Sam on 19/03/2017.
  */
 
-public class Login extends AppCompatActivity {
+public class Login extends Activity {
 
     EditText userName,password;
     Button login,forgot_pass;

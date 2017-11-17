@@ -1,5 +1,6 @@
 package com.example.sam.bucketlist.BucketListMethods;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.sam.bucketlist.API.BucketListAPICalls;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class BucketList Application Operations
@@ -29,6 +31,7 @@ public class BucketList {
     public static String token;
 
     BucketListFields bucketListFields = new BucketListFields();
+    ItemFields itemFields = new ItemFields();
     UserFields userFields = new UserFields();
     BucketListAPICalls apiCalls = new BucketListAPICalls();
 
@@ -59,10 +62,16 @@ public class BucketList {
         return status;
     }
 
-    public ArrayList<HashMap> getBucketLists() {
+    public ArrayList<HashMap> getBucketLists() throws JSONException {
 
         JSONArray myBucketListsArrayObject = apiCalls.getBucketLists();
+
+
+
+
         JSONObject bucketlistData;
+        JSONArray items;
+
 
 
         ArrayList<HashMap> bucketLists = new ArrayList<HashMap>();
@@ -70,21 +79,64 @@ public class BucketList {
         for (int index = 0; index < myBucketListsArrayObject.length(); index++) {
 
             try {
-                HashMap<String, String> bucketListData = new HashMap<>();
-                //bucketlistData = myBucketListsArrayObject.getJSONObject(index);
+                HashMap bucketListData = new HashMap<>();
                 bucketlistData = new JSONObject( myBucketListsArrayObject.getString(index));
+
+                items = bucketlistData.getJSONArray("items");
+                HashMap itemField =new HashMap();
+                ArrayList<HashMap> bucketListItem = new ArrayList<>();
+
+                for (int itemIndex = 0; itemIndex < items.length() ; itemIndex++) {
+
+                    ArrayList data = new ArrayList();
+
+
+
+                    JSONObject fields =items.optJSONObject(itemIndex);
+
+                  //  Log.d("All Items ", String.valueOf(fields));
+
+                    data.add(String.valueOf(fields.get("name")));
+                    data.add(String.valueOf(fields.get("id")));
+
+                    itemField.put(itemIndex,data);
+//                    itemField.put(itemIndex, String.valueOf(fields.get("id")));
+
+
+//                    Log.d("Item Field", fields.getString("name").
+//                            concat(" "+fields.getString("id")));
+
+                }
+                bucketListItem.add(itemField);
+
                 bucketListFields.setBucketListName(bucketlistData.getString("name"));
                 bucketListFields.setId(bucketlistData.getInt("id"));
 
+
+
+                /**
+                 * TODO
+                 * Trace the bucketlist items data giving its setters and getters.
+                 *  Streamline the data streams
+                 *
+                 *  Work on threading.
+                 */
+
                 bucketListData.put("name", bucketListFields.getBucketListName());
                 bucketListData.put("id", String.valueOf(bucketListFields.getId()));
+                bucketListData.put("items", bucketListItem);
+
+
 
                 bucketLists.add(bucketListData);
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
+        Log.d("Itemness :-P",String.valueOf(bucketLists));
 
         return bucketLists;
     }
@@ -127,6 +179,47 @@ public class BucketList {
         }
         return false;
     }
+
+    public ArrayList<HashMap> getSpecifiedBucketList(int bucketListId) throws JSONException, NoSuchFieldException {
+
+        ArrayList<HashMap> items = new ArrayList<>();
+
+        Object itemsObject = apiCalls.getBucketList(bucketListId);
+
+
+
+        Log.d("Items Object", String.valueOf(itemsObject));
+
+//        JSONObject itemsData ;
+//
+//        ArrayList<HashMap> items = new ArrayList<HashMap>();
+//
+//
+//        for (int index = 0; index < itemsObject.length(); index++) {
+//
+//            try {
+//                HashMap<String, String> itemData = new HashMap<>();
+//                //bucketlistData = myBucketListsArrayObject.getJSONObject(index);
+//                itemsData = new JSONObject( itemsArrayObject.getString(index));
+//
+//                itemFields.setItemID(itemsData.getInt("id"));
+//                itemFields.setItemName(itemsData.getString("name"));
+//
+//
+//                itemData.put("name", itemFields.getItemName());
+//                itemData.put("id", String.valueOf(itemFields.getItemID()));
+//
+//                items.add(itemData);
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+////
+//
+         return items;
+      }
+
 
 
 }
