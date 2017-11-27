@@ -99,19 +99,6 @@ public class LoginActivity extends Activity {
             }
         });
 
-
-
-
-        forgot_pass = findViewById(R.id.forgot_password);
-
-        forgot_pass.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
     }
     public void ProgressBar(View view){
 
