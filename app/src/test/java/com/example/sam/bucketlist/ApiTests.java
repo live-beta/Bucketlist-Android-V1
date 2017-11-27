@@ -1,8 +1,7 @@
 package com.example.sam.bucketlist;
 
-import com.example.sam.bucketlist.API.BucketListAPICalls;
-import com.example.sam.bucketlist.Fields.BucketListFields;
-import com.example.sam.bucketlist.Fields.ItemFields;
+import com.example.sam.bucketlist.models.BucketListFields;
+import com.example.sam.bucketlist.models.ItemFields;
 
 /**
  * Created by sam on 9/23/17.
@@ -13,8 +12,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 
 public class ApiTests {
@@ -30,20 +27,20 @@ public class ApiTests {
     public static void setUp(){
        apicalls = new BucketListAPICalls();
 
-        itemFields.setBucketId(1);
-        itemFields.setDateCreated(date);
-        itemFields.setStatus(false);
-        itemFields.setBucketId(1);
+//        itemFields.setBucketId(1);
+//        itemFields.setDateCreated(date);
+//        itemFields.setStatus(false);
+//        itemFields.setBucketId(1);
         itemFields.setItemName("SKY DIVING");
-        itemFields.setItemID(1);
+//        itemFields.setItemID(1);
         newItem.add(itemFields);
 
         newBucketListFields.setBucketListName("KHARTOUM");
-        newBucketListFields.setUserId(1);
-        newBucketListFields.setDateModified(date);
-        newBucketListFields.setId(1);
-        newBucketListFields.setDateCreated(date);
-        newBucketListFields.setItems(newItem);
+//        newBucketListFields.setUserId(1);
+//        newBucketListFields.setDateModified(date);
+//        newBucketListFields.setId(1);
+//        newBucketListFields.setDateCreated(date);
+//        newBucketListFields.setItems(newItem);
         newBucketList.add(newBucketListFields);
 
     }

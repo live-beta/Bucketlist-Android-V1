@@ -4,7 +4,6 @@ package com.example.sam.bucketlist;
  * TODO
  * Refactor unit tests
  */
-import com.example.sam.bucketlist.Fields.ItemFields;
 //import com.example.sam.bucketlist.BucketListMethods.BucketListItems;
 
 import org.junit.AfterClass;
@@ -12,9 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class BucketListItemTest {
 

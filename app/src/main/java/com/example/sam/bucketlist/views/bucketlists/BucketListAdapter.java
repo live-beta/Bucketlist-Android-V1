@@ -1,8 +1,7 @@
-package com.example.sam.bucketlist.Views.BucketListItems;
+package com.example.sam.bucketlist.views.bucketlists;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,11 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.example.sam.bucketlist.API.BucketListAPICalls;
-import com.example.sam.bucketlist.Fields.ItemFields;
+
+import com.example.sam.bucketlist.models.ItemFields;
 import com.example.sam.bucketlist.R;
-import com.example.sam.bucketlist.Views.BucketLists.ItemsDetails;
+import com.example.sam.bucketlist.views.items.ItemsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,19 +64,17 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
         public BucketListViewAdapter(View bucketlistView){
             super(bucketlistView);
 
-            id =(TextView)bucketlistView.findViewById(R.id.idView);
-            bucketListName =(TextView)bucketlistView.findViewById(R.id.bucketlistName);
-            itemsList =(ImageView) bucketlistView.findViewById(R.id.viewItems);
-            deleteBucketlist = (ImageView) bucketlistView.findViewById(R.id.deleteBucketlist);
+            id = bucketlistView.findViewById(R.id.idView);
+            bucketListName = bucketlistView.findViewById(R.id.bucketlistName);
+            itemsList = bucketlistView.findViewById(R.id.viewItems);
+            deleteBucketlist = bucketlistView.findViewById(R.id.deleteBucketlist);
 
         }
 
         public void setData(final HashMap current, final int position){
 
-            final ItemFields itemFields = new ItemFields();
-
             final Context context = layoutInflator.getContext();
-            final BucketListAPICalls apiCalls = new BucketListAPICalls();
+
             final HashMap itemCollection = new HashMap();
 
             this.id.setText(current.get("id").toString());
@@ -87,11 +83,10 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
 
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ItemsDetails.class);
+                    Intent intent = new Intent(context, ItemsActivity.class);
 
                     intent.putExtra("Name", current.get("name").toString());
                     intent.putExtra("Id", current.get("id").toString());
-
 
                     try {
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
@@ -100,7 +95,6 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
                             Log.d("Items Array", String.valueOf(itemsArray));
 
                             for (int index = 0; index <itemsArray.length() ; index++) {
-                               // itemCollection.put("ItemName", itemsArray);
 
                             }
                         }
@@ -120,23 +114,23 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
             deleteBucketlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    try {
-                        int bucketlistID = Integer.parseInt(current.get("id").toString());
-                        boolean deleteStatus = apiCalls.deleteBucketList(bucketlistID);
-
-                        if (deleteStatus == true){
-
-                            Toast.makeText(context,"Delete Success",Toast.LENGTH_SHORT).show();
-
-                            Intent intent = new Intent(context,BucketlistHome.class);
-                            context.startActivity(intent);
-
-                        }else {
-                            Toast.makeText(context,"Delete Failure",Toast.LENGTH_SHORT).show();
-                        }
-                    }catch (Exception e){
-                        Log.d("Error Deleting", e.getMessage());
-                    }
+//                    try {
+//                        int bucketlistID = Integer.parseInt(current.get("id").toString());
+//                      boolean deleteStatus = apiCalls.deleteBucketList(bucketlistID);
+//
+//                        if (deleteStatus == true){
+//
+//                            Toast.makeText(context,"Delete Success",Toast.LENGTH_SHORT).show();
+//
+//                            Intent intent = new Intent(context,BucketlistActivity.class);
+//                            context.startActivity(intent);
+//
+//                        }else {
+//                            Toast.makeText(context,"Delete Failure",Toast.LENGTH_SHORT).show();
+//                        }
+//                    }catch (Exception e){
+//                        Log.d("Error Deleting", e.getMessage());
+//                    }
                 }
             });
 

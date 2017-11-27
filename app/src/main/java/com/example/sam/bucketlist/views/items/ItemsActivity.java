@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.Views.BucketLists;
+package com.example.sam.bucketlist.views.items;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,20 +6,14 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.sam.bucketlist.API.BucketListAPICalls;
-import com.example.sam.bucketlist.BucketListMethods.BucketList;
-import com.example.sam.bucketlist.Fields.ItemFields;
+import com.example.sam.bucketlist.api.Methods;
+import com.example.sam.bucketlist.models.ItemFields;
 import com.example.sam.bucketlist.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,31 +22,17 @@ import java.util.HashMap;
  * Created by sam on 11/7/17.
  */
 
-public class ItemsDetails extends Activity {
+public class ItemsActivity extends Activity {
 
-    TextView bucketListID, bucketListName,newBucketListName;
-    Button editBucketlist, deleteBucketlist, addItem,editItem,itemDetails;
-    ListView itemsDisplay;
-    EditText addItemName;
-    BucketList bucketList = new BucketList();
-    BucketListAPICalls apiCalls = new BucketListAPICalls();
-    private final Context context = this;
-    ItemFields itemFields = new ItemFields();
 
     @Override
    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bucketlist_item_details);
 
-      // get the items
-
         final Bundle extras = getIntent().getExtras();
 
         HashMap items = new HashMap();
-
-        ArrayList<HashMap> itemsData = itemFields.getItems();
-
-        Log.d("Items", String.valueOf(itemsData));
 
 
 
@@ -77,10 +57,10 @@ public class ItemsDetails extends Activity {
 //            e.printStackTrace();
 //        }
 
-
-        itemsData.add(items);
-        startItemsRecyclerView(itemsData);
 //
+//        itemsData.add(items);
+//        startItemsRecyclerView(itemsData);
+////
 //        bucketListID = (TextView)findViewById(R.id.bucketlistViewID);
 //        bucketListName =(TextView)findViewById(R.id.bucketlistViewName);
 //        newBucketListName =(TextView)findViewById(R.id.newBucketlistName);
@@ -135,7 +115,7 @@ public class ItemsDetails extends Activity {
 //
 //                        Toast.makeText(getApplicationContext(),"Delete Success",Toast.LENGTH_SHORT).show();
 //
-//                        Intent intent = new Intent(context,BucketlistHome.class);
+//                        Intent intent = new Intent(context,BucketlistActivity.class);
 //                        startActivity(intent);
 //
 //                    }else {
@@ -191,7 +171,7 @@ public class ItemsDetails extends Activity {
 //                    e.printStackTrace();
 //                }
 //
-//                ItemsListAdapter adapter = new ItemsListAdapter(ItemsDetails.this, itemsData);
+//                ItemsListAdapter adapter = new ItemsListAdapter(ItemsActivity.this, itemsData);
 //                itemsDisplay.setAdapter(adapter);
 //
 //            }

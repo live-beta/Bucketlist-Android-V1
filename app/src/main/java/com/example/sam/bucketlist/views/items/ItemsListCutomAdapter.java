@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.Views.BucketLists;
+package com.example.sam.bucketlist.views.items;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sam.bucketlist.API.BucketListAPICalls;
 import com.example.sam.bucketlist.R;
 
 import java.util.ArrayList;
