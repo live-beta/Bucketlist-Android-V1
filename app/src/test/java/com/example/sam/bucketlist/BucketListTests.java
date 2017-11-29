@@ -1,6 +1,6 @@
 //package com.example.sam.bucketlist;
 //
-//import com.example.sam.bucketlist.BucketListMethods.Methods;
+//import com.example.sam.bucketlist.BucketListMethods.APIManager;
 //import com.example.sam.bucketlist.Fields.BucketListFields;
 //import com.example.sam.bucketlist.Fields.ItemFields;
 //import com.example.sam.bucketlist.BucketListMethods.BucketListItems;
@@ -19,7 +19,7 @@
 //
 //public class BucketListTests {
 //
-//    public static Methods bucketList;
+//    public static APIManager bucketList;
 //    public static List<ItemFields> newItem;
 //    public static BucketListItems item;
 //
@@ -31,7 +31,7 @@
 //
 //        newItem = item.createItem();
 //
-//        bucketList =new Methods(1,"HAWAII",date, date, 1, newItem );
+//        bucketList =new APIManager(1,"HAWAII",date, date, 1, newItem );
 //
 //    }
 //

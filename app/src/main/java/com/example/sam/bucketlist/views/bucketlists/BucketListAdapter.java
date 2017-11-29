@@ -114,23 +114,6 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
             deleteBucketlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    try {
-//                        int bucketlistID = Integer.parseInt(current.get("id").toString());
-//                      boolean deleteStatus = apiCalls.deleteBucketList(bucketlistID);
-//
-//                        if (deleteStatus == true){
-//
-//                            Toast.makeText(context,"Delete Success",Toast.LENGTH_SHORT).show();
-//
-//                            Intent intent = new Intent(context,BucketlistActivity.class);
-//                            context.startActivity(intent);
-//
-//                        }else {
-//                            Toast.makeText(context,"Delete Failure",Toast.LENGTH_SHORT).show();
-//                        }
-//                    }catch (Exception e){
-//                        Log.d("Error Deleting", e.getMessage());
-//                    }
                 }
             });
 

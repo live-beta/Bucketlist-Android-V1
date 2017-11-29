@@ -12,7 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.sam.bucketlist.api.Methods;
+import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.R;
 
 import org.json.JSONException;
@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 public class BucketlistActivity extends AppCompatActivity {
 
-    private Methods bucketList = new Methods();
+    private APIManager bucketList = new APIManager();
     private Context context = this;
 
     private FloatingActionButton newBucketList;

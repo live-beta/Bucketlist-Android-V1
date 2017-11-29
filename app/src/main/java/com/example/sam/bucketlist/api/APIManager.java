@@ -23,10 +23,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Class Methods Application Operations
+ * Class APIManager Application Operations
  */
 
-public class Methods {
+public class APIManager {
 
     ArrayList<BucketListFields> bucketListFieldsArrayList;
     ArrayList<HashMap> bucketListData = new ArrayList<>();
@@ -40,11 +40,11 @@ public class Methods {
 
     final UserClient userClient = retrofit.create(UserClient.class);
 
-    public Methods() {
+    public APIManager() {
 
     }
 
-    public Methods(String userName, String password) {
+    public APIManager(String userName, String password) {
 
         this.userFields.setUserName(userName);
         this.userFields.setPassword(password);

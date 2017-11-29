@@ -1,18 +1,11 @@
 package com.example.sam.bucketlist.views.items;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.sam.bucketlist.api.Methods;
-import com.example.sam.bucketlist.models.ItemFields;
 import com.example.sam.bucketlist.R;
 
 import java.util.ArrayList;

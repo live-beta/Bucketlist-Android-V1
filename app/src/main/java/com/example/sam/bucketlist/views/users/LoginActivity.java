@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.sam.bucketlist.api.Methods;
+import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.models.UserFields;
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
@@ -52,7 +52,7 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View view) {
-                Methods bucketList = new Methods(userName.getText().toString(),
+                APIManager bucketList = new APIManager(userName.getText().toString(),
                         password.getText().toString());
 
 
