@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sam.bucketlist.models.ItemFields;
 import com.example.sam.bucketlist.R;
+import com.example.sam.bucketlist.models.BucketListFields;
 import com.example.sam.bucketlist.views.items.ItemsActivity;
 
 import org.json.JSONArray;
@@ -83,30 +83,6 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
 
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ItemsActivity.class);
-
-                    intent.putExtra("Name", current.get("name").toString());
-                    intent.putExtra("Id", current.get("id").toString());
-
-                    try {
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                            JSONArray itemsArray = new JSONArray(current.get("items"));
-
-                            Log.d("Items Array", String.valueOf(itemsArray));
-
-                            for (int index = 0; index <itemsArray.length() ; index++) {
-
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    itemCollection.put("items", current.get("items"));
-
-
-                    context.startActivity(intent);
 
                 }
             });

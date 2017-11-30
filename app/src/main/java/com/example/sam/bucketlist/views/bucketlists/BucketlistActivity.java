@@ -9,11 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.R;
+import com.example.sam.bucketlist.models.BucketListFields;
 
 import org.json.JSONException;
 
@@ -55,11 +57,16 @@ public class BucketlistActivity extends AppCompatActivity {
         try {
             bucketlistData = bucketList.getBucketLists(token);
 
+            Log.d("Data point here",String.valueOf(bucketlistData));
+            loadBucketLists(bucketlistData);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        loadBucketLists(bucketlistData);
+
+
+
 
 
     }

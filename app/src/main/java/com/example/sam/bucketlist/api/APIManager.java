@@ -28,7 +28,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIManager {
 
-    ArrayList<BucketListFields> bucketListFieldsArrayList;
     ArrayList<HashMap> bucketListData = new ArrayList<>();
 
     Retrofit.Builder builder = new Retrofit.Builder()
@@ -98,32 +97,5 @@ public class APIManager {
 
     }
 
-    public ArrayList<BucketListFields> getBucketListsData(String Token) throws JSONException {
-
-        String tokenHeader = "Bearer " + Token;
-
-        Call<ArrayList<BucketListFields>> call = userClient.getBucketlist(tokenHeader);
-
-        call.enqueue(new Callback<ArrayList<BucketListFields>>() {
-
-            @Override
-            public void onResponse(Call<ArrayList<BucketListFields>> call, Response<ArrayList<BucketListFields>> response) {
-
-                bucketListFieldsArrayList =  response.body();
-
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<BucketListFields>> call, Throwable t) {
-
-            }
-        });
-
-
-        return bucketListFieldsArrayList;
-
-
-
-    }
 }
 

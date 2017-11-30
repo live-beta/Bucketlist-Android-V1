@@ -90,9 +90,7 @@ class CustomViewAdapter extends RecyclerView.ViewHolder{
             public void onClick(View view) {
 
                 Toast.makeText(context," "+ current.get("items"),Toast.LENGTH_SHORT).show();
-//                BucketListAPICalls apiCalls = new BucketListAPICalls();
-//                apiCalls.deleteBucketList(Integer.parseInt(current.get("id").toString()));
-//                Toast.makeText(context,"Delete Successful",Toast.LENGTH_SHORT).show();
+
             }
         });
 
