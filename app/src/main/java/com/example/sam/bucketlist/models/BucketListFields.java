@@ -3,8 +3,10 @@ package com.example.sam.bucketlist.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
- * Created by sam on 9/19/17.
+ * Bucketlist Data Model
  */
 
 public class BucketListFields {
@@ -24,12 +26,10 @@ public class BucketListFields {
         return id;
     }
 
-    public void setBucketListName(String bucketListNameEntry){
-        this.name = bucketListNameEntry;
-    }
     public String getBucketListName(){
         return name;
     }
+
 
 
 }

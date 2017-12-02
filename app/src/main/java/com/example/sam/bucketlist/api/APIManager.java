@@ -1,20 +1,23 @@
 package com.example.sam.bucketlist.api;
 
+import android.app.Activity;
+import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
+import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.models.BucketListFields;
-import com.example.sam.bucketlist.models.ItemFields;
 import com.example.sam.bucketlist.models.LoginFields;
 import com.example.sam.bucketlist.models.UserFields;
 import com.example.sam.bucketlist.service.UserClient;
+import com.example.sam.bucketlist.views.bucketlists.BucketListAdapter;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +31,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIManager {
 
-    ArrayList<HashMap> bucketListData = new ArrayList<>();
+    ArrayList<BucketListFields> bucketListData = new ArrayList<>();
+
 
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl("http://10.0.2.2:5000/api/v1/")
@@ -36,6 +40,8 @@ public class APIManager {
 
     Retrofit retrofit = builder.build();
     UserFields userFields = new UserFields();
+
+
 
     final UserClient userClient = retrofit.create(UserClient.class);
 
@@ -49,6 +55,7 @@ public class APIManager {
         this.userFields.setPassword(password);
     }
 
+
     public boolean login(Callback<UserFields> callback) {
 
         LoginFields loginObj = new LoginFields(userFields.getUserName(), userFields.getPassword());
@@ -58,34 +65,43 @@ public class APIManager {
         return false;
     }
 
-    public ArrayList<HashMap> getBucketLists(String Token) throws JSONException {
+    public void getBucketLists(String Token, final Context context) throws JSONException {
+
 
         String tokenHeader = "Bearer " + Token;
         Call<ArrayList<BucketListFields>> call = userClient.getBucketlist(tokenHeader);
 
+
         call.enqueue(new Callback<ArrayList<BucketListFields>>() {
 
             @Override
-            public void onResponse(Call<ArrayList<BucketListFields>> call, Response<ArrayList<BucketListFields>> response) {
+            public void onResponse(Call<ArrayList<BucketListFields>> call,
+                                   Response<ArrayList<BucketListFields>> response) {
 
-                /**
-                 * TODO
-                 * Check on iteration.
-                 */
 
-                for (int index = 0; index < response.body().size() ; index++) {
+                try {
+                    bucketListData = response.body();
 
-                    HashMap Data = new HashMap();
+                    RecyclerView recyclerView = ((Activity)context)
+                            .findViewById(R.id.bucketlistViewer);
 
-                    Data.put("id",response.body().get(index).getId());
-                    Data.put("name", response.body().get(index).getBucketListName());
-                    bucketListData.add(Data);
+                    BucketListAdapter adapter = new BucketListAdapter(context, bucketListData);
+                    recyclerView.setAdapter(adapter);
 
-                    Log.d("Bucketlist Data",bucketListData.toString());
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+                    linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+
+                }catch (Exception e){
+                    e.printStackTrace();
 
                 }
 
-            }
+        }
 
             @Override
             public void onFailure(Call<ArrayList<BucketListFields>> call, Throwable t) {
@@ -93,7 +109,6 @@ public class APIManager {
             }
         });
 
-        return bucketListData;
 
     }
 
