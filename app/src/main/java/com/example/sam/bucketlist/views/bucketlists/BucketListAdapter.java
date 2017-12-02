@@ -23,10 +23,10 @@ import java.util.HashMap;
 public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.BucketListViewAdapter> {
 
     private LayoutInflater layoutInflator;
-    private  ArrayList<HashMap> bucketlistData;
+    private  ArrayList<BucketListFields> bucketlistData;
 
 
-    public BucketListAdapter(Context context, ArrayList<HashMap> bucketLists){
+    public BucketListAdapter(Context context, ArrayList<BucketListFields> bucketLists){
 
         this.bucketlistData = bucketLists;
         this.layoutInflator  = LayoutInflater.from(context);
@@ -44,7 +44,7 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
     @Override
     public void onBindViewHolder(BucketListViewAdapter holder, int position) {
 
-        HashMap currentDataObject = bucketlistData.get(position);
+        BucketListFields currentDataObject = bucketlistData.get(position);
         holder.setData(currentDataObject,position);
 
     }
@@ -71,14 +71,10 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
 
         }
 
-        public void setData(final HashMap current, final int position){
+        public void setData(final BucketListFields current, final int position){
 
-            final Context context = layoutInflator.getContext();
-
-            final HashMap itemCollection = new HashMap();
-
-            this.id.setText(current.get("id").toString());
-            this.bucketListName.setText(current.get("name").toString());
+            this.id.setText(current.getId());
+            this.bucketListName.setText(current.getBucketListName());
             this.itemsList.setOnClickListener(new View.OnClickListener() {
 
                 @Override
