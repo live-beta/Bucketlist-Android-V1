@@ -6,26 +6,19 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.R;
-import com.example.sam.bucketlist.models.BucketListFields;
+import com.example.sam.bucketlist.api.APIManager;
 
 import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class BucketlistActivity extends AppCompatActivity {
 
     private APIManager bucketList = new APIManager();
+
     private Context context = this;
 
     private FloatingActionButton newBucketList;
@@ -42,12 +35,16 @@ public class BucketlistActivity extends AppCompatActivity {
         newBucketList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Built on a button",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"FAB Button Works",Toast.LENGTH_SHORT).show();
             }
         });
 
+        loadBucketLists();
 
-        ArrayList<HashMap> bucketlistData = new ArrayList<>();
+    }
+
+    public void loadBucketLists() {
+
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -55,34 +52,13 @@ public class BucketlistActivity extends AppCompatActivity {
         String token = preferences.getString("token", "");
 
         try {
-            bucketlistData = bucketList.getBucketLists(token);
 
-            Log.d("Data point here",String.valueOf(bucketlistData));
-            loadBucketLists(bucketlistData);
+             bucketList.getBucketLists(token, context);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-
-
-
-
-    }
-
-    private void loadBucketLists(ArrayList<HashMap> bucketlistData) {
-
-        RecyclerView recyclerView = findViewById(R.id.bucketlistViewer);
-
-        BucketListAdapter adapter = new BucketListAdapter(this, bucketlistData);
-        recyclerView.setAdapter(adapter);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
     }
