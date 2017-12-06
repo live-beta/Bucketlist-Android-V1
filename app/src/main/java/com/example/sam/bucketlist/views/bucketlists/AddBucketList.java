@@ -15,8 +15,6 @@ import com.example.sam.bucketlist.api.APIManager;
 
 import org.json.JSONException;
 
-import java.lang.annotation.Documented;
-
 /**
  * Created by sam on 12/6/17.
  */
@@ -26,7 +24,7 @@ public class AddBucketList extends Activity {
     Button addBucketList;
     EditText newBucketList;
 
-    private APIManager bucketList = new APIManager();
+    private APIManager apiManager = new APIManager();
 
     private Context context = this;
 
@@ -51,7 +49,7 @@ public class AddBucketList extends Activity {
                 String token = preferences.getString("token","");
 
                 try {
-                    bucketList.addBucketList(token,newBucketlist);
+                    apiManager.addBucketList(token,newBucketlist);
 
                     Intent intent = new Intent(context, BucketlistActivity.class);
                     startActivity(intent);

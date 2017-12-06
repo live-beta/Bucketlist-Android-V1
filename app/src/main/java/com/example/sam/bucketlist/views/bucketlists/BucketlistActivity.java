@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
@@ -18,7 +17,7 @@ import org.json.JSONException;
 
 public class BucketlistActivity extends AppCompatActivity {
 
-    private APIManager bucketList = new APIManager();
+    private APIManager apiManager = new APIManager();
 
     private Context context = this;
 
@@ -57,7 +56,7 @@ public class BucketlistActivity extends AppCompatActivity {
 
         try {
 
-             bucketList.getBucketLists(token, context);
+             apiManager.getBucketLists(token, context);
 
         } catch (JSONException e) {
             e.printStackTrace();
