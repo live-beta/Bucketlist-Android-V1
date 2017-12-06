@@ -33,7 +33,7 @@
         <activity
             android:name=".views.bucketlists.BucketlistActivity" />
         <activity android:name=".views.items.ItemsActivity"></activity>
-
+        <activity android:name=".views.bucketlists.AddBucketList"></activity>
     </application>
 
 </manifest>

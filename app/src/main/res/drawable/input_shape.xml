@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
-    <stroke android:width="2dp"
-        android:color="#ddfa722e"/>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <stroke
+        android:width="2dp"
+        android:color="#ddfa722e"
+
+        />
     <solid
         android:color="#00ffffff"/>
     <gradient
@@ -14,4 +19,6 @@
         android:topLeftRadius="20dp"
         android:topRightRadius="20dp"
         />
+
+
 </shape>

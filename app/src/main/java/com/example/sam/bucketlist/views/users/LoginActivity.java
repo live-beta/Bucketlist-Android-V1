@@ -2,6 +2,7 @@ package com.example.sam.bucketlist.views.users;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Handler;
@@ -41,9 +42,17 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_activity_layout);
 
 
+        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/Roboto-Regular.ttf");
+
         userName = findViewById(R.id.uname);
+        userName.setTypeface(face);
+
         password = findViewById(R.id.upass);
+        password.setTypeface(face);
+
         login = findViewById(R.id.login);
+        login.setTypeface(face);
+
 
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.INVISIBLE);

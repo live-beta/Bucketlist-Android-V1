@@ -1,7 +1,9 @@
 package com.example.sam.bucketlist.api;
 
 import android.app.Activity;
+import android.app.usage.NetworkStats;
 import android.content.Context;
+import android.media.session.MediaSession;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.view.View;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.models.BucketListFields;
+import com.example.sam.bucketlist.models.BucketListPost;
 import com.example.sam.bucketlist.models.LoginFields;
 import com.example.sam.bucketlist.models.UserFields;
 import com.example.sam.bucketlist.service.UserClient;
@@ -63,6 +66,33 @@ public class APIManager {
         call.enqueue(callback);
 
         return false;
+    }
+
+    public void addBucketList(String Token, String name) throws JSONException{
+
+        BucketListFields bucketListFields = new BucketListFields(name);
+
+        String tokenHeader = "Bearer " + Token;
+
+
+        BucketListPost bucketListObj = new BucketListPost(bucketListFields.getBucketListName());
+
+
+        Call<BucketListPost> call = userClient.addBucketList(tokenHeader,bucketListObj);
+
+        call.enqueue(new Callback<BucketListPost>() {
+            @Override
+            public void onResponse(Call<BucketListPost> call, Response<BucketListPost> response) {
+
+                Log.d("Bucketlist Added", response.message());
+            }
+
+            @Override
+            public void onFailure(Call<BucketListPost> call, Throwable t) {
+                Log.d("Fail","Failed to add ");
+            }
+        });
+
     }
 
     public void getBucketLists(String Token, final Context context) throws JSONException {

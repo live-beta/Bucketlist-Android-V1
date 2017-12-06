@@ -19,6 +19,11 @@ public class BucketListFields {
     @Expose
     public String name;
 
+    public BucketListFields(String name){
+        this.name = name;
+
+    }
+
     public void setId(String idEntry){
         this.id =idEntry;
     }

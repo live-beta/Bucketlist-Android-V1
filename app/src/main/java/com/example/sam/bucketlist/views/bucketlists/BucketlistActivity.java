@@ -1,6 +1,7 @@
 package com.example.sam.bucketlist.views.bucketlists;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -35,7 +36,10 @@ public class BucketlistActivity extends AppCompatActivity {
         newBucketList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"FAB Button Works",Toast.LENGTH_SHORT).show();
+
+               Intent intent = new Intent(context, AddBucketList.class);
+               startActivity(intent);
+
             }
         });
 
