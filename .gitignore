@@ -10,3 +10,6 @@
 /build
 /captures
 .externalNativeBuild
+/.idea/
+app/src/main/res/font/
+app/src/main/res/values-v21/
