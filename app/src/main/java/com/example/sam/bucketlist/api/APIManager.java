@@ -1,32 +1,33 @@
-package com.example.sam.bucketlist.api;
 
-import android.app.Activity;
-import android.app.usage.NetworkStats;
-import android.content.Context;
-import android.media.session.MediaSession;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
+        package com.example.sam.bucketlist.api;
 
-import com.example.sam.bucketlist.R;
-import com.example.sam.bucketlist.models.BucketListFields;
-import com.example.sam.bucketlist.models.BucketListPost;
-import com.example.sam.bucketlist.models.LoginFields;
-import com.example.sam.bucketlist.models.UserFields;
-import com.example.sam.bucketlist.service.UserClient;
-import com.example.sam.bucketlist.views.bucketlists.BucketListAdapter;
+        import android.app.Activity;
+        import android.app.usage.NetworkStats;
+        import android.content.Context;
+        import android.media.session.MediaSession;
+        import android.support.v7.widget.DefaultItemAnimator;
+        import android.support.v7.widget.LinearLayoutManager;
+        import android.support.v7.widget.RecyclerView;
+        import android.util.Log;
+        import android.view.View;
 
-import org.json.JSONException;
+        import com.example.sam.bucketlist.R;
+        import com.example.sam.bucketlist.models.BucketListFields;
+        import com.example.sam.bucketlist.models.BucketListPost;
+        import com.example.sam.bucketlist.models.LoginFields;
+        import com.example.sam.bucketlist.models.UserFields;
+        import com.example.sam.bucketlist.service.UserClient;
+        import com.example.sam.bucketlist.views.bucketlists.BucketListAdapter;
 
-import java.util.ArrayList;
+        import org.json.JSONException;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+        import java.util.ArrayList;
+
+        import retrofit2.Call;
+        import retrofit2.Callback;
+        import retrofit2.Response;
+        import retrofit2.Retrofit;
+        import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Class APIManager Application Operations
@@ -38,7 +39,7 @@ public class APIManager {
 
 
     Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:5000/api/v1/")
+            .baseUrl("https://peaceful-citadel-97706.herokuapp.com/api/v1/")
             .addConverterFactory(GsonConverterFactory.create());
 
     Retrofit retrofit = builder.build();
@@ -68,6 +69,31 @@ public class APIManager {
         return false;
     }
 
+    public void registerUser(String username, String password, String email){
+
+        UserFields userFields = new UserFields(username,password, email);
+
+        userFields.setUserName(username);
+        userFields.setEmail(email);
+        userFields.setPassword(password);
+
+        Call<UserFields> call = userClient.registerUser(userFields);
+
+        call.enqueue(new Callback<UserFields>() {
+            @Override
+            public void onResponse(Call<UserFields> call, Response<UserFields> response) {
+                Log.d("Registration", response.message());
+            }
+
+            @Override
+            public void onFailure(Call<UserFields> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
     public void addBucketList(String Token, String name) throws JSONException{
 
         BucketListFields bucketListFields = new BucketListFields(name);
@@ -95,6 +121,7 @@ public class APIManager {
 
     }
 
+
     public void getBucketLists(String Token, final Context context) throws JSONException {
 
 
@@ -110,7 +137,10 @@ public class APIManager {
 
 
                 try {
+
                     bucketListData = response.body();
+
+                    Log.d("Data:", String.valueOf(bucketListData));
 
                     RecyclerView recyclerView = ((Activity)context)
                             .findViewById(R.id.bucketlistViewer);
@@ -131,7 +161,7 @@ public class APIManager {
 
                 }
 
-        }
+            }
 
             @Override
             public void onFailure(Call<ArrayList<BucketListFields>> call, Throwable t) {
@@ -143,4 +173,3 @@ public class APIManager {
     }
 
 }
-

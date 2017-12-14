@@ -1,6 +1,7 @@
 package com.example.sam.bucketlist.views.users;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,12 +28,13 @@ import retrofit2.Response;
 public class LoginActivity extends Activity {
 
     EditText userName,password;
-    Button login,forgot_pass;
+    Button login,register;
 
     ProgressBar progressBar;
-    private Handler handler = new Handler();
 
     private int progressStatus = 0;
+
+    private Context context =this;
 
 
     @Override
@@ -56,6 +58,8 @@ public class LoginActivity extends Activity {
 
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.INVISIBLE);
+
+        register= findViewById(R.id.register);
 
         login.setOnClickListener(new View.OnClickListener() {
 
@@ -105,6 +109,14 @@ public class LoginActivity extends Activity {
                      }
                  });
 
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Register.class);
+                startActivity(intent);
             }
         });
 

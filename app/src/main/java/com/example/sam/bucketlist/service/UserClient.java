@@ -27,7 +27,11 @@ public interface UserClient {
     Call<ArrayList<BucketListFields>> getBucketlist(@Header("Authorization") String token);
 
     @POST("bucketlists")
-    Call<BucketListPost> addBucketList(@Header("Authorization") String token, @Body BucketListPost name);
+    Call<BucketListPost> addBucketList(@Header("Authorization") String token,
+                                       @Body BucketListPost name);
+
+    @POST("auth/register")
+    Call<UserFields> registerUser(@Body UserFields userFields);
 
 
 }
