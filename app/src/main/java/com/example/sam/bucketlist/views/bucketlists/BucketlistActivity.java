@@ -55,9 +55,6 @@ public class BucketlistActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String token = sharedPreferences.getString("token","");
 
-
-        Log.d("Token nortation", token);
-
         if (token ==null){
             Toast.makeText(this,"You are not logged in try again", Toast.LENGTH_LONG).show();
         }else {
