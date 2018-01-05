@@ -52,16 +52,24 @@ public class BucketlistActivity extends AppCompatActivity {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-
         String token = preferences.getString("token", "");
 
-        try {
 
-             bucketList.getBucketLists(token, context);
+        /*Check if the token is null*/
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (token ==null){
+            Toast.makeText(this,"You are not logged in try again", Toast.LENGTH_LONG).show();
+        }else {
+            try {
+                bucketList.getBucketLists(token, context);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
+
+
 
 
 
