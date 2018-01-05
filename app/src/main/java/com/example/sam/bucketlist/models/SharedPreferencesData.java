@@ -4,40 +4,39 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.example.sam.bucketlist.views.users.LoginActivity;
-
 /**
  * Created by sam on 1/5/18.
  */
 
-public class SharedPreferencesData{
+public class SharedPreferencesData {
 
-private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
 
-private String token;
+    private String token;
 
-public SharedPreferencesData(String token,Context context){
-   this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public SharedPreferencesData(String token, Context context) {
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-   this.token = token;
-
-}
-public SharedPreferencesData(){
+        this.token = token;
 
     }
 
-public void setToken(){
+    public SharedPreferencesData() {
 
-    this.sharedPreferences.edit().putString("token",token).apply();
+    }
 
-}
+    public void setToken() {
 
-public String getToken(){
+        this.sharedPreferences.edit().putString("token", token).apply();
 
-    token = this.sharedPreferences.getString("token","");
-    return  token;
+    }
 
-}
+    public String getToken() {
+
+        token = this.sharedPreferences.getString("token", "");
+        return token;
+
+    }
 
 
 }

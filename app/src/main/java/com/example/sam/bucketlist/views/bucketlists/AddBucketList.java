@@ -30,11 +30,11 @@ public class AddBucketList extends Activity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_bucketlist);
 
-        addBucketList =findViewById(R.id.addBucketlist);
+        addBucketList = findViewById(R.id.addBucketlist);
         newBucketList = findViewById(R.id.newBucketList);
 
 
@@ -46,10 +46,10 @@ public class AddBucketList extends Activity {
 
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-                String token = preferences.getString("token","");
+                String token = preferences.getString("token", "");
 
                 try {
-                    apiManager.addBucketList(token,newBucketlist);
+                    apiManager.addBucketList(token, newBucketlist);
 
                     Intent intent = new Intent(context, BucketlistActivity.class);
                     startActivity(intent);
@@ -58,7 +58,6 @@ public class AddBucketList extends Activity {
                 }
             }
         });
-
 
 
     }

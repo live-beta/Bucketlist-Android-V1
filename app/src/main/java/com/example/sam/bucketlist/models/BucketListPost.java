@@ -8,7 +8,7 @@ public class BucketListPost {
 
     private String name;
 
-    public BucketListPost(String name){
+    public BucketListPost(String name) {
         this.name = name;
     }
 }

@@ -2,23 +2,20 @@ package com.example.sam.bucketlist.views.users;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.content.Intent;
-import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.models.SharedPreferencesData;
 import com.example.sam.bucketlist.models.UserFields;
-import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
 
 import retrofit2.Call;
@@ -39,7 +36,7 @@ public class LoginActivity extends Activity {
 
 
     @Override
-    protected  void  onCreate(Bundle savedInstanceState){
+    protected  void  onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);

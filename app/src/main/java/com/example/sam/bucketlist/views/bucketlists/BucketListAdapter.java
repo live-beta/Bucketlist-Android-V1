@@ -16,13 +16,13 @@ import java.util.ArrayList;
 public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.BucketListViewAdapter> {
 
     private LayoutInflater layoutInflator;
-    private  ArrayList<BucketListFields> bucketlistData;
+    private ArrayList<BucketListFields> bucketlistData;
 
 
-    public BucketListAdapter(Context context, ArrayList<BucketListFields> bucketLists){
+    public BucketListAdapter(Context context, ArrayList<BucketListFields> bucketLists) {
 
         this.bucketlistData = bucketLists;
-        this.layoutInflator  = LayoutInflater.from(context);
+        this.layoutInflator = LayoutInflater.from(context);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
     public void onBindViewHolder(BucketListViewAdapter holder, int position) {
 
         BucketListFields currentDataObject = bucketlistData.get(position);
-        holder.setData(currentDataObject,position);
+        holder.setData(currentDataObject, position);
 
     }
 
@@ -47,14 +47,14 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
         return bucketlistData.size();
     }
 
-    class BucketListViewAdapter extends RecyclerView.ViewHolder{
-        TextView id,bucketListName;
+    class BucketListViewAdapter extends RecyclerView.ViewHolder {
+        TextView id, bucketListName;
 
         ImageView itemsList, deleteBucketlist;
         int position;
 
 
-        public BucketListViewAdapter(View bucketlistView){
+        public BucketListViewAdapter(View bucketlistView) {
             super(bucketlistView);
 
             id = bucketlistView.findViewById(R.id.idView);
@@ -64,7 +64,7 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Bu
 
         }
 
-        public void setData(final BucketListFields current, final int position){
+        public void setData(final BucketListFields current, final int position) {
 
             this.id.setText(current.getId());
             this.bucketListName.setText(current.getBucketListName());

@@ -2,7 +2,6 @@ package com.example.sam.bucketlist.views.users;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,15 +10,13 @@ import android.widget.Toast;
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
 
-import java.util.prefs.AbstractPreferences;
-
 /**
  * Class for registration of a new user
  */
 
 public class Register extends Activity {
 
-    EditText username,email,password;
+    EditText username, email, password;
     Button register;
     APIManager apiManager = new APIManager();
 
@@ -29,7 +26,7 @@ public class Register extends Activity {
 
         setContentView(R.layout.register_user);
 
-        username= findViewById(R.id.username);
+        username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         email = findViewById(R.id.email);
 
@@ -42,8 +39,8 @@ public class Register extends Activity {
                 String userEmail = email.getText().toString();
                 String userPassword = password.getText().toString();
 
-                apiManager.registerUser(name, userPassword,userEmail);
-                Toast.makeText(getApplicationContext(),"You have been registered",Toast.LENGTH_LONG);
+                apiManager.registerUser(name, userPassword, userEmail);
+                Toast.makeText(getApplicationContext(), "You have been registered", Toast.LENGTH_LONG);
 
             }
         });

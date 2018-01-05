@@ -16,23 +16,22 @@ public class ItemFields {
     private String name;
 
 
-    public void setItemID(String itemIDEntry){
+    public void setItemID(String itemIDEntry) {
         this.id = itemIDEntry;
 
     }
-    public  String getItemId(){
+
+    public String getItemId() {
         return id;
     }
-    public void setItemName(String itemNameEntry){
-        this.name = itemNameEntry;
-    }
 
-    public String getItemName(){
+    public String getItemName() {
         return name;
     }
 
-
-
+    public void setItemName(String itemNameEntry) {
+        this.name = itemNameEntry;
+    }
 
 
 }

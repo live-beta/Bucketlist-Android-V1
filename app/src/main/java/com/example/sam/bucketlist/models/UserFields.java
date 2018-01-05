@@ -11,42 +11,47 @@ public class UserFields {
     private String token;
     private String email;
 
-    public UserFields(String userName,String password, String email){
+    public UserFields(String userName, String password, String email) {
         this.username = userName;
         this.password = password;
         this.email = email;
     }
 
-    public UserFields(){
+    public UserFields() {
 
     }
 
-   public void setUserName(String name){
-       this.username = name;
-   }
-   public String getUserName(){
-       return this.username;
-   }
-   public void setToken(String token){
-       this.token =token;
-   }
-    public String getToken(){
-       return  this.token;
+    public String getUserName() {
+        return this.username;
     }
-   public void setPassword(String userPassword){
-       this.password = userPassword;
-   }
-   public String getPassword(){
-       return this.password;
-   }
 
-   public void setEmail(String email){
+    public void setUserName(String name) {
+        this.username = name;
+    }
 
-       this.email = email;
-   }
+    public String getToken() {
+        return this.token;
+    }
 
-   public String getEmail(){
-       return email;
-   }
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String userPassword) {
+        this.password = userPassword;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+
+        this.email = email;
+    }
 
 }

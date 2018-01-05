@@ -21,17 +21,17 @@ import java.util.HashMap;
 
 /**
  * TODO
- *
+ * <p>
  * List the items Data
  */
-public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAdapter.CustomViewAdapter>{
+public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAdapter.CustomViewAdapter> {
 
 
     private LayoutInflater layoutInflater;
     private ArrayList<HashMap> data;
 
 
-    public ItemsListCutomAdapter(Context context, ArrayList<HashMap> itemsData){
+    public ItemsListCutomAdapter(Context context, ArrayList<HashMap> itemsData) {
 
 
         this.data = itemsData;
@@ -40,9 +40,9 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
     }
 
     @Override
-    public CustomViewAdapter onCreateViewHolder(ViewGroup parent, int viewType){
+    public CustomViewAdapter onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view =layoutInflater.inflate(R.layout.items_view_adapter,parent,false);
+        View view = layoutInflater.inflate(R.layout.items_view_adapter, parent, false);
 
         CustomViewAdapter viewHolder = new CustomViewAdapter(view);
 
@@ -51,51 +51,51 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
 
 
     @Override
-    public void onBindViewHolder(CustomViewAdapter holder, int position){
+    public void onBindViewHolder(CustomViewAdapter holder, int position) {
 
-        HashMap currentItemsObject  = data.get(position);
-        holder.setData(currentItemsObject,position);
+        HashMap currentItemsObject = data.get(position);
+        holder.setData(currentItemsObject, position);
     }
 
     @Override
-    public  int getItemCount(){
+    public int getItemCount() {
         return data.size();
     }
 
 
+    class CustomViewAdapter extends RecyclerView.ViewHolder {
 
-class CustomViewAdapter extends RecyclerView.ViewHolder{
+        TextView id, itemName;
+        ImageView deleteBucketlist;
 
-    TextView id, itemName;
-    ImageView deleteBucketlist;
+        public CustomViewAdapter(View itemsView) {
+            super(itemsView);
 
-    public CustomViewAdapter(View itemsView ){
-        super(itemsView);
+            // get the views
 
-        // get the views
+            id = (TextView) itemsView.findViewById(R.id.idView);
+            itemName = (TextView) itemsView.findViewById(R.id.itemName);
+            deleteBucketlist = (ImageView) itemsView.findViewById(R.id.deleteBucketlist);
 
-        id = (TextView) itemsView.findViewById(R.id.idView);
-        itemName = (TextView) itemsView.findViewById(R.id.itemName);
-        deleteBucketlist = (ImageView)itemsView.findViewById(R.id.deleteBucketlist);
+        }
+
+        public void setData(final HashMap current, final int position) {
+
+            final Context context = layoutInflater.getContext();
+
+            id.setText(current.get("Id").toString());
+            itemName.setText(current.get("items").toString());
+            deleteBucketlist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Toast.makeText(context, " " + current.get("items"), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+        }
 
     }
-    public void setData(final HashMap current,final int position){
-
-        final Context context  = layoutInflater.getContext();
-
-        id.setText(current.get("Id").toString());
-        itemName.setText(current.get("items").toString());
-        deleteBucketlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Toast.makeText(context," "+ current.get("items"),Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-    }
-
-}
 
 }

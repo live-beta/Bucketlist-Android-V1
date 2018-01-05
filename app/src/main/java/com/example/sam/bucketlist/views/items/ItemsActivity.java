@@ -19,7 +19,7 @@ public class ItemsActivity extends Activity {
 
 
     @Override
-   protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bucketlist_item_details);
 
@@ -27,9 +27,9 @@ public class ItemsActivity extends Activity {
 
         HashMap items = new HashMap();
 
-  }
+    }
 
-  private void startItemsRecyclerView(ArrayList<HashMap> items){
+    private void startItemsRecyclerView(ArrayList<HashMap> items) {
 
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.itemsList);
@@ -44,6 +44,6 @@ public class ItemsActivity extends Activity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        }
+    }
 
 }
