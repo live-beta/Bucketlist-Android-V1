@@ -65,12 +65,12 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View view) {
-                APIManager bucketList = new APIManager(userName.getText().toString(),
+                APIManager apiManager = new APIManager(userName.getText().toString(),
                         password.getText().toString());
 
 
 
-                 bucketList.login(new Callback<UserFields>() {
+                 apiManager.login(new Callback<UserFields>() {
 
                      @Override
                      public void onResponse(Call<UserFields> call, Response<UserFields> response) {
