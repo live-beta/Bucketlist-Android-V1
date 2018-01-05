@@ -12,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
@@ -20,8 +21,10 @@ import retrofit2.http.POST;
 
 public interface UserClient {
 
+
     @POST("auth/login")
     Call <UserFields> login(@Body LoginFields login);
+
 
     @GET("bucketlists")
     Call<ArrayList<BucketListFields>> getBucketlist(@Header("Authorization") String token);

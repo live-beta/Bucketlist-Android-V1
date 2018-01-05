@@ -1,33 +1,29 @@
+package com.example.sam.bucketlist.api;
 
-        package com.example.sam.bucketlist.api;
+import android.app.Activity;
+import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
-        import android.app.Activity;
-        import android.app.usage.NetworkStats;
-        import android.content.Context;
-        import android.media.session.MediaSession;
-        import android.support.v7.widget.DefaultItemAnimator;
-        import android.support.v7.widget.LinearLayoutManager;
-        import android.support.v7.widget.RecyclerView;
-        import android.util.Log;
-        import android.view.View;
+import com.example.sam.bucketlist.R;
+import com.example.sam.bucketlist.models.BucketListFields;
+import com.example.sam.bucketlist.models.BucketListPost;
+import com.example.sam.bucketlist.models.LoginFields;
+import com.example.sam.bucketlist.models.UserFields;
+import com.example.sam.bucketlist.service.UserClient;
+import com.example.sam.bucketlist.views.bucketlists.BucketListAdapter;
 
-        import com.example.sam.bucketlist.R;
-        import com.example.sam.bucketlist.models.BucketListFields;
-        import com.example.sam.bucketlist.models.BucketListPost;
-        import com.example.sam.bucketlist.models.LoginFields;
-        import com.example.sam.bucketlist.models.UserFields;
-        import com.example.sam.bucketlist.service.UserClient;
-        import com.example.sam.bucketlist.views.bucketlists.BucketListAdapter;
+import org.json.JSONException;
 
-        import org.json.JSONException;
+import java.util.ArrayList;
 
-        import java.util.ArrayList;
-
-        import retrofit2.Call;
-        import retrofit2.Callback;
-        import retrofit2.Response;
-        import retrofit2.Retrofit;
-        import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Class APIManager Application Operations
@@ -43,15 +39,14 @@ public class APIManager {
             .addConverterFactory(GsonConverterFactory.create());
 
     Retrofit retrofit = builder.build();
+    final UserClient userClient = retrofit.create(UserClient.class);
     UserFields userFields = new UserFields();
 
-
-
-    final UserClient userClient = retrofit.create(UserClient.class);
 
     public APIManager() {
 
     }
+
 
     public APIManager(String userName, String password) {
 
@@ -69,9 +64,10 @@ public class APIManager {
         return false;
     }
 
-    public void registerUser(String username, String password, String email){
 
-        UserFields userFields = new UserFields(username,password, email);
+    public void registerUser(String username, String password, String email) {
+
+        UserFields userFields = new UserFields(username, password, email);
 
         userFields.setUserName(username);
         userFields.setEmail(email);
@@ -94,7 +90,7 @@ public class APIManager {
 
     }
 
-    public void addBucketList(String Token, String name) throws JSONException{
+    public void addBucketList(String Token, String name) throws JSONException {
 
         BucketListFields bucketListFields = new BucketListFields(name);
 
@@ -104,7 +100,7 @@ public class APIManager {
         BucketListPost bucketListObj = new BucketListPost(bucketListFields.getBucketListName());
 
 
-        Call<BucketListPost> call = userClient.addBucketList(tokenHeader,bucketListObj);
+        Call<BucketListPost> call = userClient.addBucketList(tokenHeader, bucketListObj);
 
         call.enqueue(new Callback<BucketListPost>() {
             @Override
@@ -115,7 +111,7 @@ public class APIManager {
 
             @Override
             public void onFailure(Call<BucketListPost> call, Throwable t) {
-                Log.d("Fail","Failed to add ");
+                Log.d("Fail", "Failed to add ");
             }
         });
 
@@ -142,7 +138,7 @@ public class APIManager {
 
                     Log.d("Data:", String.valueOf(bucketListData));
 
-                    RecyclerView recyclerView = ((Activity)context)
+                    RecyclerView recyclerView = ((Activity) context)
                             .findViewById(R.id.bucketlistViewer);
 
                     BucketListAdapter adapter = new BucketListAdapter(context, bucketListData);
@@ -155,8 +151,7 @@ public class APIManager {
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
 
                 }
@@ -171,5 +166,6 @@ public class APIManager {
 
 
     }
+
 
 }

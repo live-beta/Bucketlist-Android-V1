@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.sam.bucketlist.api.APIManager;
+import com.example.sam.bucketlist.models.SharedPreferencesData;
 import com.example.sam.bucketlist.models.UserFields;
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
@@ -48,7 +49,6 @@ public class LoginActivity extends Activity {
 
         userName = findViewById(R.id.uname);
         userName.setTypeface(face);
-
         password = findViewById(R.id.upass);
         password.setTypeface(face);
 
@@ -86,10 +86,8 @@ public class LoginActivity extends Activity {
                              } else {
                                  Toast.makeText(LoginActivity.this, "Super Dive " + response.body().getToken(), Toast.LENGTH_SHORT).show();
 
-                                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-                                 sp.edit().putString("token", response.body().getToken()).apply();
-
-
+                                 SharedPreferencesData sharedPreferencesData = new SharedPreferencesData(response.body().getToken(),context);
+                                 sharedPreferencesData.setToken();
                                  Intent intent = new Intent(LoginActivity.this, BucketlistActivity.class);
                                  LoginActivity.this.startActivity(intent);
 

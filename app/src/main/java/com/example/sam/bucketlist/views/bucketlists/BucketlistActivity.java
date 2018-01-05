@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
+import com.example.sam.bucketlist.models.SharedPreferencesData;
 
 import org.json.JSONException;
 
@@ -50,12 +52,11 @@ public class BucketlistActivity extends AppCompatActivity {
     public void loadBucketLists() {
 
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String token = sharedPreferences.getString("token","");
 
-        String token = preferences.getString("token", "");
 
-
-        /*Check if the token is null*/
+        Log.d("Token nortation", token);
 
         if (token ==null){
             Toast.makeText(this,"You are not logged in try again", Toast.LENGTH_LONG).show();
