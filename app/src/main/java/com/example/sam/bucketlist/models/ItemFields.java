@@ -15,6 +15,9 @@ public class ItemFields {
     @SerializedName("name")
     private String name;
 
+    public ItemFields(String name) {
+        this.name = name;
+    }
 
     public void setItemID(String itemIDEntry) {
         this.id = itemIDEntry;

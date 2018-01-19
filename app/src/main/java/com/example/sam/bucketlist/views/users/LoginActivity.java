@@ -3,8 +3,10 @@ package com.example.sam.bucketlist.views.users;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
-import com.example.sam.bucketlist.models.SharedPreferencesData;
 import com.example.sam.bucketlist.models.UserFields;
 import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
 
@@ -25,24 +26,24 @@ import retrofit2.Response;
 
 public class LoginActivity extends Activity {
 
-    EditText userName,password;
-    Button login,register;
+    EditText userName, password;
+    Button login, register;
 
     ProgressBar progressBar;
 
     private int progressStatus = 0;
 
-    private Context context =this;
+    private Context context = this;
 
 
     @Override
-    protected  void  onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
 
 
-        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/Roboto-Regular.ttf");
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
         userName = findViewById(R.id.uname);
         userName.setTypeface(face);
@@ -56,7 +57,7 @@ public class LoginActivity extends Activity {
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.INVISIBLE);
 
-        register= findViewById(R.id.register);
+        register = findViewById(R.id.register);
 
         login.setOnClickListener(new View.OnClickListener() {
 
@@ -65,44 +66,59 @@ public class LoginActivity extends Activity {
                 APIManager apiManager = new APIManager(userName.getText().toString(),
                         password.getText().toString());
 
+                ProgressBar(progressBar);
+                apiManager.login(new Callback<UserFields>() {
 
+                    @Override
+                    public void onResponse(Call<UserFields> call, Response<UserFields> response) {
 
-                 apiManager.login(new Callback<UserFields>() {
+                        try {
 
-                     @Override
-                     public void onResponse(Call<UserFields> call, Response<UserFields> response) {
+                            if (response.body().getToken().isEmpty()) {
 
-                         ProgressBar(progressBar);
+                                Toast.makeText(LoginActivity.this,
+                                        "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
+                                if (progressBar.isShown()) {
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                }
 
-                         try {
+                            } else {
 
-                             if (response.body().getToken().isEmpty()) {
+                                Toast.makeText(LoginActivity.this, "Super Dive " +
+                                        response.body().getToken(), Toast.LENGTH_SHORT).show();
 
-                                 Toast.makeText(LoginActivity.this, "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
+                                SharedPreferences preferences = PreferenceManager.
+                                        getDefaultSharedPreferences(context);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("token", response.body().getToken());
+                                editor.apply();
 
-                             } else {
-                                 Toast.makeText(LoginActivity.this, "Super Dive " + response.body().getToken(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this,
+                                        BucketlistActivity.class);
+                                LoginActivity.this.startActivity(intent);
 
-                                 SharedPreferencesData sharedPreferencesData = new SharedPreferencesData(response.body().getToken(),context);
-                                 sharedPreferencesData.setToken();
-                                 Intent intent = new Intent(LoginActivity.this, BucketlistActivity.class);
-                                 LoginActivity.this.startActivity(intent);
+                            }
 
-                             }
+                        } catch (Exception e) {
 
-                         } catch (Exception e) {
+                            Log.d("LoginActivity Error", e.getLocalizedMessage());
+                            Toast.makeText(LoginActivity.this,
+                                    "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
+                            if (progressBar.isShown()) {
+                                progressBar.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    }
 
-                             Log.d("LoginActivity Error", e.getLocalizedMessage());
-                             Toast.makeText(LoginActivity.this, "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(Call<UserFields> call, Throwable t) {
+                        Log.d("LoginActivity Error", t.getLocalizedMessage());
 
-                         }
-                     }
-
-                     @Override
-                     public void onFailure(Call<UserFields> call, Throwable t) {
-                         Log.d("LoginActivity Error", t.getLocalizedMessage());
-                     }
-                 });
+                        if (progressBar.isShown()) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
 
             }
         });
@@ -116,16 +132,15 @@ public class LoginActivity extends Activity {
         });
 
     }
-    public void ProgressBar(View view){
 
-            while (progressStatus<100){
-                progressStatus += 1;
-                progressBar.setProgress(progressStatus);
-                progressBar.setVisibility(View.VISIBLE);
-            }
+    public void ProgressBar(View view) {
+
+        while (progressStatus < 100) {
+            progressStatus += 1;
+            progressBar.setProgress(progressStatus);
+            progressBar.setVisibility(View.VISIBLE);
         }
-
-
+    }
 
 
 }

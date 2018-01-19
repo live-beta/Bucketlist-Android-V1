@@ -19,22 +19,31 @@ public class BucketListFields {
     @Expose
     public String name;
 
-    public BucketListFields(String name){
+    @SerializedName("items")
+    @Expose
+    public ArrayList items;
+
+    public BucketListFields(String name) {
         this.name = name;
 
     }
-
-    public void setId(String idEntry){
-        this.id =idEntry;
+    public BucketListFields(ArrayList items) {
+        this.items = items;
     }
-    public String getId(){
+
+    public String getId() {
         return id;
     }
 
-    public String getBucketListName(){
+    public void setId(String idEntry) {
+        this.id = idEntry;
+    }
+
+    public String getBucketListName() {
         return name;
     }
 
-
-
+    public ArrayList getItems() {
+        return items;
+    }
 }

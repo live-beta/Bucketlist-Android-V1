@@ -7,34 +7,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
+import com.example.sam.bucketlist.models.ItemFields;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
- * Created by sam on 11/15/17.
+ * Creates a custom recycler view for data items
  */
 
-
-/**
- * TODO
- * <p>
- * List the items Data
- */
 public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAdapter.CustomViewAdapter> {
 
 
     private LayoutInflater layoutInflater;
-    private ArrayList<HashMap> data;
+    private ArrayList data;
 
 
-    public ItemsListCutomAdapter(Context context, ArrayList<HashMap> itemsData) {
+    public ItemsListCutomAdapter(Context context, ArrayList<ItemFields> data) {
 
-
-        this.data = itemsData;
+        this.data = data;
         this.layoutInflater = LayoutInflater.from(context);
 
     }
@@ -49,16 +41,17 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
         return viewHolder;
     }
 
-
     @Override
     public void onBindViewHolder(CustomViewAdapter holder, int position) {
 
-        HashMap currentItemsObject = data.get(position);
-        holder.setData(currentItemsObject, position);
+        String dataItems = String.valueOf(data.get(position));
+
+        holder.setData(dataItems, position);
     }
 
     @Override
     public int getItemCount() {
+
         return data.size();
     }
 
@@ -71,25 +64,19 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
         public CustomViewAdapter(View itemsView) {
             super(itemsView);
 
-            // get the views
-
-            id = (TextView) itemsView.findViewById(R.id.idView);
-            itemName = (TextView) itemsView.findViewById(R.id.itemName);
-            deleteBucketlist = (ImageView) itemsView.findViewById(R.id.deleteBucketlist);
+            id = itemsView.findViewById(R.id.idView);
+            itemName = itemsView.findViewById(R.id.itemName);
+            deleteBucketlist = itemsView.findViewById(R.id.deleteBucketlist);
 
         }
 
-        public void setData(final HashMap current, final int position) {
+        public void setData(final String current, final int position) {
 
             final Context context = layoutInflater.getContext();
-
-            id.setText(current.get("Id").toString());
-            itemName.setText(current.get("items").toString());
+            itemName.setText(current);
             deleteBucketlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    Toast.makeText(context, " " + current.get("items"), Toast.LENGTH_SHORT).show();
 
                 }
             });

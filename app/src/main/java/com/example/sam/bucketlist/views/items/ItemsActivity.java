@@ -1,15 +1,21 @@
 package com.example.sam.bucketlist.views.items;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
+import com.example.sam.bucketlist.models.BucketListFields;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by sam on 11/7/17.
@@ -17,6 +23,9 @@ import java.util.HashMap;
 
 public class ItemsActivity extends Activity {
 
+    private FloatingActionButton newItems;
+
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +34,38 @@ public class ItemsActivity extends Activity {
 
         final Bundle extras = getIntent().getExtras();
 
-        HashMap items = new HashMap();
+        try {
+            ArrayList items = (ArrayList) extras.get("items");
+            BucketListFields bucketListFields = new BucketListFields(items);
+            startItemsRecyclerView(bucketListFields.getItems());
+
+        } catch (Exception e) {
+            Log.d("Data Error :", e.getMessage());
+        }
+
+        newItems = findViewById(R.id.floatingItemButton);
+        newItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Adds new Item", Toast.LENGTH_SHORT).show();
+
+                String bucketListId = (String) extras.get("bucketListId");
+
+
+                Intent intent = new Intent(context, AddItemActivity.class);
+
+                intent.putExtra("id", bucketListId);
+                startActivity(intent);
+
+            }
+        });
 
     }
 
-    private void startItemsRecyclerView(ArrayList<HashMap> items) {
+    private void startItemsRecyclerView(ArrayList items) {
 
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.itemsList);
+        RecyclerView recyclerView = findViewById(R.id.itemsList);
 
         ItemsListCutomAdapter adapter = new ItemsListCutomAdapter(this, items);
         recyclerView.setAdapter(adapter);
@@ -42,7 +75,6 @@ public class ItemsActivity extends Activity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
 
     }
 

@@ -6,10 +6,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.models.BucketListFields;
 import com.example.sam.bucketlist.models.BucketListPost;
+import com.example.sam.bucketlist.models.DeletePost;
+import com.example.sam.bucketlist.models.ItemFields;
+import com.example.sam.bucketlist.models.ItemPost;
 import com.example.sam.bucketlist.models.LoginFields;
 import com.example.sam.bucketlist.models.UserFields;
 import com.example.sam.bucketlist.service.UserClient;
@@ -31,29 +35,30 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIManager {
 
-    ArrayList<BucketListFields> bucketListData = new ArrayList<>();
+    ArrayList<BucketListFields> bucketListValues = new ArrayList<>();
+    ArrayList<ItemFields> itemFields = new ArrayList<>();
 
+
+    //.baseUrl("https://peaceful-citadel-97706.herokuapp.com/api/v1/")
+    //baseUrl("http://10.0.2.2:5000/api/v1/")
 
     Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://peaceful-citadel-97706.herokuapp.com/api/v1/")
+            .baseUrl("http://10.0.2.2:5000/api/v1/")
             .addConverterFactory(GsonConverterFactory.create());
 
     Retrofit retrofit = builder.build();
     final UserClient userClient = retrofit.create(UserClient.class);
     UserFields userFields = new UserFields();
 
-
     public APIManager() {
 
     }
-
 
     public APIManager(String userName, String password) {
 
         this.userFields.setUserName(userName);
         this.userFields.setPassword(password);
     }
-
 
     public boolean login(Callback<UserFields> callback) {
 
@@ -86,19 +91,14 @@ public class APIManager {
 
             }
         });
-
-
     }
+
 
     public void addBucketList(String Token, String name) throws JSONException {
 
         BucketListFields bucketListFields = new BucketListFields(name);
-
         String tokenHeader = "Bearer " + Token;
-
-
         BucketListPost bucketListObj = new BucketListPost(bucketListFields.getBucketListName());
-
 
         Call<BucketListPost> call = userClient.addBucketList(tokenHeader, bucketListObj);
 
@@ -117,31 +117,70 @@ public class APIManager {
 
     }
 
+    public void addItem(String Token, String name, String id) {
+
+        ItemFields itemFields = new ItemFields(name);
+        String tokenHeader = "Bearer " + Token;
+        ItemPost itemPost = new ItemPost(itemFields.getItemName(), id);
+        Call<ItemPost> call = userClient.addItems(tokenHeader, id, itemPost);
+
+        call.enqueue(new Callback<ItemPost>() {
+            @Override
+            public void onResponse(Call<ItemPost> call, Response<ItemPost> response) {
+                Log.d("Success", response.message());
+            }
+
+            @Override
+            public void onFailure(Call<ItemPost> call, Throwable t) {
+
+                Log.d("Fail", "Unable to add Item");
+
+            }
+        });
+    }
+
+    public void deleteBucketList(String Token, String id, final Context context) {
+
+        String tokenHeader = "Bearer " + Token;
+        Call<DeletePost> call = userClient.deleteBucketList(tokenHeader, id);
+        call.enqueue(new Callback<DeletePost>() {
+            @Override
+            public void onResponse(Call<DeletePost> call, Response<DeletePost> response) {
+                Toast.makeText(context, "Deleted " + response.message(),
+                        Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<DeletePost> call, Throwable t) {
+
+                Toast.makeText(context, "Could not Delete " + t.getMessage(),
+                        Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
 
     public void getBucketLists(String Token, final Context context) throws JSONException {
 
-
         String tokenHeader = "Bearer " + Token;
+
+        Log.d("Token at getter ", tokenHeader);
         Call<ArrayList<BucketListFields>> call = userClient.getBucketlist(tokenHeader);
-
-
         call.enqueue(new Callback<ArrayList<BucketListFields>>() {
 
             @Override
             public void onResponse(Call<ArrayList<BucketListFields>> call,
                                    Response<ArrayList<BucketListFields>> response) {
-
-
                 try {
 
-                    bucketListData = response.body();
+                    bucketListValues = response.body();
 
-                    Log.d("Data:", String.valueOf(bucketListData));
+                    Log.d("Data:", String.valueOf(bucketListValues));
 
                     RecyclerView recyclerView = ((Activity) context)
                             .findViewById(R.id.bucketlistViewer);
 
-                    BucketListAdapter adapter = new BucketListAdapter(context, bucketListData);
+                    BucketListAdapter adapter = new BucketListAdapter(context, bucketListValues);
                     recyclerView.setAdapter(adapter);
 
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
@@ -150,20 +189,17 @@ public class APIManager {
 
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
                 } catch (Exception e) {
                     e.printStackTrace();
-
                 }
 
             }
 
             @Override
             public void onFailure(Call<ArrayList<BucketListFields>> call, Throwable t) {
-
+                Log.d("Error", String.valueOf(t.getMessage()));
             }
         });
-
 
     }
 

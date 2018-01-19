@@ -40,7 +40,6 @@ public class Register extends Activity {
                 String userPassword = password.getText().toString();
 
                 apiManager.registerUser(name, userPassword, userEmail);
-                Toast.makeText(getApplicationContext(), "You have been registered", Toast.LENGTH_LONG);
 
             }
         });

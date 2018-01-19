@@ -25,7 +25,6 @@ public class AddBucketList extends Activity {
     EditText newBucketList;
 
     private APIManager apiManager = new APIManager();
-
     private Context context = this;
 
 
@@ -42,10 +41,8 @@ public class AddBucketList extends Activity {
             @Override
             public void onClick(View v) {
                 String newBucketlist = newBucketList.getText().toString();
-
-
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-
+                SharedPreferences preferences = PreferenceManager.
+                        getDefaultSharedPreferences(context);
                 String token = preferences.getString("token", "");
 
                 try {

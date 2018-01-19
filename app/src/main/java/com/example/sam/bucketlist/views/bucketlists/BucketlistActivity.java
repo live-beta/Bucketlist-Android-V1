@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -43,25 +44,29 @@ public class BucketlistActivity extends AppCompatActivity {
             }
         });
 
-        loadBucketLists();
-
+        try {
+            loadBucketLists();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void loadBucketLists() {
+    public void loadBucketLists() throws JSONException {
 
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sharedPreferences = PreferenceManager.
+                getDefaultSharedPreferences(context);
         String token = sharedPreferences.getString("token", "");
 
-        if (token == null) {
-            Toast.makeText(this, "You are not logged in try again", Toast.LENGTH_LONG).show();
-        } else {
-            try {
-                bucketList.getBucketLists(token, context);
+        // Finding out if the token is being passed
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        Log.d("Token Being passed ", token);
+
+        if (token == null) {
+            Toast.makeText(this, "You are not logged in try again",
+                    Toast.LENGTH_LONG).show();
+        } else {
+
+            bucketList.getBucketLists(token, context);
 
         }
 
