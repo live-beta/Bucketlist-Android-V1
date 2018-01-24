@@ -42,13 +42,12 @@ public class APIManager {
     //.baseUrl("https://peaceful-citadel-97706.herokuapp.com/api/v1/")
     //baseUrl("http://10.0.2.2:5000/api/v1/")
 
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:5000/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create());
 
-    Retrofit retrofit = builder.build();
-    final UserClient userClient = retrofit.create(UserClient.class);
+
     UserFields userFields = new UserFields();
+    private UserClient apiCall = retrofitInstance();
+
+
 
     public APIManager() {
 
@@ -60,10 +59,25 @@ public class APIManager {
         this.userFields.setPassword(password);
     }
 
+
+    public UserClient retrofitInstance(){
+
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:5000/api/v1/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+        final UserClient userClient = retrofit.create(UserClient.class);
+
+        return userClient;
+    }
+
     public boolean login(Callback<UserFields> callback) {
 
         LoginFields loginObj = new LoginFields(userFields.getUserName(), userFields.getPassword());
-        Call<UserFields> call = userClient.login(loginObj);
+
+
+        Call<UserFields> call = apiCall.login(loginObj);
         call.enqueue(callback);
 
         return false;
@@ -78,7 +92,7 @@ public class APIManager {
         userFields.setEmail(email);
         userFields.setPassword(password);
 
-        Call<UserFields> call = userClient.registerUser(userFields);
+        Call<UserFields> call = apiCall.registerUser(userFields);
 
         call.enqueue(new Callback<UserFields>() {
             @Override
@@ -100,7 +114,7 @@ public class APIManager {
         String tokenHeader = "Bearer " + Token;
         BucketListPost bucketListObj = new BucketListPost(bucketListFields.getBucketListName());
 
-        Call<BucketListPost> call = userClient.addBucketList(tokenHeader, bucketListObj);
+        Call<BucketListPost> call = apiCall.addBucketList(tokenHeader, bucketListObj);
 
         call.enqueue(new Callback<BucketListPost>() {
             @Override
@@ -122,7 +136,7 @@ public class APIManager {
         ItemFields itemFields = new ItemFields(name);
         String tokenHeader = "Bearer " + Token;
         ItemPost itemPost = new ItemPost(itemFields.getName(), bucketListId);
-        Call<ItemPost> call = userClient.addItems(tokenHeader, bucketListId, itemPost);
+        Call<ItemPost> call = apiCall.addItems(tokenHeader, bucketListId, itemPost);
 
         call.enqueue(new Callback<ItemPost>() {
             @Override
@@ -142,7 +156,7 @@ public class APIManager {
     public void deleteBucketList(String Token, String id, final Context context) {
 
         String tokenHeader = "Bearer " + Token;
-        Call<DeletePost> call = userClient.deleteBucketList(tokenHeader, id);
+        Call<DeletePost> call = apiCall.deleteBucketList(tokenHeader, id);
         call.enqueue(new Callback<DeletePost>() {
             @Override
             public void onResponse(Call<DeletePost> call, Response<DeletePost> response) {
@@ -165,7 +179,7 @@ public class APIManager {
         String tokenHeader = "Bearer " + Token;
 
         Log.d("Token at getter ", tokenHeader);
-        Call<ArrayList<BucketListFields>> call = userClient.getBucketlist(tokenHeader);
+        Call<ArrayList<BucketListFields>> call = apiCall.getBucketlist(tokenHeader);
         call.enqueue(new Callback<ArrayList<BucketListFields>>() {
 
             @Override
