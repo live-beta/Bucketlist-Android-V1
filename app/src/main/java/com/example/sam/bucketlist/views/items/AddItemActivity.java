@@ -45,8 +45,6 @@ public class AddItemActivity extends Activity {
                 String id = (String) extras.get("id");
                 APIManager apiManager = new APIManager();
 
-                apiManager.addItem(token, itemName.getText().toString(), id);
-
                 Intent intent = new Intent(context, BucketlistActivity.class);
                 startActivity(intent);
 

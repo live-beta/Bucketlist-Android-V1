@@ -117,26 +117,8 @@ public class APIManager {
 
     }
 
-    public void addItem(String Token, String name, String id) {
+    public void getItems(String bucketListIe) {
 
-        ItemFields itemFields = new ItemFields(name);
-        String tokenHeader = "Bearer " + Token;
-        ItemPost itemPost = new ItemPost(itemFields.getItemName(), id);
-        Call<ItemPost> call = userClient.addItems(tokenHeader, id, itemPost);
-
-        call.enqueue(new Callback<ItemPost>() {
-            @Override
-            public void onResponse(Call<ItemPost> call, Response<ItemPost> response) {
-                Log.d("Success", response.message());
-            }
-
-            @Override
-            public void onFailure(Call<ItemPost> call, Throwable t) {
-
-                Log.d("Fail", "Unable to add Item");
-
-            }
-        });
     }
 
     public void deleteBucketList(String Token, String id, final Context context) {
@@ -175,7 +157,10 @@ public class APIManager {
 
                     bucketListValues = response.body();
 
-                    Log.d("Data:", String.valueOf(bucketListValues));
+                    BucketListFields bucketListFields = new BucketListFields();
+
+                    bucketListFields.setBucketLists(bucketListValues);
+
 
                     RecyclerView recyclerView = ((Activity) context)
                             .findViewById(R.id.bucketlistViewer);

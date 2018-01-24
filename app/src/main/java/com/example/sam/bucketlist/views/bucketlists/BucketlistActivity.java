@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
+import com.example.sam.bucketlist.models.BucketListFields;
 
 import org.json.JSONException;
 
@@ -20,11 +21,9 @@ import org.json.JSONException;
 public class BucketlistActivity extends AppCompatActivity {
 
     private APIManager bucketList = new APIManager();
-
+    private BucketListFields bucketListFields = new BucketListFields();
     private Context context = this;
-
     private FloatingActionButton newBucketList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,6 @@ public class BucketlistActivity extends AppCompatActivity {
         setContentView(R.layout.bucketlist_activity_layout);
 
         newBucketList = findViewById(R.id.floatingButton);
-
         newBucketList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,8 +54,6 @@ public class BucketlistActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.
                 getDefaultSharedPreferences(context);
         String token = sharedPreferences.getString("token", "");
-
-        // Finding out if the token is being passed
 
         Log.d("Token Being passed ", token);
 

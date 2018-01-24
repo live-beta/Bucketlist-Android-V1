@@ -3,8 +3,11 @@ package com.example.sam.bucketlist.views.bucketlists;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +18,10 @@ import android.widget.Toast;
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.models.BucketListFields;
+import com.example.sam.bucketlist.models.ItemFields;
 import com.example.sam.bucketlist.views.items.ItemsActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +72,7 @@ public class BucketListAdapter extends RecyclerView.
 
         ImageView itemsList, deleteBucketlist;
         int position;
-        ArrayList itemNames = new ArrayList();
+        ArrayList  itemNames = new ArrayList();
 
 
         public BucketListViewAdapter(View bucketlistView) {
@@ -83,6 +88,7 @@ public class BucketListAdapter extends RecyclerView.
         public void setData(final BucketListFields current, final int position) {
 
             this.id.setText(current.getId());
+
             this.bucketListName.setText(current.getBucketListName());
             this.itemsList.setOnClickListener(new View.OnClickListener() {
 
@@ -91,23 +97,17 @@ public class BucketListAdapter extends RecyclerView.
 
                     Intent intent = new Intent(context, ItemsActivity.class);
 
+                    Log.d("Size of this", String.valueOf(current.getItems().size()));
+
                     if (current.getItems().size() == 0) {
+
                         Toast.makeText(context, "No Items to show", Toast.LENGTH_LONG).show();
                     } else {
 
                         for (int index = 0; index < current.getItems().size(); index++) {
 
-                            String value = current.getItems().get(index).toString();
-                            value = value.substring(46, value.length() - 1);
-                            String[] keyValuePairs = value.split(",");
-                            Map<String, String> map = new HashMap<>();
-
-                            for (String pair : keyValuePairs) {
-                                String[] entry = pair.split("=");
-                                map.put(entry[0].trim(), entry[1].trim());
-                            }
-
-                            itemNames.add(map.get("name"));
+                            String name = current.getItems().get(index).getName();
+                            itemNames.add(name);
 
 
                         }
@@ -117,7 +117,6 @@ public class BucketListAdapter extends RecyclerView.
                         context.startActivity(intent);
 
                     }
-
                 }
             });
 
@@ -126,7 +125,6 @@ public class BucketListAdapter extends RecyclerView.
                 public void onClick(View view) {
 
                     Intent intent = new Intent(context, BucketlistActivity.class);
-
                     APIManager apiManager = new APIManager();
                     SharedPreferences sharedPreferences = PreferenceManager.
                             getDefaultSharedPreferences(context);

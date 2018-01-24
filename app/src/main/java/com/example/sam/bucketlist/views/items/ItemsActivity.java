@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.models.BucketListFields;
+import com.example.sam.bucketlist.models.ItemFields;
 
 import java.util.ArrayList;
 
@@ -23,22 +24,26 @@ import java.util.ArrayList;
 
 public class ItemsActivity extends Activity {
 
+    ItemFields itemFields;
     private FloatingActionButton newItems;
-
+    private String id;
     private Context context = this;
+    private ArrayList<ItemFields> items;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bucketlist_item_details);
 
+
         final Bundle extras = getIntent().getExtras();
 
         try {
+
             ArrayList items = (ArrayList) extras.get("items");
             BucketListFields bucketListFields = new BucketListFields(items);
-            startItemsRecyclerView(bucketListFields.getItems());
-
+            startItemsRecyclerView(items);
         } catch (Exception e) {
             Log.d("Data Error :", e.getMessage());
         }
@@ -77,5 +82,6 @@ public class ItemsActivity extends Activity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
     }
+
 
 }

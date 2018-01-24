@@ -24,7 +24,7 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
     private ArrayList data;
 
 
-    public ItemsListCutomAdapter(Context context, ArrayList<ItemFields> data) {
+    public ItemsListCutomAdapter(Context context, ArrayList data) {
 
         this.data = data;
         this.layoutInflater = LayoutInflater.from(context);
