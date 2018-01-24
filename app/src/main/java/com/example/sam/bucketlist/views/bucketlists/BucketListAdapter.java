@@ -81,7 +81,8 @@ public class BucketListAdapter extends RecyclerView.
 
         public void setData(final BucketListFields current, final int position) {
 
-            this.id.setText(current.getId());
+            String numberLabel = String.valueOf(position+1);
+            this.id.setText(numberLabel);
 
             this.bucketListName.setText(current.getBucketListName());
             this.itemsList.setOnClickListener(new View.OnClickListener() {

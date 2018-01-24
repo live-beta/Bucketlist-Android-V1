@@ -18,7 +18,7 @@ import com.example.sam.bucketlist.models.BucketListFields;
 import org.json.JSONException;
 
 
-public class BucketlistActivity extends AppCompatActivity {
+public class BucketlistActivity extends AppCompatActivity implements View.OnClickListener {
 
     private APIManager bucketList = new APIManager();
     private BucketListFields bucketListFields = new BucketListFields();
@@ -32,24 +32,20 @@ public class BucketlistActivity extends AppCompatActivity {
         setContentView(R.layout.bucketlist_activity_layout);
 
         newBucketList = findViewById(R.id.floatingButton);
-        newBucketList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        newBucketList.setOnClickListener(this);
+        loadBucketLists();
+    }
 
-                Intent intent = new Intent(context, AddBucketList.class);
-                startActivity(intent);
+    @Override
+    public void onClick(View view) {
 
-            }
-        });
-
-        try {
-            loadBucketLists();
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (view == newBucketList) {
+            Intent intent = new Intent(context, AddBucketList.class);
+            startActivity(intent);
         }
     }
 
-    public void loadBucketLists() throws JSONException {
+    public void loadBucketLists() {
 
         SharedPreferences sharedPreferences = PreferenceManager.
                 getDefaultSharedPreferences(context);
@@ -62,7 +58,11 @@ public class BucketlistActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         } else {
 
-            bucketList.getBucketLists(token, context);
+            try {
+                bucketList.getBucketLists(token, context);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
 

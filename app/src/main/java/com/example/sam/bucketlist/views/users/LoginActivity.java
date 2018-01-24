@@ -24,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements View.OnClickListener {
 
     EditText userName, password;
     Button login, register;
@@ -42,94 +42,19 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
 
-
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
         userName = findViewById(R.id.uname);
         userName.setTypeface(face);
         password = findViewById(R.id.upass);
         password.setTypeface(face);
-
         login = findViewById(R.id.login);
         login.setTypeface(face);
-
-
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.INVISIBLE);
-
         register = findViewById(R.id.register);
-
-        login.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                APIManager apiManager = new APIManager(userName.getText().toString(),
-                        password.getText().toString());
-
-                ProgressBar(progressBar);
-                apiManager.login(new Callback<UserFields>() {
-
-                    @Override
-                    public void onResponse(Call<UserFields> call, Response<UserFields> response) {
-
-                        try {
-
-                            if (response.body().getToken().isEmpty()) {
-
-                                Toast.makeText(LoginActivity.this,
-                                        "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
-                                if (progressBar.isShown()) {
-                                    progressBar.setVisibility(View.INVISIBLE);
-                                }
-
-                            } else {
-
-                                Toast.makeText(LoginActivity.this, "Super Dive " +
-                                        response.body().getToken(), Toast.LENGTH_SHORT).show();
-
-                                SharedPreferences preferences = PreferenceManager.
-                                        getDefaultSharedPreferences(context);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("token", response.body().getToken());
-                                editor.apply();
-
-                                Intent intent = new Intent(LoginActivity.this,
-                                        BucketlistActivity.class);
-                                LoginActivity.this.startActivity(intent);
-
-                            }
-
-                        } catch (Exception e) {
-
-                            Log.d("LoginActivity Error", e.getLocalizedMessage());
-                            Toast.makeText(LoginActivity.this,
-                                    "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
-                            if (progressBar.isShown()) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<UserFields> call, Throwable t) {
-                        Log.d("LoginActivity Error", t.getLocalizedMessage());
-
-                        if (progressBar.isShown()) {
-                            progressBar.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                });
-
-            }
-        });
-
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, Register.class);
-                startActivity(intent);
-            }
-        });
+        login.setOnClickListener(this);
+        register.setOnClickListener(this);
 
     }
 
@@ -139,6 +64,70 @@ public class LoginActivity extends Activity {
             progressStatus += 1;
             progressBar.setProgress(progressStatus);
             progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == login) {
+
+            APIManager apiManager = new APIManager(userName.getText().toString(),
+                    password.getText().toString());
+
+            ProgressBar(progressBar);
+            apiManager.login(new Callback<UserFields>() {
+
+                @Override
+                public void onResponse(Call<UserFields> call, Response<UserFields> response) {
+
+                    try {
+
+                        if (response.body().getToken().isEmpty()) {
+
+                            Toast.makeText(LoginActivity.this,
+                                    "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
+                            if (progressBar.isShown()) {
+                                progressBar.setVisibility(View.INVISIBLE);
+                            }
+
+                        } else {
+
+                            SharedPreferences preferences = PreferenceManager.
+                                    getDefaultSharedPreferences(context);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("token", response.body().getToken());
+                            editor.apply();
+
+                            Intent intent = new Intent(LoginActivity.this,
+                                    BucketlistActivity.class);
+                            LoginActivity.this.startActivity(intent);
+
+                        }
+
+                    } catch (Exception e) {
+
+                        Log.d("LoginActivity Error", e.getLocalizedMessage());
+                        Toast.makeText(LoginActivity.this,
+                                "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
+                        if (progressBar.isShown()) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserFields> call, Throwable t) {
+                    Log.d("LoginActivity Error", t.getLocalizedMessage());
+
+                    if (progressBar.isShown()) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                }
+            });
+
+        } else if (view == register) {
+            Intent intent = new Intent(context, Register.class);
+            startActivity(intent);
         }
     }
 
