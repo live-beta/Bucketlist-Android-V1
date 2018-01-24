@@ -1,9 +1,8 @@
 package com.example.sam.bucketlist.models;
 
-import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -28,8 +27,11 @@ public class ItemFields {
     @SerializedName("name")
     @Expose
     private String name;
-
     private ArrayList<ItemFields> items;
+
+    public ItemFields(String name) {
+        this.name = name;
+    }
 
     public String getDateCreated() {
         return dateCreated;
@@ -73,12 +75,12 @@ public class ItemFields {
 
     // Setting up the items data, passing the  thetougn tht set data
 
-    public void setItems(ArrayList<ItemFields> items){
-        this.items = items;
+    public ArrayList<ItemFields> getItems() {
+        return this.items;
     }
 
-    public ArrayList<ItemFields> getItems (){
-        return this.items;
+    public void setItems(ArrayList<ItemFields> items) {
+        this.items = items;
     }
 
 

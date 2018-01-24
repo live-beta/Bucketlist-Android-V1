@@ -2,6 +2,7 @@ package com.example.sam.bucketlist.views.items;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sam.bucketlist.R;
-import com.example.sam.bucketlist.models.ItemFields;
 
 import java.util.ArrayList;
 
@@ -46,6 +46,8 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
 
         String dataItems = String.valueOf(data.get(position));
 
+        Log.d("Data thing", String.valueOf(data));
+
         holder.setData(dataItems, position);
     }
 
@@ -73,6 +75,10 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
         public void setData(final String current, final int position) {
 
             final Context context = layoutInflater.getContext();
+
+
+            String number = String.valueOf(position + 1);
+            id.setText(number);
             itemName.setText(current);
             deleteBucketlist.setOnClickListener(new View.OnClickListener() {
                 @Override

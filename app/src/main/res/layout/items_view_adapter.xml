@@ -3,11 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:elevation="30dp"
     >
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="130dp">
+        android:layout_height="130dp"
+        >
 
         <TextView
             android:id="@+id/idView"
@@ -16,7 +21,6 @@
             android:layout_margin="1dp"
             android:background="@color/cardview_light_background"
             android:gravity="center"
-            android:text="Id"
             android:textColor="@color/primary_text" />
 
         <LinearLayout

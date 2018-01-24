@@ -117,8 +117,26 @@ public class APIManager {
 
     }
 
-    public void getItems(String bucketListIe) {
+    public void addItems(String Token, String name, String bucketListId) {
 
+        ItemFields itemFields = new ItemFields(name);
+        String tokenHeader = "Bearer " + Token;
+        ItemPost itemPost = new ItemPost(itemFields.getName(), bucketListId);
+        Call<ItemPost> call = userClient.addItems(tokenHeader, bucketListId, itemPost);
+
+        call.enqueue(new Callback<ItemPost>() {
+            @Override
+            public void onResponse(Call<ItemPost> call, Response<ItemPost> response) {
+                Log.d("Success", response.message());
+            }
+
+            @Override
+            public void onFailure(Call<ItemPost> call, Throwable t) {
+
+                Log.d("Fail", "Unable to add Item");
+
+            }
+        });
     }
 
     public void deleteBucketList(String Token, String id, final Context context) {

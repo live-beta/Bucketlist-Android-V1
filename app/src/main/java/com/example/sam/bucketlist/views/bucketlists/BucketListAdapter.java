@@ -3,8 +3,6 @@ package com.example.sam.bucketlist.views.bucketlists;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,13 +16,9 @@ import android.widget.Toast;
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.models.BucketListFields;
-import com.example.sam.bucketlist.models.ItemFields;
 import com.example.sam.bucketlist.views.items.ItemsActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BucketListAdapter extends RecyclerView.
         Adapter<BucketListAdapter.BucketListViewAdapter> {
@@ -72,7 +66,7 @@ public class BucketListAdapter extends RecyclerView.
 
         ImageView itemsList, deleteBucketlist;
         int position;
-        ArrayList  itemNames = new ArrayList();
+        ArrayList itemNames = new ArrayList();
 
 
         public BucketListViewAdapter(View bucketlistView) {
