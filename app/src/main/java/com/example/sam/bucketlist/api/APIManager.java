@@ -16,7 +16,7 @@ import com.example.sam.bucketlist.models.ItemFields;
 import com.example.sam.bucketlist.models.ItemPost;
 import com.example.sam.bucketlist.models.LoginFields;
 import com.example.sam.bucketlist.models.UserFields;
-import com.example.sam.bucketlist.service.UserClient;
+import com.example.sam.bucketlist.service.NetworkService;
 import com.example.sam.bucketlist.views.bucketlists.BucketListAdapter;
 
 import org.json.JSONException;
@@ -45,7 +45,7 @@ public class APIManager {
 
 
     UserFields userFields = new UserFields();
-    private UserClient apiCall = retrofitInstance();
+    private NetworkService apiCall = retrofitInstance();
 
 
 
@@ -60,14 +60,14 @@ public class APIManager {
     }
 
 
-    public UserClient retrofitInstance(){
+    public NetworkService retrofitInstance(){
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:5000/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
-        final UserClient userClient = retrofit.create(UserClient.class);
+        final NetworkService userClient = retrofit.create(NetworkService.class);
 
         return userClient;
     }

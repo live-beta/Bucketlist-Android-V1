@@ -21,7 +21,7 @@ import retrofit2.http.Path;
  * Http Client Interface
  */
 
-public interface UserClient {
+public interface NetworkService {
 
 
     @POST("auth/login")
