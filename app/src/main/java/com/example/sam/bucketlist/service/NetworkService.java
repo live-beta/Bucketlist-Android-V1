@@ -28,22 +28,19 @@ public interface NetworkService {
     Call<UserFields> login(@Body LoginFields login);
 
     @POST("bucketlists")
-    Call<BucketListPost> addBucketList(@Header("Authorization") String token,
-                                       @Body BucketListPost name);
+    Call<BucketListPost> addBucketList(@Body BucketListPost name);
 
     @GET("bucketlists")
-    Call<ArrayList<BucketListFields>> getBucketlist(@Header("Authorization") String token);
+    Call<ArrayList<BucketListFields>> getBucketlist();
 
     @POST("auth/register")
     Call<UserFields> registerUser(@Body UserFields userFields);
 
     @POST("bucketlists/{id}/items")
-    Call<ItemPost> addItems(@Header("Authorization") String token, @Path("id") String id,
-                            @Body ItemPost name);
+    Call<ItemPost> addItems( @Path("id") String id, @Body ItemPost name);
 
     @DELETE("bucketlists/{id}")
-    Call<DeletePost> deleteBucketList(@Header("Authorization") String token,
-                                      @Path("id") String id);
+    Call<DeletePost> deleteBucketList(@Path("id") String id);
 
 
 }

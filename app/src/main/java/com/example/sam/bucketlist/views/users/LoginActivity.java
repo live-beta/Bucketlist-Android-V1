@@ -31,9 +31,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     Button login, register;
 
     ProgressBar progressBar;
-
-    CallInstanceModel callInstance = new CallInstanceModel();
-
     private int progressStatus = 0;
 
     private Context context = this;

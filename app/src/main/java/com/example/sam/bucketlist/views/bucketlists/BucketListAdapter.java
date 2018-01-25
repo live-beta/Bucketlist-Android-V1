@@ -121,10 +121,7 @@ public class BucketListAdapter extends RecyclerView.
 
                     Intent intent = new Intent(context, BucketlistActivity.class);
                     APIManager apiManager = new APIManager(context);
-                    SharedPreferences sharedPreferences = PreferenceManager.
-                            getDefaultSharedPreferences(context);
-                    apiManager.deleteBucketList(sharedPreferences.
-                            getString("token", ""), current.getId(), context);
+                    apiManager.deleteBucketList( current.getId(), context);
 
                     context.startActivity(intent);
 

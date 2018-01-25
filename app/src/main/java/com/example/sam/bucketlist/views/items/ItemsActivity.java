@@ -24,12 +24,9 @@ import java.util.ArrayList;
 
 public class ItemsActivity extends Activity {
 
-    ItemFields itemFields;
     private FloatingActionButton newItems;
     private String id;
     private Context context = this;
-    private ArrayList<ItemFields> items;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,6 @@ public class ItemsActivity extends Activity {
         try {
 
             ArrayList items = (ArrayList) extras.get("items");
-            BucketListFields bucketListFields = new BucketListFields(items);
             startItemsRecyclerView(items);
         } catch (Exception e) {
             Log.d("Data Error :", e.getMessage());

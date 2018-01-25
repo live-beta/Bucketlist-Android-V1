@@ -74,9 +74,6 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
 
         public void setData(final String current, final int position) {
 
-            final Context context = layoutInflater.getContext();
-
-
             String number = String.valueOf(position + 1);
             id.setText(number);
             itemName.setText(current);

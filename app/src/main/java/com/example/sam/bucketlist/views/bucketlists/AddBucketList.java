@@ -41,12 +41,9 @@ public class AddBucketList extends Activity {
             @Override
             public void onClick(View v) {
                 String newBucketlist = newBucketList.getText().toString();
-                SharedPreferences preferences = PreferenceManager.
-                        getDefaultSharedPreferences(context);
-                String token = preferences.getString("token", "");
 
                 try {
-                    apiManager.addBucketList(token, newBucketlist);
+                    apiManager.addBucketList(newBucketlist);
 
                     Intent intent = new Intent(context, BucketlistActivity.class);
                     startActivity(intent);

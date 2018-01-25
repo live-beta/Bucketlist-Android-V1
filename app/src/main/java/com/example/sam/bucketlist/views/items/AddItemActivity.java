@@ -3,9 +3,7 @@ package com.example.sam.bucketlist.views.items;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,14 +35,10 @@ public class AddItemActivity extends Activity {
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-                String token = sharedPreferences.getString("token", "");
                 final Bundle extras = getIntent().getExtras();
                 String bucketListId = (String) extras.get("id");
                 APIManager apiManager = new APIManager(getApplicationContext());
-                apiManager.addItems(token, itemName.getText().toString(), bucketListId);
+                apiManager.addItems(itemName.getText().toString(), bucketListId);
                 Intent intent = new Intent(context, BucketlistActivity.class);
                 startActivity(intent);
 
