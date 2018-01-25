@@ -17,7 +17,7 @@ public class Register extends Activity {
 
     EditText username, email, password;
     Button register;
-    APIManager apiManager = new APIManager();
+    APIManager apiManager = new APIManager(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

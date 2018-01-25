@@ -2,4 +2,5 @@
     <string name ="app_name">Bucketlist</string>
     <string name ="login_string">Log in</string>
     <string name ="login_username"> User Name</string>
+    <string name="base_url">http://10.0.2.2:5000/api/v1/</string>
 </resources>

@@ -73,8 +73,6 @@ public class ItemFields {
         this.name = name;
     }
 
-    // Setting up the items data, passing the  thetougn tht set data
-
     public ArrayList<ItemFields> getItems() {
         return this.items;
     }

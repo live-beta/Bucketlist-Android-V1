@@ -43,7 +43,7 @@ public class AddItemActivity extends Activity {
                 String token = sharedPreferences.getString("token", "");
                 final Bundle extras = getIntent().getExtras();
                 String bucketListId = (String) extras.get("id");
-                APIManager apiManager = new APIManager();
+                APIManager apiManager = new APIManager(getApplicationContext());
                 apiManager.addItems(token, itemName.getText().toString(), bucketListId);
                 Intent intent = new Intent(context, BucketlistActivity.class);
                 startActivity(intent);

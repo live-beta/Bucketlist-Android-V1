@@ -24,7 +24,7 @@ public class AddBucketList extends Activity {
     Button addBucketList;
     EditText newBucketList;
 
-    private APIManager apiManager = new APIManager();
+    private APIManager apiManager = new APIManager(getApplicationContext());
     private Context context = this;
 
 

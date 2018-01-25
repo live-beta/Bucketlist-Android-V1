@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
+import com.example.sam.bucketlist.models.CallInstanceModel;
 import com.example.sam.bucketlist.models.UserFields;
 import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
 
@@ -31,10 +32,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     ProgressBar progressBar;
 
+    CallInstanceModel callInstance = new CallInstanceModel();
+
     private int progressStatus = 0;
 
     private Context context = this;
-
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.login_activity_layout);
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+
+
+        url = getString(R.string.base_url);
+
 
         userName = findViewById(R.id.uname);
         userName.setTypeface(face);
@@ -72,7 +79,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         if (view == login) {
 
             APIManager apiManager = new APIManager(userName.getText().toString(),
-                    password.getText().toString());
+                    password.getText().toString(), getApplicationContext());
 
             ProgressBar(progressBar);
             apiManager.login(new Callback<UserFields>() {
@@ -96,6 +103,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                     getDefaultSharedPreferences(context);
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putString("token", response.body().getToken());
+                            editor.putString("url", url);
                             editor.apply();
 
                             Intent intent = new Intent(LoginActivity.this,

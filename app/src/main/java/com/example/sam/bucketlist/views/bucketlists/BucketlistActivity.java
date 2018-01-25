@@ -20,10 +20,11 @@ import org.json.JSONException;
 
 public class BucketlistActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private APIManager bucketList = new APIManager();
+
     private BucketListFields bucketListFields = new BucketListFields();
     private Context context = this;
     private FloatingActionButton newBucketList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,8 @@ public class BucketlistActivity extends AppCompatActivity implements View.OnClic
         } else {
 
             try {
-                bucketList.getBucketLists(token, context);
+                APIManager apiManager = new APIManager(getApplicationContext());
+                apiManager.getBucketLists(token, context);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -81,7 +81,7 @@ public class BucketListAdapter extends RecyclerView.
 
         public void setData(final BucketListFields current, final int position) {
 
-            String numberLabel = String.valueOf(position+1);
+            String numberLabel = String.valueOf(position + 1);
             this.id.setText(numberLabel);
 
             this.bucketListName.setText(current.getBucketListName());
@@ -120,7 +120,7 @@ public class BucketListAdapter extends RecyclerView.
                 public void onClick(View view) {
 
                     Intent intent = new Intent(context, BucketlistActivity.class);
-                    APIManager apiManager = new APIManager();
+                    APIManager apiManager = new APIManager(context);
                     SharedPreferences sharedPreferences = PreferenceManager.
                             getDefaultSharedPreferences(context);
                     apiManager.deleteBucketList(sharedPreferences.
