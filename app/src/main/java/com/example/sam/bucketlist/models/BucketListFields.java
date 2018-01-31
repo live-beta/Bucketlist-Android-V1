@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 /**
- * Bucketlist Data Model
+ * Bucketlist data model and serializer for the retrofit data instance
  */
 
 public class BucketListFields {
