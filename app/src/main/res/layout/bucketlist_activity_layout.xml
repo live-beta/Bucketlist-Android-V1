@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    tools:context=".views.bucketlists.BucketlistActivity">
 
-    <EditText
-        android:id="@+id/bucketlistName"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/bucketlistViewer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Bucketlist Name" />
+        android:layout_height="587dp" />
 
-    <Button
-        android:text="Get Bucketlists"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tokener" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingButton"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_gravity="bottom|right"
+        android:background="@color/icons"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:elevation="8dp"
+        android:src="@mipmap/add_button_icon"
 
-    <Button
-        android:id="@+id/addBucketList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Bucketlist " />
+        app:fabSize="normal"
+        tools:layout_editor_absoluteY="505dp" />
 
-    <ListView
-        android:id="@+id/bucketlister"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
