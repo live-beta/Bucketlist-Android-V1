@@ -23,6 +23,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/* API manager: implemnents the application programming interface
+* contracts that are defined in the Network service
+* */
+
 
 public class BucketlistActivity extends AppCompatActivity implements View.OnClickListener {
 
