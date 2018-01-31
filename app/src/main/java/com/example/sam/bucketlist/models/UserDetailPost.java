@@ -1,7 +1,7 @@
 package com.example.sam.bucketlist.models;
 
 /**
- * Created by sam on 1/31/18.
+ * Instance variables for registration of another user
  */
 
 public class UserDetailPost {

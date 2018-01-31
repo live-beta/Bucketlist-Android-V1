@@ -21,7 +21,8 @@ import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/* Login Activity
+* */
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 

@@ -6,7 +6,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 /**
- * The class sets and gets Item fields
+ * Defines variables with a serializable decorator for implementation
+ * of retrofit
  */
 
 public class ItemFields {

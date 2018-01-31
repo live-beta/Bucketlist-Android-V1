@@ -1,7 +1,7 @@
 package com.example.sam.bucketlist.models;
 
 /**
- * Created by sam on 11/18/17.
+ * Instance variables for login
  */
 
 public class LoginFields {

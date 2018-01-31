@@ -1,7 +1,7 @@
 package com.example.sam.bucketlist.models;
 
 /**
- * Created by sam on 1/18/18.
+ * Instance variables for deleting a bucketlist
  */
 
 public class DeletePost {

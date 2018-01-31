@@ -18,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by sam on 12/6/17.
+ *  Activity for primaily adding a new bucketlist
  */
 
 public class AddBucketList extends Activity {

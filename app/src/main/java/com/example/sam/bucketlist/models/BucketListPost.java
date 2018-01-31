@@ -1,7 +1,8 @@
 package com.example.sam.bucketlist.models;
 
 /**
- * Created by sam on 12/6/17.
+ * Instance Varriables for posting details of Bucketlists
+ *
  */
 
 public class BucketListPost {
