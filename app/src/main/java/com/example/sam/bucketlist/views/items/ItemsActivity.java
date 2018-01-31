@@ -13,8 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
-import com.example.sam.bucketlist.models.BucketListFields;
-import com.example.sam.bucketlist.models.ItemFields;
+import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
 
 import java.util.ArrayList;
 
@@ -53,7 +52,7 @@ public class ItemsActivity extends Activity {
                 String bucketListId = (String) extras.get("bucketListId");
 
 
-                Intent intent = new Intent(context, AddItemActivity.class);
+                Intent intent = new Intent(context, BucketlistActivity.class);
 
                 intent.putExtra("id", bucketListId);
                 startActivity(intent);

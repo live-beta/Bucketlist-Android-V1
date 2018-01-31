@@ -2,8 +2,6 @@ package com.example.sam.bucketlist.views.bucketlists;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,9 +14,14 @@ import android.widget.Toast;
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.models.BucketListFields;
+import com.example.sam.bucketlist.models.DeletePost;
 import com.example.sam.bucketlist.views.items.ItemsActivity;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BucketListAdapter extends RecyclerView.
         Adapter<BucketListAdapter.BucketListViewAdapter> {
@@ -61,6 +64,27 @@ public class BucketListAdapter extends RecyclerView.
         return bucketlistData.size();
     }
 
+    public void deleteBucketlists(String id, final Context context) {
+
+        APIManager apiManager = new APIManager(context);
+        Call<DeletePost> call = apiManager.deleteBucketList(id);
+        call.enqueue(new Callback<DeletePost>() {
+            @Override
+            public void onResponse(Call<DeletePost> call, Response<DeletePost> response) {
+                Toast.makeText(context, "Deleted " + response.message(),
+                        Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<DeletePost> call, Throwable t) {
+
+                Toast.makeText(context, "Could not Delete " + t.getMessage(),
+                        Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
     class BucketListViewAdapter extends RecyclerView.ViewHolder {
         TextView id, bucketListName;
 
@@ -92,8 +116,6 @@ public class BucketListAdapter extends RecyclerView.
 
                     Intent intent = new Intent(context, ItemsActivity.class);
 
-                    Log.d("Size of this", String.valueOf(current.getItems().size()));
-
                     if (current.getItems().size() == 0) {
 
                         Toast.makeText(context, "No Items to show", Toast.LENGTH_LONG).show();
@@ -120,9 +142,12 @@ public class BucketListAdapter extends RecyclerView.
                 public void onClick(View view) {
 
                     Intent intent = new Intent(context, BucketlistActivity.class);
-                    APIManager apiManager = new APIManager(context);
-                    apiManager.deleteBucketList( current.getId(), context);
 
+                    Log.d("Current ID", current.getId());
+
+                    deleteBucketlists(current.getId(), context);
+
+                    Log.d("Value of id", current.getId());
                     context.startActivity(intent);
 
                 }
@@ -130,6 +155,7 @@ public class BucketListAdapter extends RecyclerView.
 
             this.position = position;
         }
+
 
     }
 

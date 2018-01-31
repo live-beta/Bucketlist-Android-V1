@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
-import com.example.sam.bucketlist.models.CallInstanceModel;
 import com.example.sam.bucketlist.models.UserFields;
 import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
 
@@ -34,7 +32,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private int progressStatus = 0;
 
     private Context context = this;
-    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +40,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.login_activity_layout);
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
-
-
-        url = getString(R.string.base_url);
 
 
         userName = findViewById(R.id.uname);
@@ -79,54 +73,53 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     password.getText().toString(), getApplicationContext());
 
             ProgressBar(progressBar);
-            apiManager.login(new Callback<UserFields>() {
 
+
+            Call<UserFields> call = apiManager.login();
+
+            call.enqueue(new Callback<UserFields>() {
                 @Override
                 public void onResponse(Call<UserFields> call, Response<UserFields> response) {
 
-                    try {
+                    String token = response.body().getToken();
 
-                        if (response.body().getToken().isEmpty()) {
+                    if (token == null) {
+                        Toast.makeText(getApplicationContext(), "Login is unsuccessful ",
+                                Toast.LENGTH_LONG).show();
 
-                            Toast.makeText(LoginActivity.this,
-                                    "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
-                            if (progressBar.isShown()) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                            }
+                        /*Stop progressbar on completion*/
 
-                        } else {
-
-                            SharedPreferences preferences = PreferenceManager.
-                                    getDefaultSharedPreferences(context);
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("token", response.body().getToken());
-                            editor.putString("url", url);
-                            editor.apply();
-
-                            Intent intent = new Intent(LoginActivity.this,
-                                    BucketlistActivity.class);
-                            LoginActivity.this.startActivity(intent);
-
-                        }
-
-                    } catch (Exception e) {
-
-                        Log.d("LoginActivity Error", e.getLocalizedMessage());
-                        Toast.makeText(LoginActivity.this,
-                                "Oops! Wring Credentials", Toast.LENGTH_SHORT).show();
                         if (progressBar.isShown()) {
                             progressBar.setVisibility(View.INVISIBLE);
                         }
+
+                    } else {
+
+                         /* If token is present, Login successful*/
+
+                        SharedPreferences preferences = PreferenceManager.
+                                getDefaultSharedPreferences(context);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("token", response.body().getToken());
+                        editor.apply();
+
+                        Intent intent = new Intent(LoginActivity.this,
+                                BucketlistActivity.class);
+                        LoginActivity.this.startActivity(intent);
+
+                        /* Stop the progress bar on completion*/
+
+                        if (progressBar.isShown()) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+
                     }
+
                 }
 
                 @Override
                 public void onFailure(Call<UserFields> call, Throwable t) {
-                    Log.d("LoginActivity Error", t.getLocalizedMessage());
 
-                    if (progressBar.isShown()) {
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
                 }
             });
 

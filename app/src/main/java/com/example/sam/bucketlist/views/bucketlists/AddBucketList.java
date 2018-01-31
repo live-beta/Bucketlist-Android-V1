@@ -3,17 +3,19 @@ package com.example.sam.bucketlist.views.bucketlists;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
+import com.example.sam.bucketlist.models.BucketListPost;
 
-import org.json.JSONException;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by sam on 12/6/17.
@@ -23,8 +25,6 @@ public class AddBucketList extends Activity {
 
     Button addBucketList;
     EditText newBucketList;
-
-    private APIManager apiManager = new APIManager(getApplicationContext());
     private Context context = this;
 
 
@@ -42,14 +42,26 @@ public class AddBucketList extends Activity {
             public void onClick(View v) {
                 String newBucketlist = newBucketList.getText().toString();
 
-                try {
-                    apiManager.addBucketList(newBucketlist);
+                APIManager apiManager = new APIManager(context);
+                Call<BucketListPost> call = apiManager.addBucketList(newBucketlist);
 
-                    Intent intent = new Intent(context, BucketlistActivity.class);
-                    startActivity(intent);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                call.enqueue(new Callback<BucketListPost>() {
+                    @Override
+                    public void onResponse(Call<BucketListPost> call,
+                                           Response<BucketListPost> response) {
+
+                        Toast.makeText(context, "Bucketlist Added ", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<BucketListPost> call, Throwable t) {
+                        Toast.makeText(context, "Unable to Add Bucketlist",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                Intent intent = new Intent(context, BucketlistActivity.class);
+                startActivity(intent);
             }
         });
 
