@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> ft-refactor-retrofit
 package com.example.sam.bucketlist.fields;
 
 import java.util.ArrayList;
