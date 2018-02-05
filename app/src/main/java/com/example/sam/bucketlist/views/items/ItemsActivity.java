@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
-import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
+import com.example.sam.bucketlist.views.bucketLists.BucketlistActivity;
 
 import java.util.ArrayList;
 

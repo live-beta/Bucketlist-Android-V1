@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.models.UserFields;
-import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
+import com.example.sam.bucketlist.views.bucketLists.BucketlistActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
