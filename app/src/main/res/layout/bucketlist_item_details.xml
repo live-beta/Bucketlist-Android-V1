@@ -1,65 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/bucketlistViewID"-->
-        <!--/>-->
-
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/bucketlistViewName"/>-->
-
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="Edit Bucketlist"-->
-        <!--android:id="@+id/editBucketlistName"/>-->
-
-
-    <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="New Bucketlist Name"-->
-        <!--android:id="@+id/newBucketlistName"/>-->
-
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="Delete Bucketlist"-->
-        <!--android:id="@+id/bucketlist_delete"/>-->
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="Add Item"-->
-        <!--android:id="@+id/addItem"/>-->
-    <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="New Item Name"-->
-        <!--android:id="@+id/addItemName"/>-->
-
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="Edit Item"-->
-        <!--android:id="@+id/editItem"/>-->
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="Show Items"-->
-        <!--android:id="@+id/showItems"/>-->
-
-    <!--<ListView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:id="@+id/bucketlistItemList"-->
-        <!--/>-->
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
@@ -68,5 +14,21 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <android.support.design.widget.FloatingActionButton
 
-</LinearLayout>
+        android:id="@+id/floatingItemButton"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/icons"
+        android:elevation="8dp"
+        android:src="@mipmap/add_button_icon"
+        app:fabSize="normal"
+        tools:layout_editor_absoluteY="505dp"
+
+        />
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -34,6 +34,8 @@ proguard/
 captures/
 
 # Intellij
+
+
 *.iml
 .idea/workspace.xml
 .idea/tasks.xml
@@ -41,7 +43,7 @@ captures/
 .idea/dictionaries
 .idea/libraries
 .idea/misc.xml
-
+.idea/
 # Keystore files
 *.jks
 
@@ -59,3 +61,4 @@ freeline_project_description.json
         app/build.gradle
         build.gradle
         gradle/wrapper/gradle-wrapper.properties
+/src/main/notes.txt

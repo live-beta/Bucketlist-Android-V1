@@ -4,17 +4,13 @@ package com.example.sam.bucketlist;
  * TODO
  * Refactor unit tests
  */
-import com.example.sam.bucketlist.Fields.ItemFields;
-//import com.example.sam.bucketlist.BucketListMethods.BucketListItems;
+
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class BucketListItemTest {
 
@@ -24,7 +20,6 @@ public class BucketListItemTest {
     public static void setUp(){
         Date date = new Date();
 
-     // bucketListItems = new BucketListItems(1,"Mountain Climbing",date,false,1);
     }
 
     @AfterClass
@@ -35,8 +30,6 @@ public class BucketListItemTest {
     @Test
     public void test_that_an_item_has_been_created_successfully(){
 
-      //  List<ItemFields> item = bucketListItems.createItem();
-     //   assertEquals(item.get(0).getItemName(),"Mountain Climbing");
     }
 
 }
