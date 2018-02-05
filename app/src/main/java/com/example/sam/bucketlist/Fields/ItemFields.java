@@ -1,4 +1,5 @@
-package com.example.sam.bucketlist.Fields;
+
+package com.example.sam.bucketlist.fields;
 
 import java.util.ArrayList;
 import java.util.Date;
