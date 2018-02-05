@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.views.bucketlists;
+package com.example.sam.bucketlist.views.bucketLists;
 
 import android.app.Activity;
 import android.content.Context;
