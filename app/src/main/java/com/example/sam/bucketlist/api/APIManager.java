@@ -84,11 +84,11 @@ public class APIManager {
     /* API call to add a new bucketlist*
      */
 
-    public Call<BucketListPost> addBucketList(String name) {
+    public Call<BucketListPost> addBucketList(String name, String description) {
 
-        BucketListFields bucketListFields = new BucketListFields(name);
+        BucketListFields bucketListFields = new BucketListFields(name, description);
         BucketListPost bucketListPost = new BucketListPost(bucketListFields
-                .getBucketListName());
+                .getBucketListName(), bucketListFields.getBucketListDescription());
 
         return callInstance.getInstance().addBucketList(bucketListPost);
 

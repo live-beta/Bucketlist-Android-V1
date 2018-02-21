@@ -7,9 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/newBucketList"
-
+        android:hint="Bucketlist Name"
         />
-
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bucketListDescription"
+        android:hint="Bucketlist Description"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -31,12 +31,22 @@ public class BucketListFields {
     @Expose
     private String dateModified;
 
-    public BucketListFields(String name) {
+    @SerializedName("description")
+    @Expose
+    private String description;
+
+
+    public BucketListFields(String name, String bucketListDescription) {
         this.name = name;
+        this.description = bucketListDescription;
 
     }
 
     public BucketListFields() {
+    }
+
+    public String getBucketListDescription(){
+        return description;
     }
 
     public BucketListFields(ArrayList items) {

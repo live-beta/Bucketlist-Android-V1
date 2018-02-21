@@ -30,7 +30,7 @@ public interface NetworkService {
     Call<UserFields> login(@Body LoginFields login);
 
     @POST("bucketlists")
-    Call<BucketListPost> addBucketList(@Body BucketListPost name);
+    Call<BucketListPost> addBucketList(@Body BucketListPost bucketListPost);
 
     @GET("bucketlists?limit=1000")
     Call<ArrayList<BucketListFields>> getBucketlist();

@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class AddBucketList extends Activity {
 
     Button addBucketList;
-    EditText newBucketList;
+    EditText newBucketList, bucketListDescription;
     private Context context = this;
 
 
@@ -35,15 +35,18 @@ public class AddBucketList extends Activity {
 
         addBucketList = findViewById(R.id.addBucketlist);
         newBucketList = findViewById(R.id.newBucketList);
+        bucketListDescription = findViewById(R.id.bucketListDescription);
 
 
         addBucketList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String newBucketlist = newBucketList.getText().toString();
+                String description = bucketListDescription.getText().toString();
+
 
                 APIManager apiManager = new APIManager(context);
-                Call<BucketListPost> call = apiManager.addBucketList(newBucketlist);
+                Call<BucketListPost> call = apiManager.addBucketList(newBucketlist, description);
 
                 call.enqueue(new Callback<BucketListPost>() {
                     @Override
