@@ -86,7 +86,7 @@ public class BucketListAdapter extends RecyclerView.
     }
 
     class BucketListViewAdapter extends RecyclerView.ViewHolder {
-        TextView id, bucketListName;
+        TextView id, bucketListName, bucketListDescription;
 
         ImageView itemsList, deleteBucketlist;
         int position;
@@ -98,6 +98,7 @@ public class BucketListAdapter extends RecyclerView.
 
             id = bucketlistView.findViewById(R.id.idView);
             bucketListName = bucketlistView.findViewById(R.id.bucketlistName);
+            bucketListDescription = bucketlistView.findViewById(R.id.description);
             itemsList = bucketlistView.findViewById(R.id.viewItems);
             deleteBucketlist = bucketlistView.findViewById(R.id.deleteBucketlist);
 
@@ -109,6 +110,10 @@ public class BucketListAdapter extends RecyclerView.
             this.id.setText(numberLabel);
 
             this.bucketListName.setText(current.getBucketListName());
+            this.bucketListDescription.setText(current.getBucketListDescription());
+
+            Log.d("this is descript ", current.getBucketListDescription().toString());
+
             this.itemsList.setOnClickListener(new View.OnClickListener() {
 
                 @Override

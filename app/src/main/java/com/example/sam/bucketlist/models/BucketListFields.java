@@ -30,8 +30,7 @@ public class BucketListFields {
     @SerializedName("date_modified")
     @Expose
     private String dateModified;
-
-    @SerializedName("description")
+    @SerializedName("bucket_description")
     @Expose
     private String description;
 

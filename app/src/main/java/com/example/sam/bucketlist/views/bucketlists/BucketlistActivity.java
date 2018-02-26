@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -31,7 +30,7 @@ import retrofit2.Response;
 public class BucketlistActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = BucketlistActivity.class.getName();
-    BucketListAdapter adapter;
+    BucketListAdapter bucketListAdapter;
     private Context context = this;
     private FloatingActionButton newBucketList;
     private APIManager apiManager;
@@ -64,8 +63,8 @@ public class BucketlistActivity extends AppCompatActivity implements View.OnClic
         RecyclerView recyclerView = ((Activity) context)
                 .findViewById(R.id.bucketlistViewer);
 
-        adapter = new BucketListAdapter(context, bucketArrayList);
-        recyclerView.setAdapter(adapter);
+        bucketListAdapter = new BucketListAdapter(context, bucketArrayList);
+        recyclerView.setAdapter(bucketListAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -82,7 +81,7 @@ public class BucketlistActivity extends AppCompatActivity implements View.OnClic
             public void onResponse(Call<ArrayList<BucketListFields>> call,
                                    Response<ArrayList<BucketListFields>> response) {
                 bucketArrayList.addAll(response.body());
-                adapter.notifyDataSetChanged();
+                bucketListAdapter.notifyDataSetChanged();
             }
 
             @Override
