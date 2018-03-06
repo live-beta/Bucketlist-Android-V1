@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
-import com.example.sam.bucketlist.models.UserDetailPost;
+import com.example.sam.bucketlist.models.retrofitmodels.UserDetailPost;
 
 import retrofit2.Call;
 import retrofit2.Callback;

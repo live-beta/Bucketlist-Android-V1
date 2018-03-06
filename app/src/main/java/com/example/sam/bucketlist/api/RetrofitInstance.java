@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.example.sam.bucketlist.service.NetworkService;
+import com.example.sam.bucketlist.services.NetworkService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

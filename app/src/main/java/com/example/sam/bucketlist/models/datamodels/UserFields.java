@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.models;
+package com.example.sam.bucketlist.models.datamodels;
 
 /**
  * Class for user variables

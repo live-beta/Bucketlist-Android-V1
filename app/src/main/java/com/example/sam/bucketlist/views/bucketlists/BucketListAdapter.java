@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
-import com.example.sam.bucketlist.models.BucketListFields;
-import com.example.sam.bucketlist.models.DeletePost;
+import com.example.sam.bucketlist.models.datamodels.BucketListFields;
+import com.example.sam.bucketlist.models.retrofitmodels.DeletePost;
 import com.example.sam.bucketlist.views.items.AddItemActivity;
 import com.example.sam.bucketlist.views.items.ItemsActivity;
 

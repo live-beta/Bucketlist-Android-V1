@@ -1,12 +1,12 @@
-package com.example.sam.bucketlist.service;
+package com.example.sam.bucketlist.services;
 
-import com.example.sam.bucketlist.models.BucketListFields;
-import com.example.sam.bucketlist.models.BucketListPost;
-import com.example.sam.bucketlist.models.DeletePost;
-import com.example.sam.bucketlist.models.ItemPost;
-import com.example.sam.bucketlist.models.LoginFields;
-import com.example.sam.bucketlist.models.UserDetailPost;
-import com.example.sam.bucketlist.models.UserFields;
+import com.example.sam.bucketlist.models.datamodels.BucketListFields;
+import com.example.sam.bucketlist.models.retrofitmodels.BucketListPost;
+import com.example.sam.bucketlist.models.retrofitmodels.DeletePost;
+import com.example.sam.bucketlist.models.retrofitmodels.ItemPost;
+import com.example.sam.bucketlist.models.datamodels.LoginFields;
+import com.example.sam.bucketlist.models.retrofitmodels.UserDetailPost;
+import com.example.sam.bucketlist.models.datamodels.UserFields;
 
 import java.util.ArrayList;
 

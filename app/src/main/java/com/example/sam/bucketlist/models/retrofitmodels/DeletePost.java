@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.models;
+package com.example.sam.bucketlist.models.retrofitmodels;
 
 /**
  * Instance variables for deleting a bucketlist
@@ -12,3 +12,4 @@ public class DeletePost {
         this.id = id;
     }
 }
+

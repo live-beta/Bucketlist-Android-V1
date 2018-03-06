@@ -1,6 +1,6 @@
-package com.example.sam.bucketlist.models;
+package com.example.sam.bucketlist.models.retrofitmodels;
 
-import com.example.sam.bucketlist.service.NetworkService;
+import com.example.sam.bucketlist.services.NetworkService;
 
 /**
  * Created by sam on 1/25/18.

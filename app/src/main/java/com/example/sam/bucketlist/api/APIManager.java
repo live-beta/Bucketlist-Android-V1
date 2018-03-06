@@ -3,15 +3,15 @@ package com.example.sam.bucketlist.api;
 import android.content.Context;
 
 import com.example.sam.bucketlist.R;
-import com.example.sam.bucketlist.models.BucketListFields;
-import com.example.sam.bucketlist.models.BucketListPost;
-import com.example.sam.bucketlist.models.CallInstanceModel;
-import com.example.sam.bucketlist.models.DeletePost;
-import com.example.sam.bucketlist.models.ItemFields;
-import com.example.sam.bucketlist.models.ItemPost;
-import com.example.sam.bucketlist.models.LoginFields;
-import com.example.sam.bucketlist.models.UserDetailPost;
-import com.example.sam.bucketlist.models.UserFields;
+import com.example.sam.bucketlist.models.datamodels.BucketListFields;
+import com.example.sam.bucketlist.models.retrofitmodels.BucketListPost;
+import com.example.sam.bucketlist.models.retrofitmodels.CallInstanceModel;
+import com.example.sam.bucketlist.models.retrofitmodels.DeletePost;
+import com.example.sam.bucketlist.models.datamodels.ItemFields;
+import com.example.sam.bucketlist.models.retrofitmodels.ItemPost;
+import com.example.sam.bucketlist.models.datamodels.LoginFields;
+import com.example.sam.bucketlist.models.retrofitmodels.UserDetailPost;
+import com.example.sam.bucketlist.models.datamodels.UserFields;
 
 import java.util.ArrayList;
 

@@ -1,12 +1,11 @@
-package com.example.sam.bucketlist.models;
+package com.example.sam.bucketlist.models.retrofitmodels;
 
 /**
- * Instance Varriables for posting details of Bucketlists
+ * Instance Variables for posting bucketlist details
  *
  */
 
 public class BucketListPost {
-
     private String name;
 
     public BucketListPost(String name) {

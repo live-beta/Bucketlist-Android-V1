@@ -1,17 +1,8 @@
 package com.example.sam.bucketlist;
 
-import com.example.sam.bucketlist.models.BucketListFields;
-import com.example.sam.bucketlist.models.ItemFields;
-
 /**
  * Created by sam on 9/23/17.
  */
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 public class ApiTests {

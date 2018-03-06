@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.models;
+package com.example.sam.bucketlist.models.retrofitmodels;
 
 /**
  * Instance variables for for psting new items
@@ -14,5 +14,6 @@ public class ItemPost {
         this.name = name;
         this.description = description;
         this.id = id;
+
     }
 }

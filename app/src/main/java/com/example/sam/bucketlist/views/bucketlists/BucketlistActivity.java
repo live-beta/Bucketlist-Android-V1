@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
-import com.example.sam.bucketlist.models.BucketListFields;
+import com.example.sam.bucketlist.models.datamodels.BucketListFields;
 
 import java.util.ArrayList;
 

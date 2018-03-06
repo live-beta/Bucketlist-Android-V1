@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.models;
+package com.example.sam.bucketlist.models.retrofitmodels;
 
 /**
  * Instance variables for registration of another user
@@ -18,6 +18,5 @@ public class UserDetailPost {
 
         this.email = email;
     }
-
 
 }
