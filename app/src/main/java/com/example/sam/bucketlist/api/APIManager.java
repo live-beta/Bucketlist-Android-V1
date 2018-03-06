@@ -96,10 +96,10 @@ public class APIManager {
 
 
     /* API call to add Items*/
-    public Call<ItemPost> addItems(String name, String bucketListId) {
+    public Call<ItemPost> addItems(String name,String description, String bucketListId) {
 
         ItemFields itemFields = new ItemFields(name);
-        ItemPost itemPost = new ItemPost(itemFields.getName(), bucketListId);
+        ItemPost itemPost = new ItemPost(itemFields.getName(),description, bucketListId);
         return callInstance.getInstance().addItems(bucketListId, itemPost);
 
     }

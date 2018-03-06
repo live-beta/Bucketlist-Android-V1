@@ -18,7 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by sam on 1/29/18.
+ * Class that creates a retrofit instance with a token interceptor
  */
 
 public class RetrofitInstance {
@@ -28,15 +28,9 @@ public class RetrofitInstance {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         final String token = sharedPreferences.getString("token", "");
 
-        Log.d("Token in net ", token);
-
-        /* Gson definition for faulty JSON*/
-
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
-
-        /* Inerceptor for token headers*/
 
         Interceptor interceptor = new Interceptor() {
             @Override
@@ -46,8 +40,6 @@ public class RetrofitInstance {
                 return chain.proceed(modifiedRequest);
             }
         };
-
-        /*Adding interceptor to OkHTTPClient*/
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.interceptors().add(interceptor);

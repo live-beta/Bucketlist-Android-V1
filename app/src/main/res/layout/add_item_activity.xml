@@ -7,6 +7,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/itemName"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/description"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

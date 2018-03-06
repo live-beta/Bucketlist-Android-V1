@@ -46,13 +46,12 @@ public class ItemsActivity extends Activity {
         newItems = findViewById(R.id.floatingItemButton);
         newItems.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Adds new Item", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {;
 
                 String bucketListId = (String) extras.get("bucketListId");
 
 
-                Intent intent = new Intent(context, BucketlistActivity.class);
+                Intent intent = new Intent(context, AddItemActivity.class);
 
                 intent.putExtra("id", bucketListId);
                 startActivity(intent);

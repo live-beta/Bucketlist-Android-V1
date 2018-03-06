@@ -8,9 +8,11 @@ public class ItemPost {
 
     private String name;
     private String id;
+    private String description;
 
-    public ItemPost(String name, String id) {
+    public ItemPost(String name, String id, String description) {
         this.name = name;
+        this.description = description;
         this.id = id;
     }
 }

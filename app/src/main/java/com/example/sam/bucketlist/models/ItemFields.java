@@ -28,6 +28,7 @@ public class ItemFields {
     @SerializedName("name")
     @Expose
     private String name;
+
     private ArrayList<ItemFields> items;
 
     public ItemFields(String name) {

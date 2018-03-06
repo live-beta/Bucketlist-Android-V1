@@ -15,6 +15,7 @@ import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
 import com.example.sam.bucketlist.models.BucketListFields;
 import com.example.sam.bucketlist.models.DeletePost;
+import com.example.sam.bucketlist.views.items.AddItemActivity;
 import com.example.sam.bucketlist.views.items.ItemsActivity;
 
 import java.util.ArrayList;
@@ -119,6 +120,12 @@ public class BucketListAdapter extends RecyclerView.
                     if (current.getItems().size() == 0) {
 
                         Toast.makeText(context, "No Items to show", Toast.LENGTH_LONG).show();
+
+                        Intent itemAdd = new Intent(context,AddItemActivity.class);
+                        itemAdd.putExtra("id", current.getId());
+                        context.startActivity(itemAdd);
+
+
                     } else {
 
                         for (int index = 0; index < current.getItems().size(); index++) {

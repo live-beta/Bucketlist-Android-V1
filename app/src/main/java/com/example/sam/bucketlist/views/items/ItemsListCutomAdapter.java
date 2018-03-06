@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sam.bucketlist.R;
+import com.example.sam.bucketlist.models.ItemFields;
 
 import java.util.ArrayList;
 
@@ -21,10 +22,10 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
 
 
     private LayoutInflater layoutInflater;
-    private ArrayList data;
+    private ArrayList<ItemFields> data;
 
 
-    public ItemsListCutomAdapter(Context context, ArrayList data) {
+    public ItemsListCutomAdapter(Context context, ArrayList<ItemFields> data) {
 
         this.data = data;
         this.layoutInflater = LayoutInflater.from(context);
@@ -44,11 +45,9 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
     @Override
     public void onBindViewHolder(CustomViewAdapter holder, int position) {
 
-        String dataItems = String.valueOf(data.get(position));
+        String itemInfoName = String.valueOf(data.get(position).getName());
 
-        Log.d("Data thing", String.valueOf(data));
-
-        holder.setData(dataItems, position);
+        holder.setData(itemInfoName, position);
     }
 
     @Override
@@ -72,11 +71,11 @@ public class ItemsListCutomAdapter extends RecyclerView.Adapter<ItemsListCutomAd
 
         }
 
-        public void setData(final String current, final int position) {
+        public void setData(final String itemInfoName, final int position) {
 
             String number = String.valueOf(position + 1);
             id.setText(number);
-            itemName.setText(current);
+            itemName.setText(itemInfoName);
             deleteBucketlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

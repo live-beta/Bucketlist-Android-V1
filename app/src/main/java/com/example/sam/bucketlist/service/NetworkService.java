@@ -38,7 +38,7 @@ public interface NetworkService {
     @POST("auth/register")
     Call<UserDetailPost> registerUser(@Body UserDetailPost userDetailPost);
 
-    @POST("bucketlists/{id}/items?limit=1000")
+    @POST("bucketlists/{id}/items")
     Call<ItemPost> addItems(@Path("id") String id, @Body ItemPost name);
 
     @DELETE("bucketlists/{id}")

@@ -24,7 +24,7 @@ import retrofit2.Response;
 
 public class AddItemActivity extends Activity {
 
-    private EditText itemName;
+    private EditText itemName, description;
     private Button addItem;
 
     private Context context = this;
@@ -36,6 +36,7 @@ public class AddItemActivity extends Activity {
 
         itemName = findViewById(R.id.itemName);
         addItem = findViewById(R.id.addItem);
+        description = findViewById(R.id.description);
 
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +45,7 @@ public class AddItemActivity extends Activity {
                 String bucketListId = (String) extras.get("id");
                 APIManager apiManager = new APIManager(getApplicationContext());
 
-                Call<ItemPost> call = apiManager.addItems(itemName.getText().toString(), bucketListId);
+                Call<ItemPost> call = apiManager.addItems(itemName.getText().toString(),description.getText().toString(), bucketListId);
 
                 call.enqueue(new Callback<ItemPost>() {
                     @Override
