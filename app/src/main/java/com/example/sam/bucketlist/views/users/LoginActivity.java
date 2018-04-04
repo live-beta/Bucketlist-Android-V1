@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.api.APIManager;
-import com.example.sam.bucketlist.models.datamodels.UserFields;
+import com.example.sam.bucketlist.model.UserLoginFields;
 import com.example.sam.bucketlist.views.bucketlists.BucketlistActivity;
 
 import retrofit2.Call;
@@ -76,11 +77,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             ProgressBar(progressBar);
 
 
-            Call<UserFields> call = apiManager.login();
+            Call<UserLoginFields> call = apiManager.login();
 
-            call.enqueue(new Callback<UserFields>() {
+            call.enqueue(new Callback<UserLoginFields>() {
                 @Override
-                public void onResponse(Call<UserFields> call, Response<UserFields> response) {
+                public void onResponse(@NonNull Call<UserLoginFields> call,
+                                       @NonNull Response<UserLoginFields> response) {
 
                     String token = response.body().getToken();
 
@@ -88,15 +90,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         Toast.makeText(getApplicationContext(), "Login is unsuccessful ",
                                 Toast.LENGTH_LONG).show();
 
-                        /*Stop progressbar on completion*/
-
                         if (progressBar.isShown()) {
                             progressBar.setVisibility(View.INVISIBLE);
                         }
 
                     } else {
-
-                         /* If token is present, Login successful*/
 
                         SharedPreferences preferences = PreferenceManager.
                                 getDefaultSharedPreferences(context);
@@ -108,8 +106,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                 BucketlistActivity.class);
                         LoginActivity.this.startActivity(intent);
 
-                        /* Stop the progress bar on completion*/
-
                         if (progressBar.isShown()) {
                             progressBar.setVisibility(View.INVISIBLE);
                         }
@@ -119,14 +115,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 }
 
                 @Override
-                public void onFailure(Call<UserFields> call, Throwable t) {
+                public void onFailure(@NonNull Call<UserLoginFields> call, @NonNull Throwable t) {
 
                 }
             });
 
-        } else if (view == register) {
-            Intent intent = new Intent(context, Register.class);
-            startActivity(intent);
         }
     }
 

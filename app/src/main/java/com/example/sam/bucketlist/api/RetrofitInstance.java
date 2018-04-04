@@ -5,11 +5,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.example.sam.bucketlist.services.NetworkService;
+import com.example.sam.bucketlist.api.services.NetworkService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.io.IOException;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -32,13 +30,10 @@ public class RetrofitInstance {
                 .setLenient()
                 .create();
 
-        Interceptor interceptor = new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request modifiedRequest = chain.request().newBuilder().
-                        addHeader("Authorization", "Bearer " + token).build();
-                return chain.proceed(modifiedRequest);
-            }
+        Interceptor interceptor = chain -> {
+            Request modifiedRequest = chain.request().newBuilder().
+                    addHeader("Authorization", "Bearer " + token).build();
+            return chain.proceed(modifiedRequest);
         };
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();

@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.models.datamodels;
+package com.example.sam.bucketlist.model;
 
 /**
  * Instance variables for login

@@ -1,12 +1,12 @@
-package com.example.sam.bucketlist.models.retrofitmodels;
+package com.example.sam.bucketlist.api;
 
-import com.example.sam.bucketlist.services.NetworkService;
+import com.example.sam.bucketlist.api.services.NetworkService;
 
 /**
  * Created by sam on 1/25/18.
  */
 
-public class CallInstanceModel {
+public class CallInstance {
 
     private NetworkService instance;
     private String url;
