@@ -4,9 +4,10 @@ import android.content.Context;
 import android.databinding.ObservableInt;
 import android.view.View;
 
-import com.example.sam.bucketlist.api.services.BucketListService;
+import com.example.sam.bucketlist.apiservices.BucketListService;
 import com.example.sam.bucketlist.app.AppController;
-import com.example.sam.bucketlist.model.BucketListFields;
+import com.example.sam.bucketlist.models.BucketListFields;
+import com.example.sam.bucketlist.models.LoginFields;
 import com.example.sam.bucketlist.views.bucketlists.CompletedListener;
 
 import java.util.ArrayList;
@@ -17,9 +18,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import timber.log.Timber;
-
-
-
 
 public class MainViewModel extends Observable implements CompletedListener {
 
@@ -32,6 +30,7 @@ public class MainViewModel extends Observable implements CompletedListener {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private Context context;
+    private LoginFields loginFields;
 
     public MainViewModel(Context context) {
 
@@ -42,6 +41,11 @@ public class MainViewModel extends Observable implements CompletedListener {
         initView();
         getBucketLists();
 
+    }
+
+    public MainViewModel(Context context, LoginFields loginFields){
+        this.context = context;
+        this.loginFields = loginFields;
     }
 
     public void initView() {

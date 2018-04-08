@@ -1,9 +1,11 @@
-package com.example.sam.bucketlist.api.services;
+package com.example.sam.bucketlist.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+
+import com.example.sam.bucketlist.apiservices.BucketListService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

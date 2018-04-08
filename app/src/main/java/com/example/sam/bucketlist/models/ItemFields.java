@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.model;
+package com.example.sam.bucketlist.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

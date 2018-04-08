@@ -3,8 +3,8 @@ package com.example.sam.bucketlist.app;
 import android.app.Application;
 import android.content.Context;
 
-import com.example.sam.bucketlist.api.services.ApiFactory;
-import com.example.sam.bucketlist.api.services.BucketListService;
+import com.example.sam.bucketlist.api.ApiFactory;
+import com.example.sam.bucketlist.apiservices.BucketListService;
 
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
