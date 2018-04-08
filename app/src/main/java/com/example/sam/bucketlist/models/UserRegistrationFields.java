@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.model;
+package com.example.sam.bucketlist.models;
 
 /**
  * Instance variables for registration of another user

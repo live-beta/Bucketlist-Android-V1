@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.databinding.BucketlistViewAdapterBinding;
-import com.example.sam.bucketlist.model.BucketListFields;
+import com.example.sam.bucketlist.models.BucketListFields;
 import com.example.sam.bucketlist.viewmodel.ItemBucketListViewModel;
 
 import java.util.ArrayList;

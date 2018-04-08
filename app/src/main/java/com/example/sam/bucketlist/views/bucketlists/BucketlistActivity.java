@@ -1,14 +1,10 @@
 package com.example.sam.bucketlist.views.bucketlists;
 
-import android.os.Bundle;
 import android.databinding.DataBindingUtil;
-
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import android.util.Log;
 
 import com.example.sam.bucketlist.R;
 import com.example.sam.bucketlist.databinding.ActivityMainBinding;

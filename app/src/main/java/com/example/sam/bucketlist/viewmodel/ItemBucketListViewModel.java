@@ -3,7 +3,7 @@ package com.example.sam.bucketlist.viewmodel;
 import android.content.Context;
 import android.databinding.BaseObservable;
 
-import com.example.sam.bucketlist.model.BucketListFields;
+import com.example.sam.bucketlist.models.BucketListFields;
 
 /**
  * Created by sam on 4/4/18.
