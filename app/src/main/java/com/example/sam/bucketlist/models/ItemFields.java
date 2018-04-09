@@ -1,4 +1,4 @@
-package com.example.sam.bucketlist.models.datamodels;
+package com.example.sam.bucketlist.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -33,30 +33,6 @@ public class ItemFields {
 
     public ItemFields(String name) {
         this.name = name;
-    }
-
-    public String getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(String dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Object getDateModified() {
-        return dateModified;
-    }
-
-    public void setDateModified(Object dateModified) {
-        this.dateModified = dateModified;
-    }
-
-    public Boolean getDone() {
-        return done;
-    }
-
-    public void setDone(Boolean done) {
-        this.done = done;
     }
 
     public Integer getId() {

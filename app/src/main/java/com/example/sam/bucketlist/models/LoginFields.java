@@ -1,7 +1,7 @@
-package com.example.sam.bucketlist.models.datamodels;
+package com.example.sam.bucketlist.models;
 
 /**
- * Instance variables for login
+ * Instance variables for userLogin
  */
 
 public class LoginFields {

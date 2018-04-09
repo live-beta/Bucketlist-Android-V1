@@ -1,95 +1,77 @@
 package com.example.sam.bucketlist.views.bucketlists;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.sam.bucketlist.R;
-import com.example.sam.bucketlist.api.APIManager;
-import com.example.sam.bucketlist.models.datamodels.BucketListFields;
+import com.example.sam.bucketlist.databinding.ActivityMainBinding;
+import com.example.sam.bucketlist.viewmodel.MainViewModel;
 
-import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /* API manager: implemnents the application programming interface
 * contracts that are defined in the Network service
 * */
 
 
-public class BucketlistActivity extends AppCompatActivity implements View.OnClickListener {
+public class BucketlistActivity extends AppCompatActivity implements Observer {
 
-    private static final String TAG = BucketlistActivity.class.getName();
-    BucketListAdapter adapter;
-    private Context context = this;
-    private FloatingActionButton newBucketList;
-    private APIManager apiManager;
-    private ArrayList<BucketListFields> bucketArrayList = new ArrayList<>();
+    private ActivityMainBinding bucketlistActivityBinding;
+
+    private MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bucketlist_activity_layout);
+        initDataBinding();
+        setUpListOfBucketlistView(bucketlistActivityBinding.listBucketlists);
+        setUpObserver(mainViewModel);
 
-        newBucketList = findViewById(R.id.floatingButton);
-        newBucketList.setOnClickListener(this);
-        apiManager = new APIManager(getApplicationContext());
-        initialiseRecyclerView();
-        loadBucketLists();
+    }
 
+    private void initDataBinding(){
+        bucketlistActivityBinding = DataBindingUtil.setContentView(this,
+                R.layout.activity_main);
+        mainViewModel = new MainViewModel(this);
+        bucketlistActivityBinding.setMainViewModel(mainViewModel);
+
+    }
+
+    private void setUpListOfBucketlistView(RecyclerView listBucketList){
+
+        BucketListAdapter bucketListAdapter = new BucketListAdapter(getApplicationContext());
+        listBucketList.setAdapter(bucketListAdapter);
+        listBucketList.setLayoutManager(new LinearLayoutManager(this));
+
+    }
+
+    public void setUpObserver(Observable observable){
+
+        observable.addObserver(this);
     }
 
     @Override
-    public void onClick(View view) {
+    public void update(Observable o, Object arg){
 
-        if (view == newBucketList) {
-            Intent intent = new Intent(context, AddBucketList.class);
-            startActivity(intent);
+        if (o instanceof MainViewModel){
+            BucketListAdapter bucketListAdapter = (BucketListAdapter) bucketlistActivityBinding
+                    .listBucketlists.getAdapter();
+
+            MainViewModel bucketListViewModel = (MainViewModel) o;
+            bucketListAdapter.setBucketList(bucketListViewModel.bucketLists);
+
         }
     }
 
-    private void initialiseRecyclerView() {
-        RecyclerView recyclerView = ((Activity) context)
-                .findViewById(R.id.bucketlistViewer);
-
-        adapter = new BucketListAdapter(context, bucketArrayList);
-        recyclerView.setAdapter(adapter);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-    }
-
-    public void loadBucketLists() {
-
-        Call<ArrayList<BucketListFields>> call = apiManager.getBucketListsResponse();
-        call.enqueue(new Callback<ArrayList<BucketListFields>>() {
-            @Override
-            public void onResponse(Call<ArrayList<BucketListFields>> call,
-                                   Response<ArrayList<BucketListFields>> response) {
-                bucketArrayList.addAll(response.body());
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<BucketListFields>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Unable to load bucketlists",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mainViewModel.reset();
     }
 
 }
