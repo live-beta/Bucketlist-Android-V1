@@ -1,7 +1,6 @@
 package com.example.sam.bucketlist.views.users;
 
 import android.app.Activity;
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +10,9 @@ import com.example.sam.bucketlist.databinding.LoginActivityBinding;
 import com.example.sam.bucketlist.models.LoginFields;
 import com.example.sam.bucketlist.models.UserLoginFields;
 import com.example.sam.bucketlist.viewmodel.LoginViewModel;
-/* Login Activity
-* */
+
 
 public class LoginActivity extends Activity {
-
-    private Context context = this;
-
     private UserLoginFields userLoginFields = new UserLoginFields();
     private LoginActivityBinding loginActivityBinding;
     private LoginFields loginFields;
